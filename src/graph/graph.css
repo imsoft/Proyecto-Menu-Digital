@@ -1,0 +1,17 @@
+.container {
+    width: 50%; /* Reducir el ancho del contenedor */
+    margin: auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.canvas-container {
+    height: 300px; /* Establecer una altura fija para las gráficas */
+}
+
+canvas {
+    max-width: 100%;
+    max-height: 100%;
+}
