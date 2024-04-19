@@ -34,7 +34,14 @@ document
       return; // Detiene la función si algún campo está vacío
     }
 
+    // Redireccionar si el usuario indica que cuenta con RFC
+    if (hasRFC.value === "yes") {
+      window.location.href = "../tax-data/tax-data.html";
+      return; // Termina la ejecución después de la redirección
+    }
+
     // Aquí se podría añadir más validación o realizar una acción como enviar el formulario.
     alert("Formulario enviado correctamente!");
+    window.location.href = "../config/config.html";
     // this.submit(); // Descomenta esta línea para enviar el formulario después de la validación
   });

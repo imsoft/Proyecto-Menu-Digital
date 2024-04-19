@@ -20,17 +20,5 @@ function filterMenu(type) {
     });
 }
 
-function addDish() {
-    alert('Agregar platillo (funcionalidad no implementada)');
-}
-
-function modifyDish() {
-    alert('Modificar platillo (funcionalidad no implementada)');
-}
-
-function deleteDish() {
-    alert('Eliminar platillo (funcionalidad no implementada)');
-}
-
 // Initialize menu with food items
 filterMenu('food');

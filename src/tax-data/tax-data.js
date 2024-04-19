@@ -44,5 +44,6 @@ document
 
     // Si todo está correcto, realizar acciones adicionales o enviar el formulario
     alert("Formulario enviado correctamente!");
+    window.location.href = "../config/config.html";
     // this.submit(); // Descomenta esta línea para enviar el formulario después de la validación
   });

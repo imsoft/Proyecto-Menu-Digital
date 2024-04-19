@@ -1,13 +1,27 @@
-document.getElementById('addBranch').addEventListener('click', function() {
-    alert('Agregar Sucursal');
+document.getElementById("addBranch").addEventListener("click", function () {
+  window.location.href = "../branch/branch.html";
 });
 
-document.getElementById('modifyBranch').addEventListener('click', function() {
-    alert('Modificar Sucursal');
-});
+document
+  .getElementById("loadProductMenu")
+  .addEventListener("click", function () {
+    window.location.href = "../menu/menu.html";
+  });
 
-document.getElementById('deleteBranch').addEventListener('click', function() {
-    alert('Eliminar Sucursal');
-});
+document
+  .getElementById("customerFeedback")
+  .addEventListener("click", function () {
+    window.location.href = "../comment/comment.html";
+  });
 
-// Repetir para otros botones con funcionalidades específicas
+document
+  .getElementById("consumptionHistory")
+  .addEventListener("click", function () {
+    window.location.href = "../food-preparation/food-preparation.html";
+  });
+
+document
+  .getElementById("viewGraph")
+  .addEventListener("click", function () {
+    window.location.href = "../graph/graph.html";
+  });

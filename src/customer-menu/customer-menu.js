@@ -1,15 +1,15 @@
 document.getElementById('tableButton').addEventListener('click', function() {
-    alert('Información de la Mesa');
+    window.location.href = '../table/table.html';
 });
 
 document.getElementById('menuButton').addEventListener('click', function() {
-    window.location.href = 'menu.html'; // Suponiendo que tienes una página específica para el menú
+    window.location.href = '../menu-list/menu-list.html';
 });
 
 document.getElementById('statusButton').addEventListener('click', function() {
-    alert('Estatus de tu pedido');
+    window.location.href = '../preparation-status/preparation-status.html';
 });
 
 document.getElementById('commentsButton').addEventListener('click', function() {
-    window.location.href = 'comments.html'; // Suponiendo una página para comentarios
+    window.location.href = '../add-commet/add-commet.html';
 });
