@@ -1,11 +1,11 @@
 document.getElementById("BtnClient").addEventListener("click", function () {
-  window.location.href = "../client/client.html";
+  window.location.href = "../client/create-client/create-client.html";
 });
 
 document.getElementById("BtnEmployee").addEventListener("click", function () {
-  window.location.href = "../employee/employee.html";
+  window.location.href = "../employee/create-employee/create-employee.html";
 });
 
 document.getElementById("BtnCompany").addEventListener("click", function () {
-  window.location.href = "../company/company.html";
+  window.location.href = "../client/create-company/create-company.html";
 });
