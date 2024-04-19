@@ -2,14 +2,19 @@ document
   .getElementById("loginForm")
   .addEventListener("submit", function (event) {
     event.preventDefault();
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
+    var username = document.getElementById("username").value.trim();
+    var password = document.getElementById("password").value.trim();
 
-    // Aquí puedes añadir la validación o la lógica para enviar los datos
-    if (username === "a" && password === "a") {
-      alert("Bienvenido!");
-      window.location.href = 'home.html';
+    // Verificar si alguno de los campos está vacío
+    if (!username || !password) {
+      alert("Por favor, complete todos los campos.");
     } else {
-      alert("Usuario o contraseña incorrectos.");
+      // Continúa con la validación si ambos campos están llenos
+      if (username === "a" && password === "a") {
+        alert("Bienvenido!");
+        window.location.href = "home.html";
+      } else {
+        alert("Usuario o contraseña incorrectos.");
+      }
     }
   });

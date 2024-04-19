@@ -1,18 +1,44 @@
 document
   .getElementById("registrationForm")
   .addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent the form from submitting
+    event.preventDefault(); // Previene el envío automático del formulario
 
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
+    // Recuperar los valores de los campos
+    const firstName = document.getElementById("firstName").value.trim();
+    const lastName = document.getElementById("lastName").value.trim();
+    const surname = document.getElementById("surname").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const birthdate = document.getElementById("birthdate").value.trim();
+    const gender = document.getElementById("gender").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const confirmPassword = document
+      .getElementById("confirmPassword")
+      .value.trim();
 
-    if (password !== confirmPassword) {
-      alert("Las contraseñas no coinciden.");
-      return false;
+    // Verificar si algún campo está vacío
+    if (
+      !firstName ||
+      !lastName ||
+      !surname ||
+      !email ||
+      !phone ||
+      !birthdate ||
+      !gender ||
+      !password ||
+      !confirmPassword
+    ) {
+      alert("Todos los campos deben ser completados.");
+      return false; // Detener la función aquí si algún campo está vacío
     }
 
-    // Aquí se podría añadir más validación o realizar una acción como enviar el formulario.
+    // Verificar que las contraseñas coincidan
+    if (password !== confirmPassword) {
+      alert("Las contraseñas no coinciden.");
+      return false; // Detener la función aquí si las contraseñas no coinciden
+    }
+
+    // Si todo está correcto, enviar el formulario o realizar otras acciones
     alert("Formulario enviado correctamente!");
-    // Para enviar el formulario después de la validación, descomenta la siguiente línea:
-    // this.submit();
+    // this.submit(); // Descomenta esta línea para enviar el formulario después de la validación
   });
