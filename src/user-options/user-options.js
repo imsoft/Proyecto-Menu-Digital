@@ -7,5 +7,5 @@ document.getElementById("BtnEmployee").addEventListener("click", function () {
 });
 
 document.getElementById("BtnCompany").addEventListener("click", function () {
-  window.location.href = "../client/create-company/create-company.html";
+  window.location.href = "../company/create-company/create-company.html";
 });

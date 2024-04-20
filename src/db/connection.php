@@ -1,14 +1,14 @@
 <?php
-$host = 'localhost'; // o la IP del servidor de bases de datos
-$dbname = 'digital-menu';
-$username = 'digital-menu-user';
-$password = 'digital-menu-password';
+$servername = "digital_menu";
+$username = "user";
+$password = "password";
+$dbname = "digital_menu_db";
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    // Configurar el manejo de errores de PDO a excepción
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Conexión establecida con éxito";
-} catch (PDOException $e) {
-    die("No se pudo conectar a la base de datos $dbname :" . $e->getMessage());
+// Crear conexión
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verificar conexión
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
+echo "Connected successfully";
