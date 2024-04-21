@@ -10,24 +10,22 @@ body {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    width: 50%;
+    width: 80%;
     margin: auto;
-    text-align: center;
 }
 
-h1 {
+h1, h2 {
     color: #e5450f;
 }
 
 .buttons button {
     padding: 10px;
-    margin: 10px;
+    margin: 5px;
     background-color: #e5450f;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 150px;
 }
 
 .buttons button:hover {

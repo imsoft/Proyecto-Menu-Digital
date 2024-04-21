@@ -10,6 +10,7 @@ document.getElementById("commentForm").addEventListener("submit", function (even
       alert("Por favor, selecciona una calificación antes de enviar.");
   } else {
       alert("Comentario y calificación enviados con éxito!");
+      windows.location.href = "../read-comment/read-comment.html";
       // Aquí podrías añadir la lógica para enviar el comentario y la calificación a un servidor
       // Por ejemplo:
       // this.submit();

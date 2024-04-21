@@ -42,6 +42,6 @@ document
 
     // Aquí se podría añadir más validación o realizar una acción como enviar el formulario.
     alert("Formulario enviado correctamente!");
-    window.location.href = "../config/config.html";
+    window.location.href = "../read-company/read-company.html";
     // this.submit(); // Descomenta esta línea para enviar el formulario después de la validación
   });

@@ -40,6 +40,6 @@ document
 
     // Si todo está correcto, enviar el formulario o realizar otras acciones
     alert("Formulario enviado correctamente!");
-    window.location.href = "../customer-menu/customer-menu.html";
+    window.location.href = "../read-client/read-client.html";
     // this.submit(); // Descomenta esta línea para enviar el formulario después de la validación
   });

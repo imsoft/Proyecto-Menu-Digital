@@ -6,12 +6,17 @@ html {
   overflow: hidden;
 }
 
+h1 {
+  font-size: 3em;
+  color: #e5450f;
+}
+
 #splash-screen {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #E5450F;
+  background-color: #fff;
   color: white;
   font-family: Arial, sans-serif;
 }
@@ -19,11 +24,23 @@ html {
 #contador {
   font-size: 2em;
   margin-top: 20px;
-  color: #E5450F;
+  color: #fff;
 }
 
-img {
+.titleGroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.ImgSplash {
   width: 1500px;
   height: 1000px;
   margin-top: 5px;
+}
+
+.ImgLogo {
+  width: 100px;
+  height: 100px;
 }

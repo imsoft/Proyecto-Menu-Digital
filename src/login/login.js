@@ -10,9 +10,12 @@ document
       alert("Por favor, complete todos los campos.");
     } else {
       // Continúa con la validación si ambos campos están llenos
-      if (username === "a" && password === "a") {
-        alert("Bienvenido!");
-        window.location.href = "home.html";
+      if (username === "client" && password === "client") {
+        window.location.href = "../client/client-options/client-options.html";
+      } else if (username === "company" && password === "company") {
+        window.location.href = "../company/company-options/company-options.html";
+      } else if (username === "employee" && password === "employee") {
+        window.location.href = "../employee/employee-options/employee-options.html";
       } else {
         alert("Usuario o contraseña incorrectos.");
       }
