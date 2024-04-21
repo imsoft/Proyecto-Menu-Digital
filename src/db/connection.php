@@ -26,7 +26,7 @@
             echo "<p class='error'>Connection failed: " . mysqli_connect_error() . "</p>"; // Error si la conexión falla
         } else {
             echo "<p class='success'>Connected successfully</p>"; // Mensaje de éxito en la conexión
-            mysqli_close($conn); // Cerrar la conexión
+            // mysqli_close($conn); // Cerrar la conexión
         }
         ?>
     </div>

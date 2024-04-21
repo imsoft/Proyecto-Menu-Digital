@@ -18,6 +18,7 @@ $stmt->bind_param("ssssssss", $firstName, $lastName, $surname, $email, $phone, $
 // Ejecutar y verificar
 if ($stmt->execute()) {
     echo "New record created successfully";
+    // header("Location: ../client-options/client-options.html");
 } else {
     echo "Error: " . $stmt->error;
 }

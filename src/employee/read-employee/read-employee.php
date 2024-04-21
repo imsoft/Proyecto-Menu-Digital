@@ -26,7 +26,7 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Los datos del formulario se mostrarán aquí -->
+                <?php include 'fetchEmployees.php'; ?>
             </tbody>
         </table>
     </div>

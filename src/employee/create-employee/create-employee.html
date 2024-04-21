@@ -12,7 +12,8 @@
 <body>
     <div class="form-container">
         <h2>Registro de Empleado</h2>
-        <form id="registrationForm">
+        <form id="registrationForm" action="createEmployee.php" method="POST">
+
             <label for="firstName">Nombre:</label>
             <input type="text" id="firstName" name="firstName" required>
 
@@ -34,9 +35,9 @@
             <label for="gender">Género:</label>
             <select id="gender" name="gender" required>
                 <option value="">Seleccione...</option>
-                <option value="male">Masculino</option>
-                <option value="female">Femenino</option>
-                <option value="other">Otro</option>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+                <option value="otro">Otro</option>
             </select>
 
             <label for="password">Contraseña:</label>
