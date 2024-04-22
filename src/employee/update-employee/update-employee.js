@@ -40,8 +40,25 @@ document
 
     // Validaciones adicionales pueden ser añadidas aquí
 
-    // Si todo está correcto, enviar el formulario o realizar otras acciones
-    alert("Formulario enviado correctamente!");
+    const formData = new FormData(this); // Recoge los datos del formulario
     this.submit(); // Descomenta esta línea para enviar el formulario después de la validación
-    window.location.href = "../read-employee/read-employee.php";
+    
+    // Envía los datos del formulario usando fetch a 'updateEmployee.php'
+    fetch("updateEmployee.php", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.text()) // o .json() si tu backend responde con JSON
+      .then((text) => {
+        alert(text); // Muestra la respuesta del servidor
+        window.location.href = "../read-employee/read-employee.php"; // Asegúrate de que la URL es correcta
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Error al actualizar el registro.");
+      });
+
+    // Si todo está correcto, enviar el formulario o realizar otras acciones
+    // alert("Formulario enviado correctamente!");
+    // window.location.href = "../read-employee/read-employee.php";
   });

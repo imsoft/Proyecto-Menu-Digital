@@ -1,3 +1,9 @@
+<?php
+header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
+header("Pragma: no-cache"); // HTTP 1.0.
+header("Expires: 0"); // Proxies.
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -11,7 +17,7 @@
 
 <body>
     <div class="table-container">
-        <h2>Datos del Cliente</h2>
+        <h2>Datos de los Empleados</h2>
         <table id="employeeTable">
             <thead>
                 <tr>

@@ -1,4 +1,8 @@
 <?php
+header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
+header("Pragma: no-cache"); // HTTP 1.0.
+header("Expires: 0"); // Proxies.
+
 require '../../db/connection.php';
 
 $id = $_GET['id'] ?? ''; // Asegúrate de validar y limpiar este ID antes de usarlo en una consulta
@@ -71,7 +75,7 @@ if ($id) {
             <button type="submit">Editar</button>
         </form>
     </div>
-    <script src="update-employee.js"></script>
+    <!-- <script src="update-employee.js"></script> -->
 </body>
 
 </html>

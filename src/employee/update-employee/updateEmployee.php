@@ -14,11 +14,22 @@ $password = $_POST['password']; // Encripta la contraseña antes de almacenarla
 
 $stmt = $conn->prepare("UPDATE employees SET firstName = ?, lastName = ?, surname = ?, email = ?, phone = ?, birthdate = ?, gender = ?, password = ? WHERE id = ?");
 $stmt->bind_param("ssssssssi", $firstName, $lastName, $surname, $email, $phone, $birthdate, $gender, $password, $id);
+error_log("Recibidos: " . print_r($_POST, true));
 if ($stmt->execute()) {
-    echo "Empleado actualizado correctamente.";
+    if ($stmt->affected_rows > 0) {
+        header("Location: ../read-employee/read-employee.php"); // Redirección desde PHP
+        exit; // Asegúrate de llamar a exit después de header para detener la ejecución del script
+        // echo '<script type="text/javascript">',
+        // 'alert("Empleado actualizado correctamente.");',
+        // 'window.location.href = "../read-employee/read-employee.php";',
+        // '</script>';
+    } else {
+        echo "No se realizaron cambios en el empleado.";
+    }
 } else {
     echo "Error al actualizar el empleado: " . $stmt->error;
 }
+
 
 $stmt->close();
 $conn->close();

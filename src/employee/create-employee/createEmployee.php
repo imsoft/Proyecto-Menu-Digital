@@ -23,6 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Ejecutar el statement
         if ($stmt->execute()) {
             echo "Nuevo empleado registrado exitosamente.";
+            echo '<script type="text/javascript">',
+            'window.location.href = "../employee-options/employee-options.html";',
+            '</script>';
         } else {
             echo "Error: " . $stmt->error;
         }

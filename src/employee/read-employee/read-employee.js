@@ -10,7 +10,12 @@ document.addEventListener("DOMContentLoaded", function () {
             "Content-Type": "application/json",
           },
         })
-          .then((response) => response.json())
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
           .then((data) => {
             if (data.success) {
               this.closest("tr").remove(); // Elimina la fila de la tabla

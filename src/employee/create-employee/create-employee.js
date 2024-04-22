@@ -41,7 +41,7 @@ document
     // Validaciones adicionales pueden ser añadidas aquí
 
     // Si todo está correcto, enviar el formulario o realizar otras acciones
-    alert("Formulario enviado correctamente!");
     this.submit(); // Descomenta esta línea para enviar el formulario después de la validación
-    window.location.href = "../employee-options/employee-options.html";
+    alert("Formulario enviado correctamente!");
+    // window.location.href = "../employee-options/employee-options.html";
   });
