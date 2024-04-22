@@ -1,3 +1,9 @@
+<?php
+header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
+header("Pragma: no-cache"); // HTTP 1.0.
+header("Expires: 0"); // Proxies.
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -26,7 +32,7 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Los datos del formulario se mostrarán aquí -->
+                <?php include 'fetchClients.php'; ?>
             </tbody>
         </table>
     </div>

@@ -12,18 +12,18 @@ $birthdate = $_POST['birthdate'];
 $gender = $_POST['gender'];
 $password = $_POST['password']; // Encripta la contraseña antes de almacenarla
 
-$stmt = $conn->prepare("UPDATE employees SET firstName = ?, lastName = ?, surname = ?, email = ?, phone = ?, birthdate = ?, gender = ?, password = ? WHERE id = ?");
+$stmt = $conn->prepare("UPDATE clients SET firstName = ?, lastName = ?, surname = ?, email = ?, phone = ?, birthdate = ?, gender = ?, password = ? WHERE id = ?");
 $stmt->bind_param("ssssssssi", $firstName, $lastName, $surname, $email, $phone, $birthdate, $gender, $password, $id);
 error_log("Recibidos: " . print_r($_POST, true));
 if ($stmt->execute()) {
     if ($stmt->affected_rows > 0) {
-        header("Location: ../read-employee/read-employee.php"); // Redirección desde PHP
+        header("Location: ../read-client/read-client.php"); // Redirección desde PHP
         exit;
     } else {
-        echo "No se realizaron cambios en el empleado.";
+        echo "No se realizaron cambios en el cliente.";
     }
 } else {
-    echo "Error al actualizar el empleado: " . $stmt->error;
+    echo "Error al actualizar el cliente: " . $stmt->error;
 }
 
 

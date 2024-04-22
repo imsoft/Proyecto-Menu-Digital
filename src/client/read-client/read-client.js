@@ -1,37 +1,34 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const tableBody = document.querySelector("#clientTable tbody");
-    // Simular datos de ejemplo
-    const data = [
-        ["Juan", "Pérez", "López", "juan@example.com", "1234567890", "1990-01-01", "Masculino"]
-    ];
-
-    data.forEach((client, index) => {
-        const row = document.createElement("tr");
-        client.forEach((text) => {
-            const cell = document.createElement("td");
-            cell.textContent = text;
-            row.appendChild(cell);
-        });
-
-        const actionsCell = document.createElement("td");
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "Eliminar";
-        deleteButton.className = "delete-btn";
-        deleteButton.onclick = function () { deleteRow(index); };
-        actionsCell.appendChild(deleteButton);
-
-        const editButton = document.createElement("button");
-        editButton.textContent = "Editar";
-        editButton.className = "edit-btn";
-        editButton.onclick = function () { alert("Editado"); };
-        actionsCell.appendChild(editButton);
-
-        row.appendChild(actionsCell);
-        tableBody.appendChild(row);
+  document.querySelectorAll(".delete-btn").forEach((button) => {
+    button.addEventListener("click", function () {
+      const clientId = this.getAttribute("data-id");
+      if (confirm("¿Estás seguro de que quieres eliminar este registro?")) {
+        fetch("deleteClient.php", {
+          method: "POST",
+          body: JSON.stringify({ id: clientId }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            if (data.success) {
+              this.closest("tr").remove(); // Elimina la fila de la tabla
+              alert("Registro eliminado correctamente.");
+            } else {
+              alert("Hubo un error al eliminar el registro.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("Error al eliminar el registro.");
+          });
+      }
     });
-
-    function deleteRow(index) {
-        document.querySelector("#clientTable tbody").deleteRow(index);
-        alert("Eliminado");
-    }
+  });
 });
