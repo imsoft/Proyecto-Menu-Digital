@@ -14,12 +14,12 @@
         <div class="container">
             <h1>Menú del Restaurante</h1>
             <div class="menu-buttons">
-                <button onclick="filterMenu('food')">Comida</button>
-                <button onclick="filterMenu('drink')">Bebida</button>
+                <button onclick="filterMenu('comida')">Comida</button>
+                <button onclick="filterMenu('bebida')">Bebida</button>
                 <button onclick="filterMenu('extras')">Extras</button>
             </div>
             <div id="menuItems" class="menu-items">
-                <!-- Los platillos se mostrarán aquí -->
+                <?php include 'fetchClientMenu.php'; ?>
             </div>
             <div class="management-buttons">
                 <button>Ver Carrito</button>

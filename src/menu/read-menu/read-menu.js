@@ -1,56 +1,34 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const tableBody = document.querySelector("#productTable tbody");
-  // Simular datos de ejemplo
-  const data = [
-    [
-      "img/product1.png",
-      "Producto A",
-      "Descripción del Producto A",
-      "Categoría A",
-      "$10.00",
-    ],
-  ];
-
-  data.forEach((product, index) => {
-    const row = document.createElement("tr");
-    product.forEach((text, idx) => {
-      const cell = document.createElement("td");
-      if (idx === 0) {
-        // Asumimos que la imagen es la primera columna
-        const img = document.createElement("img");
-        img.src = text;
-        img.alt = "Imagen del Producto";
-        img.style.width = "100px"; // Ajusta el tamaño según necesites
-        cell.appendChild(img);
-      } else {
-        cell.textContent = text;
+  document.querySelectorAll(".delete-btn").forEach((button) => {
+    button.addEventListener("click", function () {
+      const menuItemId = this.getAttribute("data-id");
+      if (confirm("¿Estás seguro de que quieres eliminar este producto del menú?")) {
+        fetch("deleteMenu.php", {
+          method: "POST",
+          body: JSON.stringify({ id: menuItemId }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            if (data.success) {
+              this.closest("tr").remove(); // Elimina la fila de la tabla
+              alert("Producto eliminado correctamente.");
+            } else {
+              alert("Hubo un error al eliminar el producto.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("Error al eliminar el producto.");
+          });
       }
-      row.appendChild(cell);
     });
-
-    const actionsCell = document.createElement("td");
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Eliminar";
-    deleteButton.className = "delete-btn";
-    deleteButton.onclick = function () {
-      deleteRow(index);
-    };
-    actionsCell.appendChild(deleteButton);
-
-    const editButton = document.createElement("button");
-    editButton.textContent = "Editar";
-    editButton.className = "edit-btn";
-    editButton.onclick = function () {
-      alert("Editado");
-    };
-    actionsCell.appendChild(editButton);
-
-    row.appendChild(actionsCell);
-    tableBody.appendChild(row);
   });
-
-  function deleteRow(index) {
-    document.querySelector("#productTable tbody").deleteRow(index);
-    alert("Eliminado");
-  }
 });
