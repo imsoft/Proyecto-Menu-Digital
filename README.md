@@ -42,3 +42,30 @@ CREATE TABLE IF NOT EXISTS employees (
     password VARCHAR(255) NOT NULL
 );
 ```
+
+## Crear tabla de Menú
+
+```
+CREATE TABLE menu_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_image VARCHAR(255) NOT NULL,
+    product_name VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    category_name ENUM('comida', 'bebida', 'extras') NOT NULL,
+    price DECIMAL(10, 2) NOT NULL
+);
+```
+
+## Crear tabla de Sucursales
+
+```
+CREATE TABLE branches (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    branch_name VARCHAR(255) NOT NULL,
+    branch_manager VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    postal_code CHAR(5) NOT NULL,
+    cellphone CHAR(10) NOT NULL,
+    website VARCHAR(255)
+);
+```
