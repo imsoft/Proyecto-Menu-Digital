@@ -1,37 +1,39 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const tableBody = document.querySelector("#clientTable tbody");
-  // Simular datos de ejemplo
-  const data = [
-      ["Juan", "Pérez", "López", "XEXX010101HDFABC01", "Juan Pérez S.A. de C.V.", "Tienda Juan", "1234 Calle Principal, Ciudad", "PELJ890123HDFLRN01"]
-  ];
-
-  data.forEach((client, index) => {
-      const row = document.createElement("tr");
-      client.forEach((text) => {
-          const cell = document.createElement("td");
-          cell.textContent = text;
-          row.appendChild(cell);
-      });
-
-      const actionsCell = document.createElement("td");
-      const deleteButton = document.createElement("button");
-      deleteButton.textContent = "Eliminar";
-      deleteButton.className = "delete-btn";
-      deleteButton.onclick = function () { deleteRow(index); };
-      actionsCell.appendChild(deleteButton);
-
-      const editButton = document.createElement("button");
-      editButton.textContent = "Editar";
-      editButton.className = "edit-btn";
-      editButton.onclick = function () { alert("Editado"); };
-      actionsCell.appendChild(editButton);
-
-      row.appendChild(actionsCell);
-      tableBody.appendChild(row);
+  document.querySelectorAll(".delete-btn").forEach((button) => {
+    button.addEventListener("click", function () {
+      const taxDataId = this.getAttribute("data-id"); // Cambio de clientId a taxDataId
+      if (
+        confirm(
+          "¿Estás seguro de que quieres eliminar este registro de datos fiscales?"
+        )
+      ) {
+        fetch("deleteTaxData.php", {
+          // Cambiado de deleteClient.php a deleteTaxData.php
+          method: "POST",
+          body: JSON.stringify({ id: taxDataId }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            if (data.success) {
+              this.closest("tr").remove(); // Elimina la fila de la tabla
+              alert("Datos fiscales eliminados correctamente.");
+            } else {
+              alert("Hubo un error al eliminar los datos fiscales.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("Error al eliminar los datos fiscales.");
+          });
+      }
+    });
   });
-
-  function deleteRow(index) {
-      document.querySelector("#clientTable tbody").deleteRow(index);
-      alert("Eliminado");
-  }
 });

@@ -69,3 +69,19 @@ CREATE TABLE branches (
     website VARCHAR(255)
 );
 ```
+
+## Crear tabla de Datos fiscales
+
+```
+CREATE TABLE tax_data (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    firstName VARCHAR(100) NOT NULL,
+    lastName VARCHAR(100) NOT NULL,
+    surname VARCHAR(100) NOT NULL,
+    rfc CHAR(13) NOT NULL,
+    socialName VARCHAR(255) NOT NULL,
+    tradeName VARCHAR(255) NOT NULL,
+    address TEXT NOT NULL,
+    curp CHAR(18) NOT NULL
+);
+```
