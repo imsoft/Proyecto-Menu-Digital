@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     if (contador === 0) {
       clearInterval(intervalo);
-      window.location.href = "../login/login.html";
+      window.location.href = "../user-options/user-options.html";
     }
   }, 1000);
 });
