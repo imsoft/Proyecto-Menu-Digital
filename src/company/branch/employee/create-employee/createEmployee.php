@@ -1,5 +1,5 @@
 <?php
-require '../../db/connection.php'; // Incluye el archivo de conexión a la base de datos
+require '../../../../db/connection.php'; // Incluye el archivo de conexión a la base de datos
 
 // Verifica si el formulario ha sido enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -22,10 +22,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Ejecutar el statement
         if ($stmt->execute()) {
-            echo "Nuevo empleado registrado exitosamente.";
-            echo '<script type="text/javascript">',
-            'window.location.href = "../employee-options/employee-options.html";',
-            '</script>';
+            // echo "Nuevo empleado registrado exitosamente.";
+            Header("Location: ../employee-options/employee-options.html");
+            exit;
         } else {
             echo "Error: " . $stmt->error;
         }

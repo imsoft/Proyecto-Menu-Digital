@@ -126,3 +126,14 @@ CREATE TABLE IF NOT EXISTS cart_items (
     FOREIGN KEY (menu_item_id) REFERENCES menu_items(id)
 );
 ```
+
+## Crear tabla de ordenes
+
+```
+CREATE TABLE IF NOT EXISTS orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cart_id INT NOT NULL,
+    state ENUM('waiting', 'in_preparation', 'ready') NOT NULL DEFAULT 'waiting',
+    FOREIGN KEY (cart_id) REFERENCES carts(id)
+);
+```

@@ -19,10 +19,13 @@
             </section>
             <section id="inPreparation">
                 <h2>En Preparación</h2>
+                <button onclick="updateOrderStatus(1, 'ready')">Mover a Listo para Servir</button>
                 <ul></ul>
             </section>
             <section id="waiting">
                 <h2>En Espera de Preparación</h2>
+                <button onclick="updateOrderStatus(1, 'in_preparation')">Mover a Preparación</button>
+
                 <ul></ul>
             </section>
         </div>

@@ -13,21 +13,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gender = $_POST['gender'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Encripta la contraseña antes de almacenarla
 
-    // Preparar la consulta SQL para insertar los datos
-    $sql = "INSERT INTO `clients` (`firstName`, `lastName`, `surname`, `email`, `phone`, `birthdate`, `gender`, `password`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    // Generar un número de mesa aleatorio
+    $table_number = rand(1, 100);
+
+    // Preparar la consulta SQL para insertar los datos incluyendo el número de mesa
+    $sql = "INSERT INTO `clients` (`firstName`, `lastName`, `surname`, `email`, `phone`, `birthdate`, `gender`, `password`, `table_number`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     if ($stmt = $conn->prepare($sql)) {
         // Vincular los valores como parámetros al statement preparado
-        $stmt->bind_param("ssssssss", $firstName, $lastName, $surname, $email, $phone, $birthdate, $gender, $password);
+        $stmt->bind_param("ssssssssi", $firstName, $lastName, $surname, $email, $phone, $birthdate, $gender, $password, $table_number);
 
         // Ejecutar el statement
         if ($stmt->execute()) {
-            header("Location: ../client-options/client-options.html");
+            header("Location: ../client-options/client-options.php"); // Redireccionar a la página de opciones
             exit;
-            // echo "Nuevo cliente registrado exitosamente.";
-            // echo '<script type="text/javascript">',
-            // 'window.location.href = "../client-options/client-options.html";',
-            // '</script>';
         } else {
             echo "Error: " . $stmt->error;
         }

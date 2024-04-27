@@ -10,6 +10,7 @@
 </head>
 
 <body>
+
     <body>
         <div class="container">
             <h1>Menú del Restaurante</h1>
@@ -22,7 +23,7 @@
                 <?php include 'fetchClientMenu.php'; ?>
             </div>
             <div class="management-buttons">
-                <button>Ver Carrito</button>
+                <button onclick="window.location.href='./src/cart/viewCart/viewCart.php'">Ver Carrito</button>
             </div>
         </div>
         <script src="client-menu.js"></script>
