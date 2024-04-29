@@ -3,7 +3,7 @@ document.getElementById("addBranch").addEventListener("click", function () {
 });
 
 document.getElementById("viewBranch").addEventListener("click", function () {
-  window.location.href = "../../branch/read-branch/read-branch.html";
+  window.location.href = "../../branch/read-branch/read-branch.php";
 });
 
 document.getElementById("loadProductMenu").addEventListener("click", function () {
@@ -11,15 +11,19 @@ document.getElementById("loadProductMenu").addEventListener("click", function ()
 });
 
 document.getElementById("viewMenu").addEventListener("click", function () {
-  window.location.href = "../../menu/read-menu/read-menu.html";
+  window.location.href = "../../menu/read-menu/read-menu.php";
+});
+
+document.getElementById("addFiscalInfo").addEventListener("click", function () {
+  window.location.href = "../../tax-data/create-tax-data/create-tax-data.html";
 });
 
 document.getElementById("viewFiscalInfo").addEventListener("click", function () {
-  window.location.href = "../../tax-data/read-tax-data/read-tax-data.html";
+  window.location.href = "../../tax-data/read-tax-data/read-tax-data.php";
 });
 
 document.getElementById("consumptionHistory").addEventListener("click", function () {
-  window.location.href = "../../record/record.html";
+  window.location.href = "../../company/company-record/company-record.html";
 });
 
 document.getElementById("customerFeedback").addEventListener("click", function () {
@@ -27,5 +31,5 @@ document.getElementById("customerFeedback").addEventListener("click", function (
 });
 
 document.getElementById("viewGraph").addEventListener("click", function () {
-  window.location.href = "../../graph/graph.html";
+  window.location.href = "../../company/company-graph/company-graph.html";
 });

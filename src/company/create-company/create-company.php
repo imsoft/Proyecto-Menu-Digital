@@ -1,18 +1,28 @@
 <?php
-session_start();
 require '../../db/connection.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Procesar la imagen del producto
     if (isset($_FILES['logo']) && $_FILES['logo']['error'] == 0) {
         $fileTmpPath = $_FILES['logo']['tmp_name'];
         $fileName = $_FILES['logo']['name'];
+        $fileSize = $_FILES['logo']['size'];
         $fileType = $_FILES['logo']['type'];
         $fileNameCmps = explode(".", $fileName);
         $fileExtension = strtolower(end($fileNameCmps));
+
+        // Directorios para almacenar la imagen
         $uploadFileDir = '../../../public/images/uploaded_images/';
         $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
         $dest_path = $uploadFileDir . $newFileName;
 
+        // Verificar si el directorio existe y tiene permisos de escritura
+        if (!is_dir($uploadFileDir) || !is_writable($uploadFileDir)) {
+            echo 'El directorio de destino no existe o no tiene permisos de escritura. Verifica la ruta y los permisos del directorio.';
+            exit;
+        }
+
+        // Intentar mover el archivo al directorio de destino
         if (move_uploaded_file($fileTmpPath, $dest_path)) {
             $logoPath = $dest_path;
         } else {
@@ -24,6 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
+    // Procesar el resto de la información del formulario
     $associatedName = $_POST['associatedName'];
     $businessName = $_POST['businessName'];
     $address = $_POST['address'];
@@ -35,12 +46,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $userType = 'negocio';  // Asigna el tipo de usuario "negocio" de manera predeterminada
 
+    // Insertar en la base de datos
     $sql = "INSERT INTO companies (logo_path, associated_name, business_name, address, email, cellphone, food_type, has_rfc, consistent_menu, password, user_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param("sssssssiiss", $logoPath, $associatedName, $businessName, $address, $email, $cellphone, $foodType, $hasRFC, $consistentMenu, $password, $userType);
 
         if ($stmt->execute()) {
-            header("Location: ../read-company/read-company.php");
+            header("Location: ../company-options/company-options.html");
             exit;
         } else {
             echo "Error: " . $stmt->error;
