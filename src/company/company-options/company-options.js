@@ -1,5 +1,5 @@
 document.getElementById("addBranch").addEventListener("click", function () {
-  window.location.href = "../../branch/create-branch/create-branch.html";
+  window.location.href = "../../branch/create-branch/create-branch.php";
 });
 
 document.getElementById("viewBranch").addEventListener("click", function () {
@@ -15,7 +15,7 @@ document.getElementById("viewMenu").addEventListener("click", function () {
 });
 
 document.getElementById("addFiscalInfo").addEventListener("click", function () {
-  window.location.href = "../../tax-data/create-tax-data/create-tax-data.html";
+  window.location.href = "../../tax-data/create-tax-data/create-tax-data.php";
 });
 
 document.getElementById("viewFiscalInfo").addEventListener("click", function () {

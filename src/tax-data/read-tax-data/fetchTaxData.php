@@ -1,8 +1,21 @@
 <?php
+session_start(); // Asegura que la sesión esté iniciada
+
 require '../../db/connection.php'; // Incluye tu archivo de conexión a la base de datos
 
-$sql = "SELECT id, firstName, lastName, surname, rfc, socialName, tradeName, address, curp FROM tax_data";
-$result = $conn->query($sql);
+if (!isset($_SESSION['company_id'])) {
+    echo "No se encontró company_id en la sesión.";
+    exit;
+}
+
+$companyId = $_SESSION['company_id']; // Obtén el company_id de la sesión
+
+// Consulta SQL que incluye un filtro por company_id
+$sql = "SELECT id, firstName, lastName, surname, rfc, socialName, tradeName, address, curp FROM tax_data WHERE company_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $companyId);
+$stmt->execute();
+$result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     // Salida de datos de cada fila

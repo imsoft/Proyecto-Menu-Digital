@@ -1,8 +1,21 @@
 <?php
+session_start(); // Asegura que la sesión esté iniciada
+
 require '../../db/connection.php'; // Incluye tu archivo de conexión a la base de datos
 
-$sql = "SELECT id, branch_name, branch_manager, address, postal_code, cellphone, website FROM branches";
-$result = $conn->query($sql);
+if (!isset($_SESSION['company_id'])) {
+    echo "No se encontró company_id en la sesión.";
+    exit;
+}
+
+$companyId = $_SESSION['company_id']; // Obtén el company_id de la sesión
+
+// Consulta SQL que incluye un filtro por company_id
+$sql = "SELECT id, branch_name, branch_manager, address, postal_code, cellphone, website FROM branches WHERE company_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $companyId);
+$stmt->execute();
+$result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     // Salida de datos de cada fila
@@ -18,6 +31,7 @@ if ($result->num_rows > 0) {
         echo "</tr>";
     }
 } else {
-    echo "<tr><td colspan='7'>No hay sucursales registradas.</td></tr>";
+    echo "<tr><td colspan='7'>No hay sucursales registradas para esta empresa.</td></tr>";
 }
+$stmt->close();
 $conn->close();

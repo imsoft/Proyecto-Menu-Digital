@@ -20,12 +20,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Verificar que la contraseña hasheada coincida con la ingresada por el usuario
             if (password_verify($password, $user['password'])) {
                 // Establecer variables de sesión
-                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['company_id'] = $user['id'];
                 $_SESSION['user_name'] = $user['business_name'];
                 $_SESSION['user_type'] = $user['user_type'];
 
                 // Redireccionar al usuario a la página de inicio de su perfil o dashboard
-                header("Location: ../employee-options/employee-options.html"); // Ajusta el URL según sea necesario
+                header("Location: ../company-options/company-options.html"); // Ajusta el URL según sea necesario
                 exit;
             } else {
                 $error_message = "Credenciales inválidas.";

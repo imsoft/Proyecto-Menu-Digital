@@ -1,39 +1,61 @@
 <?php
-require '../../db/connection.php'; // Incluye el archivo de conexión a la base de datos
+session_start(); // Asegúrate de que la sesión esté iniciada
 
-// Verifica si el formulario ha sido enviado
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Recuperar los valores del formulario
-    $firstName = $_POST['firstName'];
-    $lastName = $_POST['lastName'];
-    $surname = $_POST['surname'];
-    $rfc = $_POST['rfc'];
-    $socialName = $_POST['socialName'];
-    $tradeName = $_POST['tradeName'];
-    $address = $_POST['address'];
-    $curp = $_POST['curp'];
-
-    // Preparar la consulta SQL para insertar los datos
-    $sql = "INSERT INTO tax_data (firstName, lastName, surname, rfc, socialName, tradeName, address, curp) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
-    if ($stmt = $conn->prepare($sql)) {
-        // Vincular los valores como parámetros al statement preparado
-        $stmt->bind_param("ssssssss", $firstName, $lastName, $surname, $rfc, $socialName, $tradeName, $address, $curp);
-
-        // Ejecutar el statement
-        if ($stmt->execute()) {
-            header("Location: ../read-tax-data/read-tax-data.php"); // Asumiendo que existe una página de éxito para redirigir
-            exit;
-        } else {
-            echo "Error: " . $stmt->error;
-        }
-
-        // Cerrar el statement
-        $stmt->close();
-    } else {
-        echo "Error preparando la consulta: " . $conn->error;
-    }
-
-    // Cerrar la conexión
-    $conn->close();
+if (!isset($_SESSION['company_id'])) {
+    // Redirigir al usuario para iniciar sesión si no hay un company_id en la sesión
+    header("Location: ../../company/company-login/company-login.html");
+    exit;
 }
+
+$companyId = $_SESSION['company_id']; // Recupera el company_id de la sesión
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos Fiscales</title>
+    <link rel="stylesheet" href="create-tax-data.css">
+    <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
+</head>
+
+<body>
+    <div class="form-container">
+        <h2>Registro de Datos Fiscales</h2>
+        <form id="registrationForm" action="createTaxData.php" method="POST">
+
+            <input type="hidden" id="companyId" name="companyId" value="<?php echo htmlspecialchars($companyId); ?>">
+
+            <label for="firstName">Nombre:</label>
+            <input type="text" id="firstName" name="firstName" required>
+
+            <label for="lastName">Apellido Paterno:</label>
+            <input type="text" id="lastName" name="lastName" required>
+
+            <label for="surname">Apellido Materno:</label>
+            <input type="text" id="surname" name="surname" required>
+
+            <label for="rfc">RFC:</label>
+            <input type="text" id="rfc" name="rfc" required pattern="^[A-Z]{4}[0-9]{6}[A-Z0-9]{3}$">
+
+            <label for="socialName">Nombre o Razón Social:</label>
+            <input type="text" id="socialName" name="socialName" required>
+
+            <label for="tradeName">Nombre de Comercio:</label>
+            <input type="text" id="tradeName" name="tradeName" required>
+
+            <label for="address">Domicilio:</label>
+            <input type="text" id="address" name="address" required>
+
+            <label for="curp">CURP:</label>
+            <input type="text" id="curp" name="curp" required pattern="^[A-Z]{4}[0-9]{6}[H,M][A-Z]{5}[A-Z0-9]{2}$">
+
+            <button type="submit">Registrar</button>
+        </form>
+    </div>
+    <!-- <script src="create-tax-data.js"></script> -->
+</body>
+
+</html>
