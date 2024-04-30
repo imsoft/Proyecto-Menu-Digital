@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../../../../db/connection.php'; // Incluye el archivo de conexión a la base de datos
+require '../../db/connection.php'; // Incluye el archivo de conexión a la base de datos
 
 $email = $_POST['email'];
 $password = $_POST['password']; // La contraseña debe ser verificada contra un hash

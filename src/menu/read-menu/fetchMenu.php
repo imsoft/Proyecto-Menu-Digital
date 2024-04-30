@@ -1,8 +1,20 @@
 <?php
+session_start(); // Asegura que la sesión esté iniciada
+
 require '../../db/connection.php'; // Incluye tu archivo de conexión a la base de datos
 
-$sql = "SELECT id, product_image, product_name, description, category_name, price FROM menu_items";
-$result = $conn->query($sql);
+if (!isset($_SESSION['company_id'])) {
+    echo "No se encontró company_id en la sesión.";
+    exit;
+}
+
+$companyId = $_SESSION['company_id']; // Obtén el company_id de la sesión
+
+$sql = "SELECT id, product_image, product_name, description, category_name, price FROM menu_items WHERE company_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $companyId);
+$stmt->execute();
+$result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     // Salida de datos de cada fila
@@ -19,4 +31,5 @@ if ($result->num_rows > 0) {
 } else {
     echo "<tr><td colspan='6'>No hay productos registrados.</td></tr>";
 }
+$stmt->close();
 $conn->close();

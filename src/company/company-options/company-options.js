@@ -1,3 +1,7 @@
+document.getElementById("viewCompany").addEventListener("click", function () {
+  window.location.href = "../read-company/read-company.php";
+});
+
 document.getElementById("addBranch").addEventListener("click", function () {
   window.location.href = "../../branch/create-branch/create-branch.php";
 });
@@ -7,7 +11,7 @@ document.getElementById("viewBranch").addEventListener("click", function () {
 });
 
 document.getElementById("loadProductMenu").addEventListener("click", function () {
-  window.location.href = "../../menu/create-menu/create-menu.html";
+  window.location.href = "../../menu/create-menu/create-menu.php";
 });
 
 document.getElementById("viewMenu").addEventListener("click", function () {
@@ -20,6 +24,14 @@ document.getElementById("addFiscalInfo").addEventListener("click", function () {
 
 document.getElementById("viewFiscalInfo").addEventListener("click", function () {
   window.location.href = "../../tax-data/read-tax-data/read-tax-data.php";
+});
+
+document.getElementById("addEmployee").addEventListener("click", function () {
+  window.location.href = "../../employee/create-employee/create-employee.php";
+});
+
+document.getElementById("viewEpleoyee").addEventListener("click", function () {
+  window.location.href = "../../employee/read-employee/read-employee.php";
 });
 
 document.getElementById("consumptionHistory").addEventListener("click", function () {

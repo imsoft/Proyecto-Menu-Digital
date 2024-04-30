@@ -1,3 +1,19 @@
+<?php
+header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
+header("Pragma: no-cache"); // HTTP 1.0.
+header("Expires: 0"); // Proxies.
+
+session_start(); // Asegúrate de que la sesión esté iniciada
+
+if (!isset($_SESSION['company_id'])) {
+    // Redirigir al usuario para iniciar sesión si no hay un company_id en la sesión
+    header("Location: ../../company/company-login/company-login.html");
+    exit;
+}
+
+$companyId = $_SESSION['company_id'];
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -29,6 +45,7 @@
             </thead>
             <tbody>
                 <!-- Los datos se mostrarán aquí -->
+                <?php include 'fetch-company.php'; ?>
             </tbody>
         </table>
     </div>

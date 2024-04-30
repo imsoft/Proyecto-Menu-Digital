@@ -3,7 +3,7 @@ document.getElementById("BtnClient").addEventListener("click", function () {
 });
 
 document.getElementById("BtnEmployee").addEventListener("click", function () {
-  window.location.href = "../company/branch/employee/employee-login/employee-login.html";
+  window.location.href = "../employee/employee-login/employee-login.html";
 });
 
 document.getElementById("BtnCompany").addEventListener("click", function () {

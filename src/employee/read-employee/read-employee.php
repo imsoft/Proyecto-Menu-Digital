@@ -2,6 +2,11 @@
 header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
 header("Pragma: no-cache"); // HTTP 1.0.
 header("Expires: 0"); // Proxies.
+
+session_start(); // Asegúrate de iniciar la sesión al principio del script
+$companyId = $_SESSION['company_id']; // Obtener el company_id de la sesión
+$branchId = $_SESSION['branch_id'] ?? null; // Obtener el branch_id de la sesión si existe
+
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +33,8 @@ header("Expires: 0"); // Proxies.
                     <th>Teléfono Celular</th>
                     <th>Fecha de Nacimiento</th>
                     <th>Género</th>
+                    <th>Empresa</th>
+                    <th>Sucursal</th>
                     <th>Acciones</th>
                 </tr>
             </thead>

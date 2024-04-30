@@ -50,16 +50,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO companies (logo_path, associated_name, business_name, address, email, cellphone, food_type, has_rfc, consistent_menu, password, user_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param("sssssssiiss", $logoPath, $associatedName, $businessName, $address, $email, $cellphone, $foodType, $hasRFC, $consistentMenu, $password, $userType);
-
         if ($stmt->execute()) {
             header("Location: ../company-options/company-options.html");
             exit;
         } else {
+            error_log("Error al ejecutar la consulta: " . $stmt->error);
             echo "Error: " . $stmt->error;
         }
         $stmt->close();
     } else {
+        error_log("Error preparando la consulta: " . $conn->error);
         echo "Error preparando la consulta: " . $conn->error;
     }
+
     $conn->close();
 }
