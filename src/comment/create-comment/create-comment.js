@@ -27,7 +27,7 @@ function loadBranches(companyId) {
     .then((data) => {
       const branchSelect = document.getElementById("branch");
       branchSelect.innerHTML =
-        '<option value="">-- Selecciona Sucursal --</option>'; // Limpiar opciones previas
+        '<option value="">-- Selecciona Sucursal --</option>';
       data.forEach((branch) => {
         const option = new Option(branch.branch_name, branch.id);
         branchSelect.appendChild(option);
@@ -35,3 +35,7 @@ function loadBranches(companyId) {
     })
     .catch((error) => console.error("Error loading branches:", error));
 }
+
+document.getElementById("viewComments").addEventListener("click", function () {
+  window.location.href = "../read-comment/read-comment.php";
+});

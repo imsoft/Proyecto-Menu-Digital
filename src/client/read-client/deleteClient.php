@@ -1,30 +1,39 @@
 <?php
 require '../../db/connection.php';
 
+// Comenzar la sesión
+session_start();
+
 // Asegurarse de que el método usado es POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $data = json_decode(file_get_contents("php://input"), true);
+    $commentId = $data['id'];
+    $userId = $_SESSION['user_id'];
 
-    if ($conn === false) {
-        echo json_encode(['success' => false, 'error' => 'Database connection failed']);
+    // Verificar que el ID del comentario fue recibido correctamente
+    if (!$commentId) {
+        echo json_encode(['success' => false, 'error' => 'No comment ID provided']);
         exit;
     }
 
-    $data = json_decode(file_get_contents("php://input"), true);
-    $clientId = $data['id'];
+    // Preparar la consulta SQL para eliminar el comentario
+    $stmt = $conn->prepare("DELETE FROM comments WHERE id = ? AND client_id = ?");
+    if ($stmt === false) {
+        echo json_encode(['success' => false, 'error' => 'Failed to prepare statement']);
+        exit;
+    }
 
-    // Preparar la consulta SQL para eliminar el registro
-    $stmt = $conn->prepare("DELETE FROM clients WHERE id = ?");
-    $stmt->bind_param("i", $clientId);
-
+    // Vincular parámetros y ejecutar
+    $stmt->bind_param("ii", $commentId, $userId);
     if ($stmt->execute()) {
         echo json_encode(['success' => true]);
     } else {
-        error_log("Error al ejecutar la consulta: " . $stmt->error);  // Log del error SQL
-        echo json_encode(['success' => false, 'error' => $stmt->error]);
+        echo json_encode(['success' => false, 'error' => 'Error executing statement: ' . $stmt->error]);
     }
 
     $stmt->close();
-    $conn->close();
 } else {
-    echo json_encode(['success' => false, 'error' => 'Invalid request']);
+    echo json_encode(['success' => false, 'error' => 'Invalid request method']);
 }
+
+$conn->close();

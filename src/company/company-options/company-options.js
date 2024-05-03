@@ -39,7 +39,7 @@ document.getElementById("consumptionHistory").addEventListener("click", function
 });
 
 document.getElementById("customerFeedback").addEventListener("click", function () {
-  window.location.href = "../../comment/read-comment/read-comment.html";
+  window.location.href = "../company-comments/read-company-comments/read-company-comments.php";
 });
 
 document.getElementById("viewGraph").addEventListener("click", function () {

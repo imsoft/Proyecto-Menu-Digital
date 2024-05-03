@@ -1,5 +1,10 @@
 <?php
-session_start(); // Asegúrate de iniciar la sesión
+header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
+header("Pragma: no-cache"); // HTTP 1.0.
+header("Expires: 0"); // Proxies.
+
+session_start(); // Asegúrate de iniciar la sesión al principio del script
+$companyId = $_SESSION['company_id']; // Obtener el company_id de la sesión
 ?>
 
 <!DOCTYPE html>

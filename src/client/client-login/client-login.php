@@ -46,5 +46,3 @@ if ($user = $result->fetch_assoc()) {
 } else {
     echo "Credenciales inválidas.";
 }
-
-$conn->close();

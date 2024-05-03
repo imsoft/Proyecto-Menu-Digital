@@ -13,5 +13,5 @@ document.getElementById("statusButton").addEventListener("click", function () {
 document
   .getElementById("commentsButton")
   .addEventListener("click", function () {
-    window.location.href = "../../comment/create-comment/create-comment.html";
+    window.location.href = "../../comment/create-comment/create-comment.php";
   });
