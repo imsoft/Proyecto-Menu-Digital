@@ -7,7 +7,7 @@ document.getElementById("menuButton").addEventListener("click", function () {
 });
 
 document.getElementById("statusButton").addEventListener("click", function () {
-  window.location.href = "../preparation-status/preparation-status.html";
+  window.location.href = "../preparation-status/preparation-status.php";
 });
 
 document

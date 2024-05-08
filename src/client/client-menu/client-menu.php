@@ -23,7 +23,7 @@
                 <?php include 'fetchClientMenu.php'; ?>
             </div>
             <div class="management-buttons">
-                <button onclick="window.location.href='./src/cart/viewCart/viewCart.php'">Ver Carrito</button>
+                <button onclick="window.location.href='../../cart/viewCart/viewCart.php'">Ver Carrito</button>
             </div>
         </div>
         <script src="client-menu.js"></script>

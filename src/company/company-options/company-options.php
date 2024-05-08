@@ -1,3 +1,9 @@
+<?php
+session_start();
+require '../../db/connection.php';
+$companyId = $_SESSION['company_id'];
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 

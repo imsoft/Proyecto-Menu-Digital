@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['user_type'] = $user['user_type'];
 
                 // Redireccionar al usuario a la página de inicio de su perfil o dashboard
-                header("Location: ../company-options/company-options.html"); // Ajusta el URL según sea necesario
+                header("Location: ../company-options/company-options.php"); // Ajusta el URL según sea necesario
                 exit;
             } else {
                 $error_message = "Credenciales inválidas.";

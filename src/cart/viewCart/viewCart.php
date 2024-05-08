@@ -57,7 +57,6 @@ if ($result->num_rows > 0) {
     echo "<td>$" . number_format($total_sum, 2) . "</td>";
     echo "</tr>";
     echo "</table>";
-    echo "<button id='finishOrderButton'>Terminar Pedido</button>";
 } else {
     echo "Tu carrito está vacío.";
 }
@@ -78,21 +77,86 @@ $conn->close();
 <body>
     <!-- El contenido HTML se puede agregar aquí, el PHP anterior generará el contenido dinámico del carrito -->
 
+    <!-- Selector de Empresa -->
+    <select id="companySelect" onchange="updateBranches()">
+        <option value="">Selecciona una empresa</option>
+        <!-- Las opciones se llenarán dinámicamente con PHP -->
+        <?php
+        require '../../db/connection.php';
+        $sql = "SELECT id, business_name FROM companies";
+        $result = $conn->query($sql);
+        if ($result === false) {
+            die("Error en la consulta: " . $conn->error);
+        }
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo "<option value='" . $row['id'] . "'>" . htmlspecialchars($row['business_name']) . "</option>";
+            }
+        } else {
+            echo "<option>No se encontraron empresas</option>";
+        }
+
+        ?>
+    </select>
+
+    <!-- Selector de Sucursales -->
+    <select id="branchSelect">
+        <option value="">Primero selecciona una empresa</option>
+    </select>
+
+    <button id='finishOrderButton'>Terminar Pedido</button>
+
     <script>
         document.getElementById('finishOrderButton').addEventListener('click', function() {
+            const companyId = document.getElementById('companySelect').value;
+            const branchId = document.getElementById('branchSelect').value;
+            const cartId = <?php echo $cart_id; ?>; // Asegúrate de que esta variable esté correctamente definida
+
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function() {
                 if (this.responseText.trim() === 'success') {
                     alert('Pedido realizado con éxito');
-                    window.location.href = 'orderConfirmation.php'; // Redireccionar a una página de confirmación
+                    window.location.href = '../../client/preparation-status/preparation-status.php'; // Redireccionar a una página de confirmación
                 } else {
-                    alert('Error al realizar el pedido');
+                    alert('Error al realizar el pedido: ' + this.responseText);
                 }
             };
-            xhttp.open("POST", "../../../company/branch/food-preparation/processOrder/processOrder.php");
+            xhttp.open("POST", "../processOrder/processOrder.php");
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("cartId=" + <?php echo $cart_id; ?>);
+            xhttp.send(`cartId=${cartId}&companyId=${companyId}&branchId=${branchId}`);
         });
+
+        function updateBranches() {
+            var companyId = document.getElementById('companySelect').value;
+            var branchSelect = document.getElementById('branchSelect');
+
+            // Limpia las opciones anteriores
+            branchSelect.innerHTML = '';
+
+            // Si no se selecciona una empresa, no hace nada más
+            if (!companyId) {
+                branchSelect.innerHTML = '<option value="">Primero selecciona una empresa</option>';
+                return;
+            }
+
+            // Crear una solicitud AJAX para obtener las sucursales
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    // Parsear la respuesta y llenar el desplegable de sucursales
+                    const branches = JSON.parse(this.responseText);
+                    branches.forEach(function(branch) {
+                        var option = document.createElement('option');
+                        option.value = branch.id;
+                        option.textContent = branch.branch_name;
+                        branchSelect.appendChild(option);
+                    });
+                }
+            };
+            xhttp.open("GET", "getBranches.php?company_id=" + companyId, true);
+            xhttp.send();
+        }
+
 
         function removeFromCart(cartItemId) {
             const xhttp = new XMLHttpRequest();

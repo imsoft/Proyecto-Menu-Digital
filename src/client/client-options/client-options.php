@@ -5,6 +5,7 @@ header("Expires: 0"); // Proxies.
 
 session_start(); // Asegúrate de iniciar la sesión al principio del script
 $companyId = $_SESSION['company_id']; // Obtener el company_id de la sesión
+$clientId = $_SESSION['user_id']; // Obtener el user_id de la sesión
 ?>
 
 <!DOCTYPE html>

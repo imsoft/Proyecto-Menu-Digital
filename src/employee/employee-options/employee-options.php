@@ -1,3 +1,11 @@
+<?php
+session_start();
+require '../../db/connection.php';
+$employeeId = $_SESSION['user_id'];
+$companyId = $_SESSION['user_company'];
+$branchId = $_SESSION['user_branch'];
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 

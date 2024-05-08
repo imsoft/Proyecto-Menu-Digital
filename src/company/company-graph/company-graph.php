@@ -1,3 +1,9 @@
+<?php
+session_start();
+require '../../db/connection.php';
+$companyId = $_SESSION['company_id'];
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -7,21 +13,22 @@
     <title>Graficas</title>
     <link rel="stylesheet" href="company-graph.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="company-graph.js" defer></script>
     <link rel="shortcut icon" href="../../public/images/favicon/logo.png" />
 </head>
 
 <body>
     <div class="container">
-        <h1>Platillos Más Vendidos</h1>
-        <div class="canvas-container">
-            <canvas id="topDishesChart"></canvas>
-        </div>
-        <h1>Platillos Menos Vendidos</h1>
-        <div class="canvas-container">
-            <canvas id="leastDishesChart"></canvas>
+        <h1>Graficas de Negocio</h1>
+        <div>
+            <div class="canvas-container">
+                <canvas id="genderChart"></canvas>
+            </div>
+            <div class="canvas-container">
+                <canvas id="ratingsChart"></canvas>
+            </div>
         </div>
     </div>
-    <script src="company-graph.js"></script>
 </body>
 
 </html>

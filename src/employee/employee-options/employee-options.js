@@ -1,5 +1,5 @@
 document
   .getElementById("viewStatus")
   .addEventListener("click", function () {
-    window.location.href = "../../food-preparation/food-preparation.html";
+    window.location.href = "../../branch/food-preparation/food-preparation.php";
   });

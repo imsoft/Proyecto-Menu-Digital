@@ -35,7 +35,7 @@ document.getElementById("viewEpleoyee").addEventListener("click", function () {
 });
 
 document.getElementById("consumptionHistory").addEventListener("click", function () {
-  window.location.href = "../../company/company-record/company-record.html";
+  window.location.href = "../../company/company-record/company-record.php";
 });
 
 document.getElementById("customerFeedback").addEventListener("click", function () {
@@ -43,5 +43,5 @@ document.getElementById("customerFeedback").addEventListener("click", function (
 });
 
 document.getElementById("viewGraph").addEventListener("click", function () {
-  window.location.href = "../../company/company-graph/company-graph.html";
+  window.location.href = "../../company/company-graph/company-graph.php";
 });
