@@ -39,9 +39,11 @@ if ($id) {
         <form id="menuItemForm" action="updateMenu.php" method="POST" enctype="multipart/form-data">
             <!-- Añade un input oculto para el ID del producto -->
             <input type="hidden" name="id" value="<?php echo htmlspecialchars($menuItem['id']); ?>">
+            <input type="hidden" name="existingImage" value="<?php echo htmlspecialchars($menuItem['product_image']); ?>">
 
             <label for="productImage">Imagen del Producto:</label>
             <input type="file" id="productImage" name="productImage" accept="image/*">
+            <img src="<?php echo htmlspecialchars($menuItem['product_image']); ?>" alt="Current Image" style="width:100px;">
 
             <label for="productName">Nombre del Producto:</label>
             <input type="text" id="productName" name="productName" value="<?php echo htmlspecialchars($menuItem['product_name']); ?>" required>
@@ -63,7 +65,6 @@ if ($id) {
             <button type="submit">Editar</button>
         </form>
     </div>
-    <!-- <script src="update-menu.js"></script> -->
 </body>
 
 </html>

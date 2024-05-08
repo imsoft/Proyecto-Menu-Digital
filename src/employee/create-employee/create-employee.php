@@ -27,7 +27,7 @@ $branchesResult = $branchesStmt->get_result();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee</title>
+    <title>Registro de Empleado</title>
     <link rel="stylesheet" href="create-employee.css">
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
 </head>
@@ -35,7 +35,7 @@ $branchesResult = $branchesStmt->get_result();
 <body>
     <div class="form-container">
         <h2>Registro de Empleado</h2>
-        <form id="registrationForm" action="createEmployee.php" method="POST">
+        <form id="registrationForm" action="createEmployee.php" method="POST" onsubmit="return validateForm()">
 
             <label for="firstName">Nombre:</label>
             <input type="text" id="firstName" name="firstName" required>
@@ -66,7 +66,7 @@ $branchesResult = $branchesStmt->get_result();
             <!-- Selector de Empresa (no es necesario si siempre es el mismo) -->
             <label for="company">Empresa:</label>
             <select id="company" name="company_id" required>
-            <option value="">Seleccione una empresa...</option>
+                <option value="">Seleccione una empresa...</option>
                 <?php if ($company = $companyResult->fetch_assoc()) : ?>
                     <option value="<?= $company['id'] ?>"><?= htmlspecialchars($company['business_name']) ?></option>
                 <?php endif; ?>
@@ -92,11 +92,23 @@ $branchesResult = $branchesStmt->get_result();
         </form>
     </div>
     <script>
-        function updateBranches(companyId) {
-            const branches = document.querySelectorAll('.branch-option');
-            branches.forEach(branch => {
-                branch.style.display = branch.dataset.company === companyId ? 'block' : 'none';
-            });
+        function validateForm() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,16}$/;
+
+            if (password !== confirmPassword) {
+                alert('Las contraseñas no coinciden.');
+                return false;
+            }
+
+            if (!passwordRegex.test(password)) {
+                alert('La contraseña debe tener entre 12 y 16 caracteres, e incluir letras mayúsculas, minúsculas, números y caracteres especiales.');
+                return false;
+            }
+
+            return true;
         }
     </script>
 </body>

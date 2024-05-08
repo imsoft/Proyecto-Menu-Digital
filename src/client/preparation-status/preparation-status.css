@@ -1,20 +1,69 @@
+/* preparation-status.css */
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
+  background-color: #f0f0f0;
 }
 
 .container {
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    width: 50%;
-    margin: auto;
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#orderDetails p {
-    font-size: 16px;
-    color: #333;
+.orderDetails {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.orderDetails img {
+  display: block;
+  margin: 10px 0;
+}
+
+.status-waiting {
+  background-color: #ffe3a3;
+}
+
+.status-preparing {
+  background-color: #fff9b0;
+}
+
+.status-ready {
+  background-color: #a3ffb3;
+}
+
+.status-delivered {
+  background-color: #d3ffd3;
+}
+
+.progress-bar {
+  background-color: #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 10px;
+  position: relative;
+}
+
+.progress {
+  height: 10px;
+  background-color: #4caf50;
+  width: 0;
+  transition: width 0.5s;
+  position: relative;
+}
+
+.progress-dot {
+  width: 14px;
+  height: 14px;
+  background-color: #ff5733;
+  border-radius: 50%;
+  position: absolute;
+  top: -2px;
+  right: -7px;
 }

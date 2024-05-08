@@ -11,7 +11,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone = $_POST['phone'];
     $birthdate = $_POST['birthdate'];
     $gender = $_POST['gender'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Encripta la contraseña antes de almacenarla
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirmPassword'];
+
+    // Validar que las contraseñas coinciden
+    if ($password !== $confirmPassword) {
+        die("Las contraseñas no coinciden.");
+    }
+
+    // Validar la contraseña
+    $passwordRegex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,16}$/';
+    if (!preg_match($passwordRegex, $password)) {
+        die("La contraseña debe tener entre 12 y 16 caracteres, e incluir letras mayúsculas, minúsculas, números y caracteres especiales.");
+    }
+
+    // Encriptar la contraseña antes de almacenarla
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Generar un número de mesa aleatorio
     $table_number = rand(1, 100);
@@ -21,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt = $conn->prepare($sql)) {
         // Vincular los valores como parámetros al statement preparado
-        $stmt->bind_param("ssssssssi", $firstName, $lastName, $surname, $email, $phone, $birthdate, $gender, $password, $table_number);
+        $stmt->bind_param("ssssssssi", $firstName, $lastName, $surname, $email, $phone, $birthdate, $gender, $hashedPassword, $table_number);
 
         // Ejecutar el statement
         if ($stmt->execute()) {

@@ -13,14 +13,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gender = $_POST['gender'];
     $companyId = $_POST['company_id'];
     $branchId = !empty($_POST['branch_id']) ? $_POST['branch_id'] : null;
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Encripta la contraseña antes de almacenarla
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirmPassword'];
+
+    // Validar que las contraseñas coinciden
+    if ($password !== $confirmPassword) {
+        die("Las contraseñas no coinciden.");
+    }
+
+    // Validar la contraseña
+    $passwordRegex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,16}$/';
+    if (!preg_match($passwordRegex, $password)) {
+        die("La contraseña debe tener entre 12 y 16 caracteres, e incluir letras mayúsculas, minúsculas, números y caracteres especiales.");
+    }
+
+    // Encriptar la contraseña antes de almacenarla
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Preparar la consulta SQL para insertar los datos
     $sql = "INSERT INTO `employees` (`firstName`, `lastName`, `surname`, `email`, `phone`, `birthdate`, `gender`, `password`, `company_id`, `branch_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     if ($stmt = $conn->prepare($sql)) {
         // Vincular los valores como parámetros al statement preparado
-        $stmt->bind_param("ssssssssii", $firstName, $lastName, $surname, $email, $phone, $birthdate, $gender, $password, $companyId, $branchId);
+        $stmt->bind_param("ssssssssii", $firstName, $lastName, $surname, $email, $phone, $birthdate, $gender, $hashedPassword, $companyId, $branchId);
 
         // Ejecutar el statement
         if ($stmt->execute()) {

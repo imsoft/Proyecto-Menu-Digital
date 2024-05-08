@@ -12,7 +12,8 @@
 <body>
     <div class="form-container">
         <h2>Registro de Negocio</h2>
-        <form id="businessForm" action="create-company.php" method="POST" enctype="multipart/form-data">
+        <form id="businessForm" action="create-company.php" method="POST" enctype="multipart/form-data"
+            onsubmit="return validateForm()">
             <label for="logo">Logo del Negocio:</label>
             <input type="file" id="logo" name="logo" accept="image/*">
 
@@ -61,6 +62,27 @@
             <button type="submit">Registrar</button>
         </form>
     </div>
+
+    <script>
+        function validateForm() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,16}$/;
+
+            if (password !== confirmPassword) {
+                alert('Las contraseñas no coinciden.');
+                return false;
+            }
+
+            if (!passwordRegex.test(password)) {
+                alert('La contraseña debe tener entre 12 y 16 caracteres, e incluir letras mayúsculas, minúsculas, números y caracteres especiales.');
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </body>
 
 </html>

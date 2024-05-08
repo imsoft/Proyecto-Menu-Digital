@@ -9,5 +9,5 @@ document.addEventListener("DOMContentLoaded", function () {
       clearInterval(intervalo);
       window.location.href = "../user-options/user-options.html";
     }
-  }, 1000);
+  }, 5000);
 });

@@ -44,12 +44,30 @@ if ($row = $result->fetch_assoc()) {
     $stmt->bind_param("ii", $new_quantity, $row['id']);
     $stmt->execute();
 } else {
-    // Producto nuevo, insertar en carrito
-    $sql = "INSERT INTO cart_items (cart_id, menu_item_id, quantity) VALUES (?, ?, ?)";
+    // Generar un folio único
+    $folio = mt_rand(100000, 999999); // Generar un folio aleatorio de 6 dígitos
+    // Verificar que el folio sea único
+    $sql = "SELECT COUNT(*) as count FROM cart_items WHERE folio = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("iii", $cart_id, $menu_item_id, $quantity);
+    $stmt->bind_param("i", $folio);
     $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    while ($row['count'] > 0) {
+        // Si el folio no es único, generar uno nuevo
+        $folio = mt_rand(100000, 999999);
+        $stmt->bind_param("i", $folio);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+    }
+
+    // Producto nuevo, insertar en carrito
+    $sql = "INSERT INTO cart_items (cart_id, menu_item_id, quantity, folio) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("iiii", $cart_id, $menu_item_id, $quantity, $folio);
+    $stmt->execute();
+    echo "Producto añadido al carrito con folio #" . $folio;
 }
 
-echo "Producto añadido al carrito.";
 $conn->close();

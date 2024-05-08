@@ -12,7 +12,7 @@
 <body>
     <div class="form-container">
         <h2>Registro de Cliente</h2>
-        <form id="registrationForm" action="create-client.php" method="POST">
+        <form id="registrationForm" action="create-client.php" method="POST" onsubmit="return validateForm()">
 
             <label for="firstName">Nombre:</label>
             <input type="text" id="firstName" name="firstName" required>
@@ -49,7 +49,27 @@
             <button type="submit">Registrar</button>
         </form>
     </div>
-    <!-- <script src="create-client.js"></script> -->
+
+    <script>
+        function validateForm() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,16}$/;
+
+            if (password !== confirmPassword) {
+                alert('Las contraseñas no coinciden.');
+                return false;
+            }
+
+            if (!passwordRegex.test(password)) {
+                alert('La contraseña debe tener entre 12 y 16 caracteres, e incluir letras mayúsculas, minúsculas, números y caracteres especiales.');
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </body>
 
 </html>

@@ -43,13 +43,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $foodType = $_POST['foodType'];
     $hasRFC = $_POST['hasRFC'] === 'yes' ? 1 : 0;
     $consistentMenu = $_POST['consistentMenu'] === 'yes' ? 1 : 0;
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    $userType = 'negocio';  // Asigna el tipo de usuario "negocio" de manera predeterminada
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirmPassword'];
+
+    // Validar que las contraseñas coinciden
+    if ($password !== $confirmPassword) {
+        die("Las contraseñas no coinciden.");
+    }
+
+    // Validar la contraseña
+    $passwordRegex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,16}$/';
+    if (!preg_match($passwordRegex, $password)) {
+        die("La contraseña debe tener entre 12 y 16 caracteres, e incluir letras mayúsculas, minúsculas, números y caracteres especiales.");
+    }
+
+    // Encriptar la contraseña antes de almacenarla
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Insertar en la base de datos
     $sql = "INSERT INTO companies (logo_path, associated_name, business_name, address, email, cellphone, food_type, has_rfc, consistent_menu, password, user_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     if ($stmt = $conn->prepare($sql)) {
-        $stmt->bind_param("sssssssiiss", $logoPath, $associatedName, $businessName, $address, $email, $cellphone, $foodType, $hasRFC, $consistentMenu, $password, $userType);
+        $userType = 'negocio';  // Asigna el tipo de usuario "negocio" de manera predeterminada
+        $stmt->bind_param("sssssssiiss", $logoPath, $associatedName, $businessName, $address, $email, $cellphone, $foodType, $hasRFC, $consistentMenu, $hashedPassword, $userType);
         if ($stmt->execute()) {
             header("Location: ../company-options/company-options.html");
             exit;

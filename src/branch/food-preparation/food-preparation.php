@@ -9,6 +9,7 @@ $sql = "SELECT
         o.id AS folio, 
         o.state AS status, 
         mi.product_name AS dish, 
+        mi.product_image AS image, 
         c.table_number
     FROM orders o
     JOIN cart_items ci ON o.cart_id = ci.cart_id
@@ -52,10 +53,12 @@ if ($result->num_rows > 0) {
         <h1>Estado de Preparación de los Alimentos</h1>
         <div id="preparationStatus">
             <section id="waiting">
-                <h2>Esperando</h2>
+                <h2>En espera</h2>
                 <ul>
                     <?php foreach ($orders['esperando'] as $order) { ?>
-                        <li><?php echo htmlspecialchars($order['dish']) . " (Orden #" . $order['folio'] . ")"; ?>
+                        <li>
+                            <img src="<?php echo htmlspecialchars($order['image']); ?>" alt="<?php echo htmlspecialchars($order['dish']); ?>" style="width:50px;">
+                            <?php echo htmlspecialchars($order['dish']) . " (Orden #" . htmlspecialchars($order['folio']) . ", Mesa #" . htmlspecialchars($order['table_number']) . ")"; ?>
                             <button onclick="updateOrderStatus(<?php echo $order['folio']; ?>, 'preparando')">Mover a Preparación</button>
                         </li>
                     <?php } ?>
@@ -65,7 +68,9 @@ if ($result->num_rows > 0) {
                 <h2>Preparando</h2>
                 <ul>
                     <?php foreach ($orders['preparando'] as $order) { ?>
-                        <li><?php echo htmlspecialchars($order['dish']) . " (Orden #" . $order['folio'] . ")"; ?>
+                        <li>
+                            <img src="<?php echo htmlspecialchars($order['image']); ?>" alt="<?php echo htmlspecialchars($order['dish']); ?>" style="width:50px;">
+                            <?php echo htmlspecialchars($order['dish']) . " (Orden #" . htmlspecialchars($order['folio']) . ", Mesa #" . htmlspecialchars($order['table_number']) . ")"; ?>
                             <button onclick="updateOrderStatus(<?php echo $order['folio']; ?>, 'lista')">Mover a Listo para Servir</button>
                         </li>
                     <?php } ?>
@@ -75,22 +80,25 @@ if ($result->num_rows > 0) {
                 <h2>Listos para Servir</h2>
                 <ul>
                     <?php foreach ($orders['lista'] as $order) { ?>
-                        <li><?php echo htmlspecialchars($order['dish']) . " (Orden #" . $order['folio'] . ")"; ?>
+                        <li>
+                            <img src="<?php echo htmlspecialchars($order['image']); ?>" alt="<?php echo htmlspecialchars($order['dish']); ?>" style="width:50px;">
+                            <?php echo htmlspecialchars($order['dish']) . " (Orden #" . htmlspecialchars($order['folio']) . ", Mesa #" . htmlspecialchars($order['table_number']) . ")"; ?>
                             <button onclick="updateOrderStatus(<?php echo $order['folio']; ?>, 'entregada')">Mover a Entregada</button>
                         </li>
                     <?php } ?>
                 </ul>
             </section>
-
             <section id="delivered">
                 <h2>Entregadas</h2>
                 <ul>
                     <?php foreach ($orders['entregada'] as $order) { ?>
-                        <li><?php echo htmlspecialchars($order['dish']) . " (Orden #" . $order['folio'] . ")"; ?></li>
+                        <li>
+                            <img src="<?php echo htmlspecialchars($order['image']); ?>" alt="<?php echo htmlspecialchars($order['dish']); ?>" style="width:50px;">
+                            <?php echo htmlspecialchars($order['dish']) . " (Orden #" . htmlspecialchars($order['folio']) . ", Mesa #" . htmlspecialchars($order['table_number']) . ")"; ?>
+                        </li>
                     <?php } ?>
                 </ul>
             </section>
-
         </div>
     </div>
     <script src="food-preparation.js"></script>
