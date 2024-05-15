@@ -1,11 +1,16 @@
+// function addToCart(menuItemId) {
+//   const xhttp = new XMLHttpRequest();
+//   xhttp.onload = function () {
+//     alert("Producto añadido al carrito");
+//   };
+//   xhttp.open("POST", "../../cart/addToCart/addToCart.php");
+//   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+//   xhttp.send("menuItemId=" + menuItemId);
+// }
+
 function addToCart(menuItemId) {
-  const xhttp = new XMLHttpRequest();
-  xhttp.onload = function () {
-    alert("Producto añadido al carrito");
-  };
-  xhttp.open("POST", "../../cart/addToCart/addToCart.php");
-  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send("menuItemId=" + menuItemId);
+  // Redirigir a la página de selección de ingredientes
+  window.location.href = '../../cart/selectIngredients/selectIngredients.php?menuItemId=' + menuItemId;
 }
 
 function filterMenu(type) {

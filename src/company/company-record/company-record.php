@@ -4,33 +4,39 @@ require '../../db/connection.php';  // Asegúrate que la ruta de conexión es co
 
 $companyId = $_SESSION['company_id'];  // Tomamos el ID de la compañía desde la sesión
 
-// Consulta para obtener los pedidos entregados
-$sql = "SELECT o.id, o.created_at, mi.product_name, mi.price, b.branch_name, o.state
-        FROM orders o
-        JOIN cart_items ci ON o.cart_id = ci.cart_id
-        JOIN menu_items mi ON ci.menu_item_id = mi.id
-        JOIN branches b ON o.branch_id = b.id
-        WHERE o.company_id = ? AND o.state = 'entregada'
-        ORDER BY o.created_at DESC";
-
-$stmt = $conn->prepare($sql);
-if (!$stmt) {
-    die("Error al preparar la consulta: " . $conn->error);
-}
-$stmt->bind_param("i", $companyId);
-if (!$stmt->execute()) {
-    die("Error al ejecutar la consulta: " . $stmt->error);
-}
-$result = $stmt->get_result();
-
-$orders = [];
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $orders[] = $row;
+// Obtener todos los platillos
+$sqlDishes = "SELECT DISTINCT mi.product_name FROM menu_items mi
+              JOIN cart_items ci ON mi.id = ci.menu_item_id
+              JOIN orders o ON ci.cart_id = o.cart_id
+              WHERE o.company_id = ?";
+$stmtDishes = $conn->prepare($sqlDishes);
+$stmtDishes->bind_param("i", $companyId);
+$stmtDishes->execute();
+$resultDishes = $stmtDishes->get_result();
+$dishes = [];
+if ($resultDishes->num_rows > 0) {
+    while ($row = $resultDishes->fetch_assoc()) {
+        $dishes[] = $row['product_name'];
     }
 }
+$stmtDishes->close();
 
-$conn->close();
+// Función para obtener el color según el estado
+function getColorByState($state)
+{
+    switch ($state) {
+        case 'esperando':
+            return '#f8d7da'; // Rojo claro
+        case 'preparando':
+            return '#fff3cd'; // Amarillo claro
+        case 'lista':
+            return '#d1ecf1'; // Azul claro
+        case 'entregada':
+            return '#d4edda'; // Verde claro
+        default:
+            return '#ffffff'; // Blanco por defecto
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -47,23 +53,43 @@ $conn->close();
 <body>
     <div class="container">
         <h1>Historial de Pedidos</h1>
-        <div id="orderHistory">
-            <?php if (count($orders) > 0) : ?>
-                <?php foreach ($orders as $order) : ?>
-                    <div class="order">
-                        <p><strong>ID del Pedido:</strong> <?php echo htmlspecialchars($order['id']); ?></p>
-                        <p><strong>Producto:</strong> <?php echo htmlspecialchars($order['product_name']); ?></p>
-                        <p><strong>Precio:</strong> $<?php echo number_format($order['price'], 2); ?></p>
-                        <p><strong>Sucursal:</strong> <?php echo htmlspecialchars($order['branch_name']); ?></p>
-                        <p><strong>Estado:</strong> <?php echo htmlspecialchars($order['state']); ?></p>
-                        <p><strong>Fecha de Entrega:</strong> <?php echo date('d/m/Y H:i:s', strtotime($order['created_at'])); ?></p>
-                    </div>
+
+        <form id="filterForm">
+            <label for="startDate">Desde:</label>
+            <input type="date" id="startDate" name="startDate">
+
+            <label for="endDate">Hasta:</label>
+            <input type="date" id="endDate" name="endDate">
+
+            <label for="dish">Platillo:</label>
+            <select id="dish" name="dish">
+                <option value="">-- Selecciona Platillo --</option>
+                <?php foreach ($dishes as $dish) : ?>
+                    <option value="<?php echo htmlspecialchars($dish); ?>"><?php echo htmlspecialchars($dish); ?></option>
                 <?php endforeach; ?>
-            <?php else : ?>
-                <p>No hay pedidos entregados.</p>
-            <?php endif; ?>
+            </select>
+
+            <button type="button" onclick="filterOrders()">Filtrar</button>
+        </form>
+
+        <div id="orderHistory">
+            <!-- Los pedidos se cargarán aquí -->
+        </div>
+
+        <div id="statistics">
+            <h2>Estadísticas</h2>
+            <button type="button" onclick="loadStatistics('day')">Ventas por Día</button>
+            <button type="button" onclick="loadStatistics('month')">Ventas por Mes</button>
+            <button type="button" onclick="loadStatistics('year')">Ventas por Año</button>
+            <button type="button" onclick="loadPopularDishes()">Platillos más Consumidos</button>
+
+            <div id="statisticsResult">
+                <!-- Las estadísticas se cargarán aquí -->
+            </div>
         </div>
     </div>
+
+    <script src="company-record.js"></script>
 </body>
 
 </html>

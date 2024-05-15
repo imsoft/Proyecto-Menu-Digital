@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $userType = 'negocio';  // Asigna el tipo de usuario "negocio" de manera predeterminada
         $stmt->bind_param("sssssssiiss", $logoPath, $associatedName, $businessName, $address, $email, $cellphone, $foodType, $hasRFC, $consistentMenu, $hashedPassword, $userType);
         if ($stmt->execute()) {
-            header("Location: ../company-options/company-options.html");
+            header("Location: ../company-options/company-options.php");
             exit;
         } else {
             error_log("Error al ejecutar la consulta: " . $stmt->error);

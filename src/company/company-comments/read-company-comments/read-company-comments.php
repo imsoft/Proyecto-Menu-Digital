@@ -1,10 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['company_id'])) {
-    header('Location: ../../company-login/company-login.php');
-}
-
-$companyId = $_SESSION['company_id']; // Obtener el company_id de la sesión
+require '../../../db/connection.php';
+$companyId = $_SESSION['company_id'];
 ?>
 
 <!DOCTYPE html>
@@ -28,14 +25,37 @@ $companyId = $_SESSION['company_id']; // Obtener el company_id de la sesión
                     <th>Correo Electrónico</th>
                     <th>Valoración</th>
                     <th>Comentario</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <?php include 'fetchComments.php'; ?>
             </tbody>
-
         </table>
     </div>
+
+    <script>
+        function editComment(id) {
+            window.location.href = `../update-company-comments/update-comment.php?id=${id}`;
+        }
+
+        function deleteComment(id) {
+            if (confirm('¿Estás seguro de que quieres eliminar este comentario?')) {
+                fetch(`deleteComment.php?id=${id}`, {
+                        method: 'GET',
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        if (data === 'success') {
+                            location.reload();
+                        } else {
+                            alert('Error al eliminar el comentario.');
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        }
+    </script>
 </body>
 
 </html>

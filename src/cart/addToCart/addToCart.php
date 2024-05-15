@@ -9,6 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $menu_item_id = isset($_POST['menuItemId']) ? intval($_POST['menuItemId']) : 0;
 $quantity = 1; // Cantidad a añadir cada vez que se haga clic en "Añadir al carrito"
+$ingredients = isset($_POST['ingredients']) ? $_POST['ingredients'] : [];
 
 // Obtener o crear carrito
 $sql = "SELECT id FROM carts WHERE client_id = ?";
@@ -67,7 +68,19 @@ if ($row = $result->fetch_assoc()) {
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("iiii", $cart_id, $menu_item_id, $quantity, $folio);
     $stmt->execute();
-    echo "Producto añadido al carrito con folio #" . $folio;
+    $cart_item_id = $stmt->insert_id;
+
+    // Añadir ingredientes seleccionados al carrito
+    foreach ($ingredients as $ingredient) {
+        $sql = "INSERT INTO cart_item_ingredients (cart_item_id, ingredient) VALUES (?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("is", $cart_item_id, $ingredient);
+        $stmt->execute();
+    }
 }
+
+// Redirigir a la página de ver carrito
+header("Location: ../viewCart/viewCart.php");
+exit();
 
 $conn->close();

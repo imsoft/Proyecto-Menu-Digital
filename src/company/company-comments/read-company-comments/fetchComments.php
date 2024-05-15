@@ -5,7 +5,7 @@ session_start();
 $companyId = $_SESSION['company_id']; // Obtener el company_id de la sesión
 
 // Preparar y ejecutar la consulta SQL para obtener los comentarios
-$sql = "SELECT cl.firstName, cl.email, co.rating, co.comment
+$sql = "SELECT co.id, cl.firstName, cl.email, co.rating, co.comment
         FROM comments co
         JOIN clients cl ON co.client_id = cl.id
         JOIN branches br ON co.branch_id = br.id
@@ -26,6 +26,10 @@ if ($result->num_rows > 0) {
         echo "<td>" . htmlspecialchars($row['email']) . "</td>";
         echo "<td>" . htmlspecialchars($row['rating']) . "</td>";
         echo "<td>" . htmlspecialchars($row['comment']) . "</td>";
+        echo "<td>
+                <button class='edit-btn' onclick='editComment(" . $row['id'] . ")'>Editar</button>
+                <button class='delete-btn' onclick='deleteComment(" . $row['id'] . ")'>Eliminar</button>
+              </td>";
         echo "</tr>";
     }
 } else {

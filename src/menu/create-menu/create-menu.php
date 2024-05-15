@@ -8,7 +8,6 @@ if (!isset($_SESSION['company_id'])) {
 }
 
 $companyId = $_SESSION['company_id']; // Recupera el company_id de la sesión
-echo "Company ID: " . $companyId; // Imprime el company_id en la página
 ?>
 
 <!DOCTYPE html>

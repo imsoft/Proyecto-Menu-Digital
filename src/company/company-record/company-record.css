@@ -1,26 +1,91 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    width: 80%;
-    margin: auto;
+  margin: 20px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #e5450f;
+  text-align: center;
+}
+
+#filterForm {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#filterForm label,
+#filterForm input,
+#filterForm button {
+  margin-right: 10px;
+}
+
+#orderHistory {
+  margin-top: 20px;
 }
 
 .order {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #f9f9f9;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+}
+
+.order:last-child {
+  border-bottom: none;
+}
+
+.order img.order-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 20px;
 }
 
 .order p {
-    margin: 5px 0;
+  margin: 5px 0;
+  flex: 1;
+}
+
+.order p strong {
+  color: #333;
+}
+
+#statistics {
+  margin-top: 40px;
+}
+
+#statistics h2 {
+  color: #e5450f;
+  text-align: center;
+}
+
+#statistics button {
+  margin: 5px;
+  padding: 10px 20px;
+  background-color: #e5450f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#statistics button:hover {
+  background-color: #cc2b00;
+}
+
+#statisticsResult {
+  margin-top: 20px;
 }
