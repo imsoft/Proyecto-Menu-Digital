@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../../db/connection.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -66,6 +67,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $userType = 'negocio';  // Asigna el tipo de usuario "negocio" de manera predeterminada
         $stmt->bind_param("sssssssiiss", $logoPath, $associatedName, $businessName, $address, $email, $cellphone, $foodType, $hasRFC, $consistentMenu, $hashedPassword, $userType);
         if ($stmt->execute()) {
+            // Obtener el ID de la empresa recién creada
+            $companyId = $stmt->insert_id;
+            // Guardar el ID de la empresa en la sesión
+            $_SESSION['company_id'] = $companyId;
+            // Redirigir a la página de opciones de la empresa
             header("Location: ../company-options/company-options.php");
             exit;
         } else {

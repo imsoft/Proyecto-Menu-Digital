@@ -7,7 +7,14 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+if (!isset($_SESSION['company_id']) || !isset($_SESSION['branch_id'])) {
+    echo "Por favor selecciona un negocio y una sucursal.";
+    exit;
+}
+
 $user_id = $_SESSION['user_id'];
+$company_id = $_SESSION['company_id'];
+$branch_id = $_SESSION['branch_id'];
 
 // Obtener el carrito del usuario
 $sql = "SELECT c.id FROM carts c WHERE c.client_id = ?";
@@ -75,42 +82,13 @@ $conn->close();
 </head>
 
 <body>
-    <!-- El contenido HTML se puede agregar aquí, el PHP anterior generará el contenido dinámico del carrito -->
-
-    <!-- Selector de Empresa -->
-    <select id="companySelect" onchange="updateBranches()">
-        <option value="">Selecciona una empresa</option>
-        <!-- Las opciones se llenarán dinámicamente con PHP -->
-        <?php
-        require '../../db/connection.php';
-        $sql = "SELECT id, business_name FROM companies";
-        $result = $conn->query($sql);
-        if ($result === false) {
-            die("Error en la consulta: " . $conn->error);
-        }
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<option value='" . $row['id'] . "'>" . htmlspecialchars($row['business_name']) . "</option>";
-            }
-        } else {
-            echo "<option>No se encontraron empresas</option>";
-        }
-
-        ?>
-    </select>
-
-    <!-- Selector de Sucursales -->
-    <select id="branchSelect">
-        <option value="">Primero selecciona una empresa</option>
-    </select>
-
     <button id='finishOrderButton'>Terminar Pedido</button>
 
     <script>
         document.getElementById('finishOrderButton').addEventListener('click', function() {
-            const companyId = document.getElementById('companySelect').value;
-            const branchId = document.getElementById('branchSelect').value;
-            const cartId = <?php echo $cart_id; ?>; // Asegúrate de que esta variable esté correctamente definida
+            const companyId = <?php echo $company_id; ?>;
+            const branchId = <?php echo $branch_id; ?>;
+            const cartId = <?php echo $cart_id; ?>;
 
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function() {
@@ -125,38 +103,6 @@ $conn->close();
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send(`cartId=${cartId}&companyId=${companyId}&branchId=${branchId}`);
         });
-
-        function updateBranches() {
-            var companyId = document.getElementById('companySelect').value;
-            var branchSelect = document.getElementById('branchSelect');
-
-            // Limpia las opciones anteriores
-            branchSelect.innerHTML = '';
-
-            // Si no se selecciona una empresa, no hace nada más
-            if (!companyId) {
-                branchSelect.innerHTML = '<option value="">Primero selecciona una empresa</option>';
-                return;
-            }
-
-            // Crear una solicitud AJAX para obtener las sucursales
-            const xhttp = new XMLHttpRequest();
-            xhttp.onload = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    // Parsear la respuesta y llenar el desplegable de sucursales
-                    const branches = JSON.parse(this.responseText);
-                    branches.forEach(function(branch) {
-                        var option = document.createElement('option');
-                        option.value = branch.id;
-                        option.textContent = branch.branch_name;
-                        branchSelect.appendChild(option);
-                    });
-                }
-            };
-            xhttp.open("GET", "getBranches.php?company_id=" + companyId, true);
-            xhttp.send();
-        }
-
 
         function removeFromCart(cartItemId) {
             const xhttp = new XMLHttpRequest();

@@ -3,12 +3,20 @@ body {
   font-family: Arial, sans-serif;
 }
 
+.business-name {
+  margin-left: auto;
+  padding-left: 20px;
+  font-size: 1.2em;
+  color: #fff;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #e5450f;
   padding: 10px 20px;
+  background-color: #e5450f;
+  color: #fff;
 }
 
 .navbar .logo {

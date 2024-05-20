@@ -3,7 +3,7 @@ document.getElementById("tableButton").addEventListener("click", function () {
 });
 
 document.getElementById("menuButton").addEventListener("click", function () {
-  window.location.href = "../client-menu/client-menu.php";
+  window.location.href = "../select-business-branch/select-business-branch.php";
 });
 
 document.getElementById("statusButton").addEventListener("click", function () {

@@ -8,6 +8,11 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 $menu_item_id = isset($_POST['menuItemId']) ? intval($_POST['menuItemId']) : 0;
+
+if ($menu_item_id == 0) {
+    die("ID del menú no proporcionado.");
+}
+
 $quantity = 1; // Cantidad a añadir cada vez que se haga clic en "Añadir al carrito"
 $ingredients = isset($_POST['ingredients']) ? $_POST['ingredients'] : [];
 

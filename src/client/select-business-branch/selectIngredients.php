@@ -1,24 +1,24 @@
-<?php
 session_start();
 require '../../db/connection.php';
 
-if (!isset($_GET['menuItemId']) || !isset($_SESSION['company_id'])) {
-    die('ID del menú o ID de la empresa no proporcionado.');
+if (!isset($_GET['menuItemId']) || !isset($_SESSION['company_id']) || !isset($_SESSION['branch_id'])) {
+die('ID del menú, ID de la empresa o ID de la sucursal no proporcionado.');
 }
 
 $menuItemId = intval($_GET['menuItemId']);
 $companyId = intval($_SESSION['company_id']);
+$branchId = intval($_SESSION['branch_id']);
 
 // Obtener la información del platillo seleccionado
-$sql = "SELECT product_name, product_image, description, price, category_name FROM menu_items WHERE id = ? AND company_id = ?";
+$sql = "SELECT product_name, product_image, description, price FROM menu_items WHERE id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ii", $menuItemId, $companyId);
+$stmt->bind_param("i", $menuItemId);
 $stmt->execute();
 $result = $stmt->get_result();
 $menuItem = $result->fetch_assoc();
 
 if (!$menuItem) {
-    die('Platillo no encontrado.');
+die('Platillo no encontrado.');
 }
 
 // Obtener los ingredientes del negocio
@@ -30,14 +30,13 @@ $result = $stmt->get_result();
 
 $ingredients = [];
 if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $ingredients[] = $row;
-    }
+while ($row = $result->fetch_assoc()) {
+$ingredients[] = $row;
+}
 }
 
 $conn->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -72,7 +71,7 @@ $conn->close();
         <form id="ingredientsForm" action="../addToCart/addToCart.php" method="POST">
             <input type="hidden" name="menuItemId" value="<?php echo htmlspecialchars($menuItemId); ?>">
             <input type="hidden" id="basePrice" value="<?php echo htmlspecialchars($menuItem['price']); ?>">
-            <?php if (!empty($ingredients) && !in_array($menuItem['category_name'], ['bebida', 'extras'])) : ?>
+            <?php if (!empty($ingredients)) : ?>
                 <?php foreach ($ingredients as $ingredient) : ?>
                     <div class="ingredient">
                         <label>
@@ -81,6 +80,8 @@ $conn->close();
                         </label>
                     </div>
                 <?php endforeach; ?>
+            <?php else : ?>
+                <p>No hay ingredientes disponibles.</p>
             <?php endif; ?>
             <p id="totalPrice">Total: $<?php echo number_format($menuItem['price'], 2); ?></p>
             <button type="submit">Añadir al Carrito</button>

@@ -1,7 +1,30 @@
 <?php
 session_start();
 require '../../db/connection.php';
+
+// Asegúrate de que el ID de la empresa está disponible en la sesión
+if (!isset($_SESSION['company_id'])) {
+    die("ID de la empresa no proporcionado.");
+}
+
 $companyId = $_SESSION['company_id'];
+
+// Consulta para obtener el nombre del negocio
+$sql = "SELECT business_name FROM companies WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $companyId);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $company = $result->fetch_assoc();
+    $businessName = $company['business_name'];
+} else {
+    $businessName = "Nombre no encontrado";
+}
+
+$stmt->close();
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +46,7 @@ $companyId = $_SESSION['company_id'];
                 <a href="#about">Negocio</a>
                 <ul class="submenu">
                     <li><a href="../read-company/read-company.php">Ver información del negocio</a></li>
+                    <li><a href="../company-food-preparation/company-food-preparation.php">Pedidos actuales</a></li>
                 </ul>
             </li>
             <li>
@@ -37,6 +61,8 @@ $companyId = $_SESSION['company_id'];
                 <ul class="submenu">
                     <li><a href="../../menu/create-menu/create-menu.php">Agregar productos al menú</a></li>
                     <li><a href="../../menu/read-menu/read-menu.php">Ver menú</a></li>
+                    <li><a href="../company-ingredients/create-company-ingredients/create-company-ingredients.php">Agregar ingredientes</a></li>
+                    <li><a href="../company-ingredients/read-company-ingredients/read-company-ingredients.php">Ver ingredientes</a></li>
                 </ul>
             </li>
             <li>
@@ -62,6 +88,9 @@ $companyId = $_SESSION['company_id'];
                 </ul>
             </li>
         </ul>
+        <div class="business-name">
+            <?php echo htmlspecialchars($businessName); ?>
+        </div>
         <div class="menu-toggle">
             <div></div>
             <div></div>
