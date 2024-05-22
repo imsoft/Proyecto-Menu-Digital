@@ -39,3 +39,29 @@ function loadBranches(companyId) {
 document.getElementById("viewComments").addEventListener("click", function () {
   window.location.href = "../read-comment/read-comment.php";
 });
+
+document.getElementById("restaurant").addEventListener("change", function () {
+  const restaurantId = this.value;
+  const branchSelect = document.getElementById("branch");
+  branchSelect.innerHTML =
+    '<option value="">-- Selecciona Sucursal --</option>';
+  branchSelect.innerHTML += '<option value="0">No aplica</option>'; // Añadir opción "No aplica"
+
+  if (restaurantId) {
+    fetch("get-branches.php?restaurant_id=" + restaurantId)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.length > 0) {
+          data.forEach((branch) => {
+            branchSelect.innerHTML += `<option value="${branch.id}">${branch.branch_name}</option>`;
+          });
+        } else {
+          branchSelect.innerHTML = '<option value="0">No aplica</option>';
+        }
+      });
+  } else {
+    branchSelect.innerHTML =
+      '<option value="">-- Selecciona Sucursal --</option>';
+    branchSelect.innerHTML += '<option value="0">No aplica</option>';
+  }
+});

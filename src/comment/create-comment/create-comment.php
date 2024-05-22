@@ -18,9 +18,9 @@
                 <!-- Las opciones del restaurante se llenarán desde la base de datos -->
             </select>
 
-            <select id="branch" name="branch" required>
+            <select id="branch" name="branch">
                 <option value="">-- Selecciona Sucursal --</option>
-                <option value="">No aplica</option>
+                <option value="0">No aplica</option>
                 <!-- Las opciones de sucursal se llenarán dependiendo de la selección del restaurante -->
             </select>
 

@@ -6,12 +6,12 @@ if (!isset($_SESSION['user_id'])) {
     die("Por favor inicia sesión para dejar un comentario.");
 }
 
-if (!isset($_POST['branch'], $_POST['rating'], $_POST['commentBox'])) {
+if (!isset($_POST['rating'], $_POST['commentBox'])) {
     die("Todos los campos son necesarios.");
 }
 
 $client_id = $_SESSION['user_id'];
-$branch_id = $_POST['branch'];
+$branch_id = isset($_POST['branch']) && intval($_POST['branch']) > 0 ? intval($_POST['branch']) : null;
 $rating = $_POST['rating'];
 $comment = $_POST['commentBox'];
 
@@ -20,7 +20,13 @@ $stmt = $conn->prepare($sql);
 if (!$stmt) {
     die("Error preparando la consulta: " . $conn->error);
 }
-$stmt->bind_param("iiss", $client_id, $branch_id, $rating, $comment);
+
+if ($branch_id !== null) {
+    $stmt->bind_param("iiss", $client_id, $branch_id, $rating, $comment);
+} else {
+    $stmt->bind_param("isss", $client_id, $branch_id, $rating, $comment);
+}
+
 if (!$stmt->execute()) {
     die("Error ejecutando la consulta: " . $stmt->error);
 }
@@ -30,3 +36,4 @@ exit;
 
 $stmt->close();
 $conn->close();
+?>

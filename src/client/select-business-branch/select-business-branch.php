@@ -2,7 +2,6 @@
 session_start();
 require '../../db/connection.php';
 
-// Obtener la lista de negocios
 $sql = "SELECT id, business_name FROM companies";
 $result = $conn->query($sql);
 
@@ -39,7 +38,7 @@ $conn->close();
             </select>
 
             <label for="branch">Sucursal:</label>
-            <select id="branch" name="branch" required>
+            <select id="branch" name="branch">
                 <option value="">Seleccione un negocio primero...</option>
             </select>
 
@@ -52,15 +51,21 @@ $conn->close();
             const businessId = this.value;
             const branchSelect = document.getElementById('branch');
             branchSelect.innerHTML = '<option value="">Cargando sucursales...</option>';
+            branchSelect.required = false;
 
             if (businessId) {
                 fetch('get-branches.php?business_id=' + businessId)
                     .then(response => response.json())
                     .then(data => {
                         branchSelect.innerHTML = '<option value="">Seleccione una sucursal...</option>';
-                        data.forEach(branch => {
-                            branchSelect.innerHTML += `<option value="${branch.id}">${branch.branch_name}</option>`;
-                        });
+                        if (data.length > 0) {
+                            data.forEach(branch => {
+                                branchSelect.innerHTML += `<option value="${branch.id}">${branch.branch_name}</option>`;
+                            });
+                            branchSelect.required = true;
+                        } else {
+                            branchSelect.innerHTML = '<option value="">Este negocio no tiene sucursales</option>';
+                        }
                     });
             } else {
                 branchSelect.innerHTML = '<option value="">Seleccione un negocio primero...</option>';

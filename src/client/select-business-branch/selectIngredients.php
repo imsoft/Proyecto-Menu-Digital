@@ -1,8 +1,9 @@
+<?php
 session_start();
 require '../../db/connection.php';
 
 if (!isset($_GET['menuItemId']) || !isset($_SESSION['company_id']) || !isset($_SESSION['branch_id'])) {
-die('ID del menú, ID de la empresa o ID de la sucursal no proporcionado.');
+    die('ID del menú, ID de la empresa o ID de la sucursal no proporcionado.');
 }
 
 $menuItemId = intval($_GET['menuItemId']);
@@ -18,7 +19,7 @@ $result = $stmt->get_result();
 $menuItem = $result->fetch_assoc();
 
 if (!$menuItem) {
-die('Platillo no encontrado.');
+    die('Platillo no encontrado.');
 }
 
 // Obtener los ingredientes del negocio
@@ -30,13 +31,14 @@ $result = $stmt->get_result();
 
 $ingredients = [];
 if ($result->num_rows > 0) {
-while ($row = $result->fetch_assoc()) {
-$ingredients[] = $row;
-}
+    while ($row = $result->fetch_assoc()) {
+        $ingredients[] = $row;
+    }
 }
 
 $conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 

@@ -1,42 +1,3 @@
-<?php
-session_start();
-require '../../db/connection.php'; // Ajusta esta ruta según la ubicación real del archivo
-
-$companyId = $_SESSION['user_company'];
-$branchId = $_SESSION['user_branch'];
-
-$sql = "SELECT 
-        o.id AS folio, 
-        o.state AS status, 
-        mi.product_name AS dish, 
-        mi.product_image AS image, 
-        c.table_number
-    FROM orders o
-    JOIN cart_items ci ON o.cart_id = ci.cart_id
-    JOIN menu_items mi ON ci.menu_item_id = mi.id
-    JOIN clients c ON o.client_id = c.id
-    WHERE o.company_id = ? AND o.branch_id = ?
-    ORDER BY o.state DESC";
-
-$stmt = $conn->prepare($sql);
-if (!$stmt) {
-    die("Error al preparar la consulta: " . $conn->error);
-}
-$stmt->bind_param("ii", $companyId, $branchId);
-if (!$stmt->execute()) {
-    die("Error al ejecutar la consulta: " . $stmt->error);
-}
-$result = $stmt->get_result();
-
-$orders = ['esperando' => [], 'preparando' => [], 'lista' => [], 'entregada' => []];
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $orders[$row['status']][] = $row;
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -51,57 +12,98 @@ if ($result->num_rows > 0) {
 <body>
     <div class="container">
         <h1>Estado de Preparación de los Alimentos</h1>
-        <div id="preparationStatus">
-            <section id="waiting">
-                <h2>En espera</h2>
-                <ul>
-                    <?php foreach ($orders['esperando'] as $order) { ?>
-                        <li>
-                            <img src="<?php echo htmlspecialchars($order['image']); ?>" alt="<?php echo htmlspecialchars($order['dish']); ?>" style="width:50px;">
-                            <?php echo htmlspecialchars($order['dish']) . " (Orden #" . htmlspecialchars($order['folio']) . ", Mesa #" . htmlspecialchars($order['table_number']) . ")"; ?>
-                            <button onclick="updateOrderStatus(<?php echo $order['folio']; ?>, 'preparando')">Mover a Preparación</button>
-                        </li>
-                    <?php } ?>
-                </ul>
-            </section>
-            <section id="inPreparation">
-                <h2>Preparando</h2>
-                <ul>
-                    <?php foreach ($orders['preparando'] as $order) { ?>
-                        <li>
-                            <img src="<?php echo htmlspecialchars($order['image']); ?>" alt="<?php echo htmlspecialchars($order['dish']); ?>" style="width:50px;">
-                            <?php echo htmlspecialchars($order['dish']) . " (Orden #" . htmlspecialchars($order['folio']) . ", Mesa #" . htmlspecialchars($order['table_number']) . ")"; ?>
-                            <button onclick="updateOrderStatus(<?php echo $order['folio']; ?>, 'lista')">Mover a Listo para Servir</button>
-                        </li>
-                    <?php } ?>
-                </ul>
-            </section>
-            <section id="ready">
-                <h2>Listos para Servir</h2>
-                <ul>
-                    <?php foreach ($orders['lista'] as $order) { ?>
-                        <li>
-                            <img src="<?php echo htmlspecialchars($order['image']); ?>" alt="<?php echo htmlspecialchars($order['dish']); ?>" style="width:50px;">
-                            <?php echo htmlspecialchars($order['dish']) . " (Orden #" . htmlspecialchars($order['folio']) . ", Mesa #" . htmlspecialchars($order['table_number']) . ")"; ?>
-                            <button onclick="updateOrderStatus(<?php echo $order['folio']; ?>, 'entregada')">Mover a Entregada</button>
-                        </li>
-                    <?php } ?>
-                </ul>
-            </section>
-            <section id="delivered">
-                <h2>Entregadas</h2>
-                <ul>
-                    <?php foreach ($orders['entregada'] as $order) { ?>
-                        <li>
-                            <img src="<?php echo htmlspecialchars($order['image']); ?>" alt="<?php echo htmlspecialchars($order['dish']); ?>" style="width:50px;">
-                            <?php echo htmlspecialchars($order['dish']) . " (Orden #" . htmlspecialchars($order['folio']) . ", Mesa #" . htmlspecialchars($order['table_number']) . ")"; ?>
-                        </li>
-                    <?php } ?>
-                </ul>
-            </section>
-        </div>
+        <div id="preparationStatus"></div>
     </div>
-    <script src="food-preparation.js"></script>
+
+    <script>
+        function fetchPreparationStatus() {
+            fetch('../../client/preparation-status/getOrderStatusForEmployee.php')
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('preparationStatus');
+                    container.innerHTML = '';
+
+                    const statusCategories = {
+                        esperando: [],
+                        preparando: [],
+                        lista: [],
+                        entregada: []
+                    };
+
+                    data.forEach(order => {
+                        statusCategories[order.status].push(order);
+                    });
+
+                    const sections = {
+                        esperando: 'En espera',
+                        preparando: 'Preparando',
+                        lista: 'Listos para Servir',
+                        entregada: 'Entregadas'
+                    };
+
+                    for (const status in sections) {
+                        container.innerHTML += `<section id="${status}">
+                            <h2>${sections[status]}</h2>
+                            <ul>${statusCategories[status].map(order => `
+                                <li>
+                                    <img src="${order.image}" alt="${order.dish}" style="width:50px;">
+                                    ${order.dish} (Orden #${order.folio}, Mesa #${order.table_number})
+                                    ${status !== 'entregada' ? `<button onclick="updateOrderStatus(${order.folio}, '${getNextState(status)}')">Mover a ${getNextStateText(status)}</button>` : ''}
+                                </li>`).join('')}
+                            </ul>
+                        </section>`;
+                    }
+                })
+                .catch(error => console.error('Error fetching preparation status:', error));
+        }
+
+        function getNextState(currentState) {
+            switch (currentState) {
+                case 'esperando':
+                    return 'preparando';
+                case 'preparando':
+                    return 'lista';
+                case 'lista':
+                    return 'entregada';
+                default:
+                    return '';
+            }
+        }
+
+        function getNextStateText(currentState) {
+            switch (currentState) {
+                case 'esperando':
+                    return 'Preparación';
+                case 'preparando':
+                    return 'Listo para Servir';
+                case 'lista':
+                    return 'Entregado';
+                default:
+                    return '';
+            }
+        }
+
+        function updateOrderStatus(folio, newState) {
+            fetch('updateOrderStatus.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `orderId=${folio}&newState=${newState}`
+                })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+                    fetchPreparationStatus();
+                })
+                .catch(error => console.error('Error updating order status:', error));
+        }
+
+        // Fetch preparation status every 10 seconds
+        setInterval(fetchPreparationStatus, 10000);
+        // Initial fetch
+        fetchPreparationStatus();
+    </script>
 </body>
 
 </html>
