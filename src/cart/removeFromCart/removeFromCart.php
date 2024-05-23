@@ -24,4 +24,5 @@ if ($stmt->execute()) {
     echo "Error al eliminar el producto: " . $stmt->error;
 }
 
+$stmt->close();
 $conn->close();

@@ -74,8 +74,7 @@ $branchesResult = $branchesStmt->get_result();
 
             <!-- Selector de Sucursal -->
             <label for="branch">Sucursal:</label>
-            <select id="branch" name="branch_id" required>
-                <option value="">Seleccione una sucursal...</option>
+            <select id="branch" name="branch_id">
                 <option value="">No Aplicable</option>
                 <?php while ($branch = $branchesResult->fetch_assoc()) : ?>
                     <option value="<?= $branch['id'] ?>"><?= htmlspecialchars($branch['branch_name']) ?></option>

@@ -28,7 +28,7 @@ if ($id) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee</title>
+    <title>Editar Empleado</title>
     <link rel="stylesheet" href="update-employee.css">
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
 </head>
@@ -59,7 +59,7 @@ if ($id) {
             <input type="date" id="birthdate" name="birthdate" value="<?php echo htmlspecialchars($employee['birthdate']); ?>" required>
 
             <label for="gender">Género:</label>
-            <select id="gender" name="gender" value="<?php echo htmlspecialchars($employee['gender']); ?>" required>
+            <select id="gender" name="gender" required>
                 <option value="">Seleccione...</option>
                 <option value="masculino" <?php echo ($employee['gender'] == 'masculino') ? 'selected' : ''; ?>>Masculino</option>
                 <option value="femenino" <?php echo ($employee['gender'] == 'femenino') ? 'selected' : ''; ?>>Femenino</option>
@@ -67,7 +67,7 @@ if ($id) {
             </select>
 
             <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" value="<?php echo htmlspecialchars($employee['password']); ?>" required>
+            <input type="password" id="password" name="password" required>
 
             <label for="confirmPassword">Verificar Contraseña:</label>
             <input type="password" id="confirmPassword" name="confirmPassword" required>
@@ -75,7 +75,24 @@ if ($id) {
             <button type="submit">Editar</button>
         </form>
     </div>
-    <!-- <script src="update-employee.js"></script> -->
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,16}$/;
+
+            if (password !== confirmPassword) {
+                alert('Las contraseñas no coinciden.');
+                event.preventDefault();
+            }
+
+            if (!passwordRegex.test(password)) {
+                alert('La contraseña debe tener entre 12 y 16 caracteres, e incluir letras mayúsculas, minúsculas, números y caracteres especiales.');
+                event.preventDefault();
+            }
+        });
+    </script>
 </body>
 
 </html>

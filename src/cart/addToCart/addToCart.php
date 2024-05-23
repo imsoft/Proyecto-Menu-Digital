@@ -28,12 +28,15 @@ if ($result->num_rows > 0) {
     $cart_id = $row['id'];
 } else {
     // Crear un nuevo carrito si no existe
+    $stmt->close();
     $sql = "INSERT INTO carts (client_id) VALUES (?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $cart_id = $stmt->insert_id; // ID del nuevo carrito
 }
+
+$stmt->close();
 
 // Añadir al carrito o actualizar la cantidad si el producto ya existe en el carrito
 $sql = "SELECT id, quantity FROM cart_items WHERE cart_id = ? AND menu_item_id = ?";
@@ -69,6 +72,7 @@ if ($row = $result->fetch_assoc()) {
     }
 
     // Producto nuevo, insertar en carrito
+    $stmt->close();
     $sql = "INSERT INTO cart_items (cart_id, menu_item_id, quantity, folio) VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("iiii", $cart_id, $menu_item_id, $quantity, $folio);
@@ -83,6 +87,8 @@ if ($row = $result->fetch_assoc()) {
         $stmt->execute();
     }
 }
+
+$stmt->close();
 
 // Redirigir a la página de ver carrito
 header("Location: ../viewCart/viewCart.php");

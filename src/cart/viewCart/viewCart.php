@@ -7,14 +7,14 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-if (!isset($_SESSION['company_id']) || !isset($_SESSION['branch_id'])) {
-    echo "Por favor selecciona un negocio y una sucursal.";
+if (!isset($_SESSION['company_id'])) {
+    echo "Por favor selecciona un negocio.";
     exit;
 }
 
 $user_id = $_SESSION['user_id'];
 $company_id = $_SESSION['company_id'];
-$branch_id = $_SESSION['branch_id'];
+$branch_id = isset($_SESSION['branch_id']) ? $_SESSION['branch_id'] : null;
 
 // Obtener el carrito del usuario
 $sql = "SELECT c.id FROM carts c WHERE c.client_id = ?";
@@ -68,6 +68,7 @@ if ($result->num_rows > 0) {
     echo "Tu carrito está vacío.";
 }
 
+$stmt->close();
 $conn->close();
 ?>
 
@@ -87,7 +88,7 @@ $conn->close();
     <script>
         document.getElementById('finishOrderButton').addEventListener('click', function() {
             const companyId = <?php echo $company_id; ?>;
-            const branchId = <?php echo $branch_id; ?>;
+            const branchId = <?php echo $branch_id ?? 'null'; ?>;
             const cartId = <?php echo $cart_id; ?>;
 
             const xhttp = new XMLHttpRequest();
