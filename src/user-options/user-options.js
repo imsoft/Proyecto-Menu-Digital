@@ -9,3 +9,7 @@ document.getElementById("BtnEmployee").addEventListener("click", function () {
 document.getElementById("BtnCompany").addEventListener("click", function () {
   window.location.href = "../company/company-login/company-login.html";
 });
+
+document.getElementById("BtnSuperUser").addEventListener("click", function () {
+  window.location.href = "../super-user/super-user-login/super-user-login.html";
+});

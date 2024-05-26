@@ -1,0 +1,148 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.business-name {
+  margin-left: auto;
+  padding-left: 20px;
+  font-size: 1.2em;
+  color: #fff;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #e5450f;
+  color: #fff;
+}
+
+.navbar .logo {
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.navbar .menu {
+  display: flex;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.navbar .menu li {
+  position: relative;
+  margin-left: 20px;
+}
+
+.navbar .menu li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 10px;
+}
+
+.navbar .menu li a:hover {
+  color: #ddd;
+  background-color: #cc2b00;
+}
+
+.navbar .submenu {
+  display: none;
+  position: absolute;
+  background-color: #e5450f;
+  top: 30px;
+  left: 0;
+  padding: 10px 0;
+  list-style: none;
+  margin: 0;
+  min-width: 300px; /* Ancho mínimo de los submenús */
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.navbar .submenu li {
+  margin: 0;
+}
+
+.navbar .submenu li a {
+  color: white;
+  padding: 10px 20px;
+  display: block;
+  border-bottom: 1px solid #cc2b00;
+}
+
+.navbar .submenu li a:hover {
+  background-color: #cc2b00;
+}
+
+.navbar .submenu li:last-child a {
+  border-bottom: none; /* Eliminar borde del último elemento */
+}
+
+.navbar .menu li:hover .submenu {
+  display: block;
+}
+
+.navbar .menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.navbar .menu-toggle div {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 4px 0;
+}
+
+.full-screen-image {
+  width: 100%;
+  height: calc(
+    100vh - 47px
+  ); /* Altura restante de la pantalla debajo del menú */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.full-screen-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ajusta la imagen para cubrir el contenedor */
+}
+
+@media (max-width: 768px) {
+  .navbar .menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .navbar .menu li {
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .navbar .submenu {
+    position: static;
+    padding: 0;
+  }
+
+  .navbar .submenu li a {
+    padding: 10px;
+    border-bottom: 1px solid #cc2b00;
+  }
+
+  .navbar .menu-toggle {
+    display: flex;
+  }
+}
+
+.navbar.active .menu {
+  display: flex;
+}
