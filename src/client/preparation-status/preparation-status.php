@@ -17,8 +17,13 @@
 
     <script>
         function fetchOrderStatus() {
-            fetch('../../branch/food-preparation/getOrderStatus.php')
-                .then(response => response.json())
+            fetch('../../branch/food-preparation/getOrdetStatus.php')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     const container = document.getElementById('orderStatusContainer');
                     container.innerHTML = '';
@@ -59,7 +64,6 @@
                                 <div class='orderDetails ${status_class}'>
                                     <p><strong>Mesa:</strong> ${order.table_number}</p>
                                     <p><strong>Platillo:</strong> ${order.dish}</p>
-                                    <p><strong>Descripción:</strong> ${order.description}</p>
                                     <p><img src='${order.image}' alt='${order.dish}' style='width:100px;'></p>
                                     <p><strong>Folio:</strong> ${order.folio}</p>
                                     <p><strong>Estado:</strong> ${friendly_status}</p>

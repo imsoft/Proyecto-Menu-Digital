@@ -112,7 +112,7 @@ $conn->close();
                     alert('Producto eliminado del carrito');
                     window.location.reload(); // Recargar la página para actualizar la lista del carrito
                 } else {
-                    alert('Error al eliminar el producto');
+                    alert('Error al eliminar el producto: ' + this.responseText);
                 }
             };
             xhttp.open("POST", "../removeFromCart/removeFromCart.php");
