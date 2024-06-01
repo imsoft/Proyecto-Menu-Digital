@@ -14,22 +14,18 @@ $clientId = $_SESSION['user_id']; // Obtener el user_id de la sesión
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú del cliente</title>
+    <title>Configuración</title>
+    <link rel="shortcut icon" href="../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="client-options.css">
-    <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
+    <script src="../client-menubar/client-menubar.js"></script>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Menú del Cliente</h1>
-        <div class="buttons">
-            <button id="tableButton">Mesa</button>
-            <button id="menuButton">Menú</button>
-            <button id="statusButton">Estatus de Preparación</button>
-            <button id="commentsButton">Comentarios y Mejoras</button>
-        </div>
+    <?php include '../client-menubar/client-menubar.php'; ?>
+
+    <div class="full-screen-image">
+        <img src="../../../public/images/splash/splash.png" alt="Main Image" />
     </div>
-    <script src="client-options.js"></script>
 </body>
 
 </html>

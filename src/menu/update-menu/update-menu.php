@@ -31,9 +31,12 @@ if ($id) {
     <title>Edit Menu Item</title>
     <link rel="stylesheet" href="update-menu.css">
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
+    <link rel="stylesheet" href="../../company/company-menubar/company-menubar.css">
+    <script src="../../company/company-menubar/company-menubar.js"></script>
 </head>
 
 <body>
+    <?php include '../../company/company-menubar/company-menubar.php'; ?>
     <div class="form-container">
         <h2>Editar Producto del Menú</h2>
         <form id="menuItemForm" action="updateMenu.php" method="POST" enctype="multipart/form-data">

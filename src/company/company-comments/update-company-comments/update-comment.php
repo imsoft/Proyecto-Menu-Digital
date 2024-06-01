@@ -47,9 +47,12 @@ if ($comment['company_id']) {
     <title>Editar Comentario</title>
     <link rel="stylesheet" href="update-comment.css">
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
+    <link rel="stylesheet" href="../../company-menubar/company-menubar.css">
+    <script src="../../company-menubar/company-menubar.js"></script>
 </head>
 
 <body>
+    <?php include '../../company-menubar/company-menubar.php'; ?>
     <div class="container">
         <h2>Editar Comentario</h2>
         <form id="commentForm" action="updateComment.php" method="POST">

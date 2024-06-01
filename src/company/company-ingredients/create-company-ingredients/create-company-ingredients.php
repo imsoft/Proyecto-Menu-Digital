@@ -3,7 +3,6 @@ session_start();
 require '../../../db/connection.php';
 
 $companyId = $_SESSION['company_id'];
-
 ?>
 
 <!DOCTYPE html>
@@ -14,9 +13,12 @@ $companyId = $_SESSION['company_id'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Ingrediente</title>
     <link rel="stylesheet" href="create-company-ingredients.css">
+    <link rel="stylesheet" href="../../company-menubar/company-menubar.css">
+    <script src="../../company-menubar/company-menubar.js"></script>
 </head>
 
 <body>
+    <?php include '../../company-menubar/company-menubar.php'; ?>
     <div class="form-container">
         <h2>Agregar Ingrediente</h2>
         <form action="CreateCompanyIngredients.php" method="POST">

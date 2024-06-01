@@ -30,9 +30,12 @@ $branchesResult = $branchesStmt->get_result();
     <title>Registro de Empleado</title>
     <link rel="stylesheet" href="create-employee.css">
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
+    <link rel="stylesheet" href="../../company/company-menubar/company-menubar.css">
+    <script src="../../company/company-menubar/company-menubar.js"></script>
 </head>
 
 <body>
+    <?php include '../../company/company-menubar/company-menubar.php'; ?>
     <div class="form-container">
         <h2>Registro de Empleado</h2>
         <form id="registrationForm" action="createEmployee.php" method="POST" onsubmit="return validateForm()">

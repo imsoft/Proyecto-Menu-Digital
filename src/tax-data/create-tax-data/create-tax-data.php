@@ -19,9 +19,12 @@ $companyId = $_SESSION['company_id']; // Recupera el company_id de la sesión
     <title>Datos Fiscales</title>
     <link rel="stylesheet" href="create-tax-data.css">
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
+    <link rel="stylesheet" href="../../company/company-menubar/company-menubar.css">
+    <script src="../../company/company-menubar/company-menubar.js"></script>
 </head>
 
 <body>
+    <?php include '../../company/company-menubar/company-menubar.php'; ?>
     <div class="form-container">
         <h2>Registro de Datos Fiscales</h2>
         <form id="registrationForm" action="createTaxData.php" method="POST">

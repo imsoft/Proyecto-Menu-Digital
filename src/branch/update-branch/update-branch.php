@@ -31,9 +31,12 @@ if ($id) {
     <title>Editar Sucursal</title>
     <link rel="stylesheet" href="update-branch.css">
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
+    <link rel="stylesheet" href="../../company/company-menubar/company-menubar.css">
+    <script src="../../company/company-menubar/company-menubar.js"></script>
 </head>
 
 <body>
+    <?php include '../../company/company-menubar/company-menubar.php'; ?>
     <div class="form-container">
         <h2>Editar Sucursal</h2>
         <form id="registrationForm" action="updateBranch.php" method="POST">

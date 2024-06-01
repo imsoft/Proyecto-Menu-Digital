@@ -1,18 +1,24 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 1;
+  margin: 0;
+  padding: 0;
 }
 
 h2 {
   color: #e5450f;
+  margin-top: 20px; /* Ajustar según sea necesario */
+  text-align: center; /* Centrar el título */
 }
 
 .table-container {
-  margin-top: 20px;
+  margin: 100px auto;
+  width: 90%;
+  max-width: 1200px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 8px;
 }
 
 table {

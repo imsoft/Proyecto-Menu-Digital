@@ -23,9 +23,12 @@ $companyId = $_SESSION['company_id'];
     <title>Información de Sucursales</title>
     <link rel="stylesheet" href="read-branch.css">
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
+    <link rel="stylesheet" href="../../company/company-menubar/company-menubar.css">
+    <script src="../../company/company-menubar/company-menubar.js"></script>
 </head>
 
 <body>
+    <?php include '../../company/company-menubar/company-menubar.php'; ?>
     <div class="table-container">
         <h2>Detalles de Sucursales</h2>
         <table id="branchTable">

@@ -11,7 +11,7 @@ body {
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 80%;
-  margin: auto;
+  margin: 100px auto;
 }
 
 section {
@@ -24,45 +24,44 @@ h2 {
   color: #e5450f;
 }
 
-ul {
-  list-style-type: none;
+.order-list {
   padding: 0;
 }
 
-li {
+.order-item {
   padding: 8px;
   margin-top: 5px;
   background-color: #e9e9f9;
   border-bottom: 1px solid #ddd;
 }
 
-li:last-child {
+.order-item:last-child {
   border-bottom: none;
 }
 
-.waiting li {
+.waiting .order-item {
   background-color: #ffebcc; /* Light yellow for waiting */
 }
 
-.preparing li {
+.preparing .order-item {
   background-color: #ffe0e0; /* Light red for preparing */
 }
 
-.ready li {
+.ready .order-item {
   background-color: #e0ffe0; /* Light green for ready */
 }
 
-.delivered li {
+.delivered .order-item {
   background-color: #e0e0ff; /* Light blue for delivered */
 }
 
-li img {
+.order-item img {
   width: 50px;
   vertical-align: middle;
   margin-right: 10px;
 }
 
-li button {
+.order-item button {
   margin-left: 10px;
   padding: 5px 10px;
   background-color: #007bff;
@@ -72,7 +71,7 @@ li button {
   cursor: pointer;
 }
 
-li button:hover {
+.order-item button:hover {
   background-color: #0056b3;
 }
 

@@ -1,4 +1,5 @@
 <?php
+require "../db/connection.php";
 session_start(); // Asegúrate de iniciar la sesión
 ?>
 
@@ -11,9 +12,12 @@ session_start(); // Asegúrate de iniciar la sesión
     <title>Mesa</title>
     <link rel="stylesheet" href="table.css">
     <link rel="shortcut icon" href="../../public/images/favicon/logo.png" />
+    <link rel="stylesheet" href="../client/client-menubar/client-menubar.css">
+    <script src="../client/client-menubar/client-menubar.js"></script>
 </head>
 
 <body>
+    <?php include '../client/client-menubar/client-menubar.php'; ?>
     <div class="container">
         <h2>Número de Folio de la Mesa</h2>
         <div class="folio-number">

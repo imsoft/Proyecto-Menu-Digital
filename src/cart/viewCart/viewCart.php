@@ -1,6 +1,6 @@
 <?php
-session_start();
 require '../../db/connection.php';
+session_start();
 
 if (!isset($_SESSION['user_id'])) {
     echo "Por favor inicia sesión para ver tu carrito.";
@@ -80,9 +80,12 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ver Carrito</title>
     <link rel="stylesheet" href="viewCart.css">
+    <link rel="stylesheet" href="../../client/client-menubar/client-menubar.css">
+    <script src="../../client/client-menubar/client-menubar.js"></script>
 </head>
 
 <body>
+    <?php include '../../client/client-menubar/client-menubar.php'; ?>
     <button id='finishOrderButton'>Terminar Pedido</button>
 
     <script>

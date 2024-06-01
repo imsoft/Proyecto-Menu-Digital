@@ -1,6 +1,6 @@
 <?php
-session_start(); // Asegúrate de que la sesión esté iniciada
 require '../../db/connection.php'; // Incluye tu archivo de conexión a la base de datos
+session_start(); // Asegúrate de que la sesión esté iniciada
 ?>
 
 <!DOCTYPE html>
@@ -12,9 +12,12 @@ require '../../db/connection.php'; // Incluye tu archivo de conexión a la base 
     <title>Menú</title>
     <link rel="stylesheet" href="client-menu.css">
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
+    <link rel="stylesheet" href="../../client/client-menubar/client-menubar.css">
+    <script src="../../client/client-menubar/client-menubar.js"></script>
 </head>
 
 <body>
+    <?php include '../../client/client-menubar/client-menubar.php'; ?>
     <div class="container">
         <h1>Menú del Restaurante</h1>
         <div class="menu-buttons">

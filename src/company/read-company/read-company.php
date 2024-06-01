@@ -23,9 +23,12 @@ $companyId = $_SESSION['company_id'];
     <title>Lista de negocios</title>
     <link rel="stylesheet" href="read-company.css">
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
+    <link rel="stylesheet" href="../company-menubar/company-menubar.css">
+    <script src="../company-menubar/company-menubar.js"></script>
 </head>
 
 <body>
+    <?php include '../company-menubar/company-menubar.php'; ?>
     <div class="table-container">
         <h2>Datos del Negocio</h2>
         <table id="companyTable">

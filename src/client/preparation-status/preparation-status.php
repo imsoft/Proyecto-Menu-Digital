@@ -1,3 +1,8 @@
+<?php
+require '../../db/connection.php';
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -7,9 +12,12 @@
     <title>Estatus de preparación</title>
     <link rel="stylesheet" href="preparation-status.css">
     <link rel="shortcut icon" href="../../public/images/favicon/logo.png" />
+    <link rel="stylesheet" href="../client-menubar/client-menubar.css">
+    <script src="../client-menubar/client-menubar.js"></script>
 </head>
 
 <body>
+    <?php include '../client-menubar/client-menubar.php'; ?>
     <div class="container">
         <h1>Estado del Pedido</h1>
         <div id="orderStatusContainer"></div>

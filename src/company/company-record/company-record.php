@@ -48,9 +48,12 @@ function getColorByState($state)
     <title>Historial</title>
     <link rel="stylesheet" href="company-record.css">
     <link rel="shortcut icon" href="../../public/images/favicon/logo.png" />
+    <link rel="stylesheet" href="../company-menubar/company-menubar.css">
+    <script src="../company-menubar/company-menubar.js"></script>
 </head>
 
 <body>
+    <?php include '../company-menubar/company-menubar.php'; ?>
     <div class="container">
         <h1>Historial de Pedidos</h1>
 

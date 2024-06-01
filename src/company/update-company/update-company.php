@@ -31,9 +31,12 @@ if ($id) {
     <title>Editar Negocio</title>
     <link rel="stylesheet" href="update-company.css">
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
+    <link rel="stylesheet" href="../company-menubar/company-menubar.css">
+    <script src="../company-menubar/company-menubar.js"></script>
 </head>
 
 <body>
+    <?php include '../company-menubar/company-menubar.php'; ?>
     <div class="form-container">
         <h2>Editar Negocio</h2>
         <form id="businessForm" action="updateCompany.php" method="POST" enctype="multipart/form-data">

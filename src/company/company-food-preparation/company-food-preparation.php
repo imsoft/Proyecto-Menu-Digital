@@ -47,9 +47,12 @@ if ($result->num_rows > 0) {
     <title>Preparación de alimentos</title>
     <link rel="stylesheet" href="company-food-preparation.css">
     <link rel="shortcut icon" href="../../public/images/favicon/logo.png" />
+    <link rel="stylesheet" href="../company-menubar/company-menubar.css">
+    <script src="../company-menubar/company-menubar.js"></script>
 </head>
 
 <body>
+    <?php include '../company-menubar/company-menubar.php'; ?>
     <div class="container">
         <h1>Estado de Preparación de los Alimentos</h1>
         <div id="preparationStatus">
@@ -59,69 +62,69 @@ if ($result->num_rows > 0) {
 
                     <div class="status-section waiting">
                         <h3>En espera</h3>
-                        <ul>
+                        <div class="order-list">
                             <?php if (isset($statuses['esperando'])) {
                                 foreach ($statuses['esperando'] as $order) { ?>
-                                    <li>
+                                    <div class="order-item">
                                         <img src="<?php echo htmlspecialchars($order['image']); ?>" alt="<?php echo htmlspecialchars($order['dish']); ?>">
                                         <?php echo htmlspecialchars($order['dish']) . " (Orden #" . htmlspecialchars($order['folio']) . ", Mesa #" . htmlspecialchars($order['table_number']) . ")"; ?>
                                         <button onclick="updateOrderStatus(<?php echo $order['folio']; ?>, 'preparando')">Mover a Preparación</button>
-                                    </li>
+                                    </div>
                                 <?php }
                             } else { ?>
-                                <li>No hay pedidos en espera.</li>
+                                <div class="order-item">No hay pedidos en espera.</div>
                             <?php } ?>
-                        </ul>
+                        </div>
                     </div>
 
                     <div class="status-section preparing">
                         <h3>Preparando</h3>
-                        <ul>
+                        <div class="order-list">
                             <?php if (isset($statuses['preparando'])) {
                                 foreach ($statuses['preparando'] as $order) { ?>
-                                    <li>
+                                    <div class="order-item">
                                         <img src="<?php echo htmlspecialchars($order['image']); ?>" alt="<?php echo htmlspecialchars($order['dish']); ?>">
                                         <?php echo htmlspecialchars($order['dish']) . " (Orden #" . htmlspecialchars($order['folio']) . ", Mesa #" . htmlspecialchars($order['table_number']) . ")"; ?>
                                         <button onclick="updateOrderStatus(<?php echo $order['folio']; ?>, 'lista')">Mover a Listo para Servir</button>
-                                    </li>
+                                    </div>
                                 <?php }
                             } else { ?>
-                                <li>No hay pedidos en preparación.</li>
+                                <div class="order-item">No hay pedidos en preparación.</div>
                             <?php } ?>
-                        </ul>
+                        </div>
                     </div>
 
                     <div class="status-section ready">
                         <h3>Listos para Servir</h3>
-                        <ul>
+                        <div class="order-list">
                             <?php if (isset($statuses['lista'])) {
                                 foreach ($statuses['lista'] as $order) { ?>
-                                    <li>
+                                    <div class="order-item">
                                         <img src="<?php echo htmlspecialchars($order['image']); ?>" alt="<?php echo htmlspecialchars($order['dish']); ?>">
                                         <?php echo htmlspecialchars($order['dish']) . " (Orden #" . htmlspecialchars($order['folio']) . ", Mesa #" . htmlspecialchars($order['table_number']) . ")"; ?>
                                         <button onclick="updateOrderStatus(<?php echo $order['folio']; ?>, 'entregada')">Mover a Entregada</button>
-                                    </li>
+                                    </div>
                                 <?php }
                             } else { ?>
-                                <li>No hay pedidos listos para servir.</li>
+                                <div class="order-item">No hay pedidos listos para servir.</div>
                             <?php } ?>
-                        </ul>
+                        </div>
                     </div>
 
                     <div class="status-section delivered">
                         <h3>Entregadas</h3>
-                        <ul>
+                        <div class="order-list">
                             <?php if (isset($statuses['entregada'])) {
                                 foreach ($statuses['entregada'] as $order) { ?>
-                                    <li>
+                                    <div class="order-item">
                                         <img src="<?php echo htmlspecialchars($order['image']); ?>" alt="<?php echo htmlspecialchars($order['dish']); ?>">
                                         <?php echo htmlspecialchars($order['dish']) . " (Orden #" . htmlspecialchars($order['folio']) . ", Mesa #" . htmlspecialchars($order['table_number']) . ")"; ?>
-                                    </li>
+                                    </div>
                                 <?php }
                             } else { ?>
-                                <li>No hay pedidos entregados.</li>
+                                <div class="order-item">No hay pedidos entregados.</div>
                             <?php } ?>
-                        </ul>
+                        </div>
                     </div>
                 </section>
             <?php } ?>

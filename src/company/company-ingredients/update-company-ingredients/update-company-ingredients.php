@@ -32,9 +32,12 @@ if (isset($_GET['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Ingrediente</title>
     <link rel="stylesheet" href="update-company-ingredients.css">
+    <link rel="stylesheet" href="../../company-menubar/company-menubar.css">
+    <script src="../../company-menubar/company-menubar.js"></script>
 </head>
 
 <body>
+<?php include '../../company-menubar/company-menubar.php'; ?>
     <div class="form-container">
         <h2>Editar Ingrediente</h2>
         <form action="UpdateCompanyIngredients.php" method="POST">

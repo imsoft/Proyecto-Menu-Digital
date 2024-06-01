@@ -10,11 +10,14 @@ body {
   font-size: 1.2em;
   color: #fff;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px; /* Ajusta según el espacio disponible */
 }
 
 .navbar {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
   background-color: #e5450f;
@@ -23,24 +26,33 @@ body {
   width: 100%;
   top: 0;
   z-index: 1000;
+  box-sizing: border-box;
 }
 
 .navbar .logo {
   color: white;
   font-size: 24px;
   text-decoration: none;
+  flex-shrink: 0;
+}
+
+.navbar .menu-container {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
 }
 
 .navbar .menu {
   display: flex;
   list-style: none;
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
 }
 
 .navbar .menu li {
   position: relative;
   margin-left: 20px;
+  flex-shrink: 0;
 }
 
 .navbar .menu li a {
@@ -123,6 +135,10 @@ body {
 }
 
 @media (max-width: 768px) {
+  .navbar .menu-container {
+    justify-content: flex-start;
+  }
+
   .navbar .menu {
     display: none;
     flex-direction: column;
@@ -163,4 +179,10 @@ body {
 .navbar .menu li:last-child a:hover {
   color: #ddd;
   background-color: #cc2b00;
+}
+
+/* Clase para el contenido de la página */
+.content {
+  margin-top: 60px; /* Ajusta según la altura del navbar */
+  padding: 20px;
 }

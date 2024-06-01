@@ -8,8 +8,8 @@ $companyId = $_SESSION['company_id']; // Obtener el company_id de la sesión
 $sql = "SELECT co.id, cl.firstName, cl.email, co.rating, co.comment
         FROM comments co
         JOIN clients cl ON co.client_id = cl.id
-        JOIN branches br ON co.branch_id = br.id
-        WHERE br.company_id = ? OR co.branch_id IS NULL AND co.company_id = ?";
+        LEFT JOIN branches br ON co.branch_id = br.id
+        WHERE (br.company_id = ? OR co.branch_id IS NULL) AND co.company_id = ?";
 
 $stmt = $conn->prepare($sql);
 if ($stmt === false) {
@@ -35,4 +35,5 @@ if ($result->num_rows > 0) {
 } else {
     echo "<tr><td colspan='5'>No hay comentarios disponibles.</td></tr>";
 }
+$stmt->close();
 $conn->close();

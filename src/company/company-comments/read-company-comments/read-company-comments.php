@@ -1,6 +1,12 @@
 <?php
 session_start();
 require '../../../db/connection.php';
+
+// Asegúrate de que el ID de la empresa está disponible en la sesión
+if (!isset($_SESSION['company_id'])) {
+    die("ID de la empresa no proporcionado.");
+}
+
 $companyId = $_SESSION['company_id'];
 ?>
 
@@ -13,9 +19,12 @@ $companyId = $_SESSION['company_id'];
     <title>Comentarios de Clientes</title>
     <link rel="stylesheet" href="read-company-comments.css">
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
+    <link rel="stylesheet" href="../../company-menubar/company-menubar.css">
+    <script src="../../company-menubar/company-menubar.js"></script>
 </head>
 
 <body>
+    <?php include '../../company-menubar/company-menubar.php'; ?>
     <div class="table-container">
         <h2>Comentarios de Clientes</h2>
         <table id="clientTable">
