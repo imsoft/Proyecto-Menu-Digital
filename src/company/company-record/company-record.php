@@ -47,7 +47,7 @@ function getColorByState($state)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historial</title>
     <link rel="stylesheet" href="company-record.css">
-    <link rel="shortcut icon" href="../../public/images/favicon/logo.png" />
+    <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="../company-menubar/company-menubar.css">
     <script src="../company-menubar/company-menubar.js"></script>
 </head>

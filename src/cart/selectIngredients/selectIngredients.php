@@ -46,6 +46,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seleccionar Ingredientes</title>
     <link rel="stylesheet" href="selectIngredients.css">
+    <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <script>
         function updateTotal() {
             const checkboxes = document.querySelectorAll('input[name="ingredients[]"]:checked');

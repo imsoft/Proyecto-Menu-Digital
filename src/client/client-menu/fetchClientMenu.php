@@ -33,7 +33,7 @@ if ($result->num_rows > 0) {
         echo '<p>' . htmlspecialchars($row['description']) . '</p>';
         echo '<p>Categoría: ' . htmlspecialchars($row['category_name']) . '</p>';
         echo '<p>Precio: $' . htmlspecialchars($row['price']) . '</p>';
-        echo '<button onclick="addToCart(' . $row['id'] . ')">Añadir al Carrito</button>';
+        echo '<button class="add-to-cart-btn" onclick="addToCart(' . $row['id'] . ')">Añadir al Carrito</button>';
         echo '</div>';
     }
 } else {

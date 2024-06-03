@@ -18,7 +18,7 @@ $companyId = $_SESSION['company_id'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comentarios de Clientes</title>
     <link rel="stylesheet" href="read-company-comments.css">
-    <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
+    <link rel="shortcut icon" href="../../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="../../company-menubar/company-menubar.css">
     <script src="../../company-menubar/company-menubar.js"></script>
 </head>

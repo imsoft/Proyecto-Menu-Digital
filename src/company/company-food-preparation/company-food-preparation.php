@@ -46,7 +46,7 @@ if ($result->num_rows > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preparación de alimentos</title>
     <link rel="stylesheet" href="company-food-preparation.css">
-    <link rel="shortcut icon" href="../../public/images/favicon/logo.png" />
+    <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="../company-menubar/company-menubar.css">
     <script src="../company-menubar/company-menubar.js"></script>
 </head>

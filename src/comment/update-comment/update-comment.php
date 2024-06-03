@@ -47,43 +47,54 @@ if ($comment['company_id']) {
     <title>Editar Comentario</title>
     <link rel="stylesheet" href="update-comment.css">
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
+    <link rel="stylesheet" href="../../client/client-menubar/client-menubar.css">
+    <script src="../../client/client-menubar/client-menubar.js"></script>
 </head>
 
 <body>
+    <?php include '../../client/client-menubar/client-menubar.php'; ?>
     <div class="container">
         <h2>Editar Comentario</h2>
         <form id="commentForm" action="updateComment.php" method="POST">
             <input type="hidden" name="id" value="<?php echo htmlspecialchars($comment['id']); ?>">
 
-            <label for="company">Negocio:</label>
-            <select id="company" name="company" required onchange="updateBranches(this.value)">
-                <option value="">-- Selecciona Negocio --</option>
-                <?php while ($company = $companies->fetch_assoc()) : ?>
-                    <option value="<?php echo $company['id']; ?>" <?php echo ($company['id'] == $comment['company_id']) ? 'selected' : ''; ?>>
-                        <?php echo htmlspecialchars($company['business_name']); ?>
-                    </option>
-                <?php endwhile; ?>
-            </select>
+            <div class="form-group">
+                <label for="company">Negocio:</label>
+                <select id="company" name="company" required onchange="updateBranches(this.value)">
+                    <option value="">-- Selecciona Negocio --</option>
+                    <?php while ($company = $companies->fetch_assoc()) : ?>
+                        <option value="<?php echo $company['id']; ?>" <?php echo ($company['id'] == $comment['company_id']) ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($company['business_name']); ?>
+                        </option>
+                    <?php endwhile; ?>
+                </select>
+            </div>
 
-            <label for="branch">Sucursal:</label>
-            <select id="branch" name="branch">
-                <option value="">-- Selecciona Sucursal --</option>
-                <?php foreach ($branches as $branch) : ?>
-                    <option value="<?php echo $branch['id']; ?>" <?php echo ($branch['id'] == $comment['branch_id']) ? 'selected' : ''; ?>>
-                        <?php echo htmlspecialchars($branch['branch_name']); ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
+            <div class="form-group">
+                <label for="branch">Sucursal:</label>
+                <select id="branch" name="branch">
+                    <option value="">-- Selecciona Sucursal --</option>
+                    <?php foreach ($branches as $branch) : ?>
+                        <option value="<?php echo $branch['id']; ?>" <?php echo ($branch['id'] == $comment['branch_id']) ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($branch['branch_name']); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
 
-            <label for="rating">Valoración:</label>
-            <select id="rating" name="rating" required>
-                <option value="bueno" <?php echo ($comment['rating'] == 'bueno') ? 'selected' : ''; ?>>Bueno</option>
-                <option value="regular" <?php echo ($comment['rating'] == 'regular') ? 'selected' : ''; ?>>Regular</option>
-                <option value="malo" <?php echo ($comment['rating'] == 'malo') ? 'selected' : ''; ?>>Malo</option>
-            </select>
+            <div class="form-group">
+                <label for="rating">Valoración:</label>
+                <select id="rating" name="rating" required>
+                    <option value="bueno" <?php echo ($comment['rating'] == 'bueno') ? 'selected' : ''; ?>>Bueno</option>
+                    <option value="regular" <?php echo ($comment['rating'] == 'regular') ? 'selected' : ''; ?>>Regular</option>
+                    <option value="malo" <?php echo ($comment['rating'] == 'malo') ? 'selected' : ''; ?>>Malo</option>
+                </select>
+            </div>
 
-            <label for="commentBox">Comentario:</label>
-            <textarea id="commentBox" name="commentBox" rows="4" required><?php echo htmlspecialchars($comment['comment']); ?></textarea>
+            <div class="form-group">
+                <label for="commentBox">Comentario:</label>
+                <textarea id="commentBox" name="commentBox" rows="4" required><?php echo htmlspecialchars($comment['comment']); ?></textarea>
+            </div>
 
             <button type="submit">Actualizar Comentario</button>
         </form>

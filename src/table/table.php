@@ -28,7 +28,6 @@ session_start(); // Asegúrate de iniciar la sesión
                 </span></p>
         </div>
     </div>
-    <script src="table.js"></script>
 </body>
 
 </html>

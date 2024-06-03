@@ -1,18 +1,35 @@
+<?php
+session_start();
+require '../../db/connection.php';
+
+$employeeId = $_SESSION['user_id'] ?? null;
+$companyId = $_SESSION['user_company'] ?? null;
+$branchId = $_SESSION['user_branch'] ?? null;
+
+if (!$employeeId || !$companyId) {
+    echo 'No se encontró la información del empleado o de la empresa.';
+    exit;
+}
+?>
+
 <!DOCTYPE html>
-<html lang="es">
+<html lang='es'>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Preparación de alimentos</title>
-    <link rel="stylesheet" href="food-preparation.css">
-    <link rel="shortcut icon" href="../../public/images/favicon/logo.png" />
+    <link rel='stylesheet' href='food-preparation.css'>
+    <link rel='shortcut icon' href='../../../public/images/favicon/logo.png' />
+    <link rel='stylesheet' href='../../employee/employee-menubar/employee-menubar.css'>
+    <script src='../../employee/employee-menubar/employee-menubar.js'></script>
 </head>
 
 <body>
-    <div class="container">
+    <?php include '../../employee/employee-menubar/employee-menubar.php'; ?>
+    <div class='container'>
         <h1>Estado de Preparación de los Alimentos</h1>
-        <div id="preparationStatus"></div>
+        <div id='preparationStatus'></div>
     </div>
 
     <script>
@@ -42,16 +59,44 @@
                     };
 
                     for (const status in sections) {
-                        container.innerHTML += `<section id="${status}">
-                            <h2>${sections[status]}</h2>
-                            <ul>${statusCategories[status].map(order => `
-                                <li>
-                                    <img src="${order.image}" alt="${order.dish}" style="width:50px;">
-                                    ${order.dish} (Orden #${order.folio}, Mesa #${order.table_number})
-                                    ${status !== 'entregada' ? `<button onclick="updateOrderStatus(${order.folio}, '${getNextState(status)}')">Mover a ${getNextStateText(status)}</button>` : ''}
-                                </li>`).join('')}
-                            </ul>
-                        </section>`;
+                        const sectionElement = document.createElement('section');
+                        sectionElement.id = status;
+
+                        const header = document.createElement('h2');
+                        header.textContent = sections[status];
+                        sectionElement.appendChild(header);
+
+                        statusCategories[status].forEach(order => {
+                            const orderElement = document.createElement('div');
+                            orderElement.className = 'order';
+
+                            const orderInfo = document.createElement('div');
+                            orderInfo.className = 'order-info';
+
+                            const img = document.createElement('img');
+                            img.src = order.image;
+                            img.alt = order.dish;
+
+                            const orderDetails = document.createElement('div');
+                            orderDetails.className = 'order-details';
+                            orderDetails.innerHTML = `<p><strong>${order.dish}</strong></p><p>Orden #${order.folio}, Mesa #${order.table_number}</p>`;
+
+                            orderInfo.appendChild(img);
+                            orderInfo.appendChild(orderDetails);
+                            orderElement.appendChild(orderInfo);
+
+                            if (status !== 'entregada') {
+                                const button = document.createElement('button');
+                                button.className = 'action-button';
+                                button.textContent = `Mover a ${getNextStateText(status)}`;
+                                button.onclick = () => updateOrderStatus(order.folio, getNextState(status));
+                                orderElement.appendChild(button);
+                            }
+
+                            sectionElement.appendChild(orderElement);
+                        });
+
+                        container.appendChild(sectionElement);
                     }
                 })
                 .catch(error => console.error('Error fetching preparation status:', error));
@@ -99,9 +144,7 @@
                 .catch(error => console.error('Error updating order status:', error));
         }
 
-        // Fetch preparation status every 10 seconds
         setInterval(fetchPreparationStatus, 10000);
-        // Initial fetch
         fetchPreparationStatus();
     </script>
 </body>

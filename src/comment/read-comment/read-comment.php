@@ -16,25 +16,29 @@ $clientId = $_SESSION['user_id'];
     <title>Comentarios de Clientes</title>
     <link rel="stylesheet" href="read-comment.css">
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
+    <link rel="stylesheet" href="../../client/client-menubar/client-menubar.css">
+    <script src="../../client/client-menubar/client-menubar.js"></script>
 </head>
 
 <body>
-    <div class="table-container">
+    <?php include '../../client/client-menubar/client-menubar.php'; ?>
+    <div class="container">
         <h2>Comentarios de Clientes</h2>
-        <table id="clientTable">
-            <thead>
-                <tr>
-                    <th>Calificación</th>
-                    <th>Comentario</th>
-                    <th>Fecha de creación</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php include 'fetchComments.php'; ?>
-            </tbody>
-
-        </table>
+        <div class="table-container">
+            <table id="clientTable">
+                <thead>
+                    <tr>
+                        <th>Calificación</th>
+                        <th>Comentario</th>
+                        <th>Fecha de creación</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php include 'fetchComments.php'; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
     <script src="read-comment.js"></script>
 </body>

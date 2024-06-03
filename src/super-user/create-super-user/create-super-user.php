@@ -1,8 +1,6 @@
 <?php
 session_start();
-
 require '../../db/connection.php'; // Asegúrate de que la ruta es correcta
-
 ?>
 
 <!DOCTYPE html>
@@ -14,13 +12,15 @@ require '../../db/connection.php'; // Asegúrate de que la ruta es correcta
     <title>Registro de Superusuario</title>
     <link rel="stylesheet" href="create-super-user.css">
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
+    <link rel="stylesheet" href="../super-user-menubar/super-user-menubar.css">
+    <script src="../super-user-menubar/super-user-menubar.js"></script>
 </head>
 
 <body>
+    <?php include '../super-user-menubar/super-user-menubar.php'; ?>
     <div class="form-container">
         <h2>Registro de Superusuario</h2>
         <form id="registrationForm" action="createSuperuser.php" method="POST" onsubmit="return validateForm()">
-
             <label for="username">Nombre de Usuario:</label>
             <input type="text" id="username" name="username" required>
 

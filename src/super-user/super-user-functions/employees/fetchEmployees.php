@@ -20,7 +20,7 @@ if ($result->num_rows > 0) {
         echo "<td>" . htmlspecialchars($row['gender']) . "</td>";
         echo "<td>" . htmlspecialchars($row['companyName']) . "</td>";
         echo "<td>" . htmlspecialchars($row['branchName'] ?? 'No Aplicable') . "</td>";
-        echo '<td><button class="edit-btn" onclick="location.href=\'../update-employee.php?id=' . $row['id'] . '\'">Editar</button><button class="delete-btn" data-id="' . $row['id'] . '">Eliminar</button></td>';
+        echo '<td><button class="edit-btn" onclick="location.href=\'update-employee.php?id=' . $row['id'] . '\'">Editar</button><button class="delete-btn" data-id="' . $row['id'] . '">Eliminar</button></td>';
         echo "</tr>";
     }
 } else {

@@ -1,19 +1,30 @@
-/* preparation-status.css */
-
 body {
+  font-family: Arial, sans-serif;
   background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
   width: 80%;
-  margin: auto;
+  margin: 100px auto; /* Separado 100px del tope */
   padding: 20px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
 .orderDetails {
+  background-color: #fff; /* Fondo blanco para todos los estados */
   border: 1px solid #ccc;
   padding: 10px;
   margin: 10px 0;
@@ -23,23 +34,7 @@ body {
 
 .orderDetails img {
   display: block;
-  margin: 10px 0;
-}
-
-.status-waiting {
-  background-color: #ffe3a3;
-}
-
-.status-preparing {
-  background-color: #fff9b0;
-}
-
-.status-ready {
-  background-color: #a3ffb3;
-}
-
-.status-delivered {
-  background-color: #d3ffd3;
+  margin: 10px auto;
 }
 
 .progress-bar {
@@ -48,10 +43,11 @@ body {
   overflow: hidden;
   margin-top: 10px;
   position: relative;
+  height: 20px; /* Adjusted height for better visibility */
 }
 
 .progress {
-  height: 10px;
+  height: 100%;
   background-color: #4caf50;
   width: 0;
   transition: width 0.5s;
@@ -59,11 +55,11 @@ body {
 }
 
 .progress-dot {
-  width: 14px;
-  height: 14px;
+  width: 20px; /* Adjusted size for better visibility */
+  height: 20px; /* Adjusted size for better visibility */
   background-color: #ff5733;
   border-radius: 50%;
   position: absolute;
-  top: -2px;
-  right: -7px;
+  top: 0px; /* Adjusted position for better alignment */
+  right: -10px; /* Adjusted position for better alignment */
 }

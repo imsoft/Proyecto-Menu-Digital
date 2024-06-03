@@ -16,7 +16,7 @@ if ($result->num_rows > 0) {
         echo "<td>" . htmlspecialchars($row['food_type']) . "</td>";
         echo "<td>" . ($row['has_rfc'] ? 'Sí' : 'No') . "</td>";
         echo "<td>" . ($row['consistent_menu'] ? 'Sí' : 'No') . "</td>";
-        echo '<td><button class="edit-btn" onclick="location.href=\'../update-company.php?id=' . $row['id'] . '\'">Editar</button>';
+        echo '<td><button class="edit-btn" onclick="location.href=\'update-company.php?id=' . $row['id'] . '\'">Editar</button>';
         echo '<button class="delete-btn" data-id=' . $row['id'] . '">Eliminar</button></td>';
         echo "</tr>";
     }

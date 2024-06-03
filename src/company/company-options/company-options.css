@@ -7,6 +7,7 @@ body {
 .business-name {
   margin-left: auto;
   padding-left: 20px;
+  padding-right: 30px;
   font-size: 1.2em;
   color: #fff;
   white-space: nowrap;
@@ -14,7 +15,7 @@ body {
 
 .navbar {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
   background-color: #e5450f;
@@ -108,7 +109,7 @@ body {
 .full-screen-image {
   width: 100%;
   height: calc(
-    100vh - 47px
+    100vh - 0px
   ); /* Altura restante de la pantalla debajo del menú */
   display: flex;
   justify-content: center;

@@ -3,6 +3,7 @@ header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
 header("Pragma: no-cache"); // HTTP 1.0.
 header("Expires: 0"); // Proxies.
 
+session_start();
 require '../../../db/connection.php';
 
 $id = $_GET['id'] ?? ''; // Asegúrate de validar y limpiar este ID antes de usarlo en una consulta
@@ -37,10 +38,13 @@ $branchesResult = $conn->query($branchesQuery);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Empleado</title>
     <link rel="stylesheet" href="update-employee.css">
-    <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
+    <link rel="shortcut icon" href="../../../../public/images/favicon/logo.png" />
+    <link rel="stylesheet" href="../../super-user-menubar/super-user-menubar.css">
+    <script src="../../super-user-menubar/super-user-menubar.js"></script>
 </head>
 
 <body>
+    <?php include '../../super-user-menubar/super-user-menubar.php'; ?>
     <div class="form-container">
         <h2>Editar Empleado</h2>
         <form id="updateForm" action="updateEmployee.php" method="POST">

@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", function () {
+  filterMenu("comida");
+});
+
 function addToCart(menuItemId) {
   // Redirigir a la página de selección de ingredientes
   window.location.href =

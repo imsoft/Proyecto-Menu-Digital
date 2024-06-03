@@ -34,7 +34,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configuración</title>
-    <link rel="shortcut icon" href="../../public/images/favicon/logo.png" />
+    <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="company-options.css">
     <script src="../company-menubar/company-menubar.js"></script>
 </head>

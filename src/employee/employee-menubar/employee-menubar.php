@@ -12,12 +12,7 @@ $path = $_SERVER['REQUEST_URI'];
 $currentUrl = $protocol . "://" . $host . $path;
 
 session_start();
-
-if ($currentUrl === "https://menudigital.sbs/src/table/table.php") {
-    require '../db/connection.php';
-} else {
-    require '../../db/connection.php';
-}
+require '../../db/connection.php';
 
 
 // Asegúrate de que el ID del cliente está disponible en la sesión
@@ -28,7 +23,7 @@ if (!isset($_SESSION['user_id'])) {
 $clientId = $_SESSION['user_id'];
 
 // Consulta para obtener el nombre del cliente
-$sql = "SELECT firstName FROM clients WHERE id = ?";
+$sql = "SELECT firstName FROM employees WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $clientId);
 $stmt->execute();
@@ -53,27 +48,9 @@ $base_url = '/src';
     <div class="menu-container">
         <ul class="menu">
             <li>
-                <a href="#about">Mesa</a>
+                <a href="#about">Estatus</a>
                 <ul class="submenu">
-                    <li><a href="<?php echo $base_url; ?>/table/table.php">Ver número de mesa</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#services">Menú</a>
-                <ul class="submenu">
-                    <li><a href="<?php echo $base_url; ?>/client/select-business-branch/select-business-branch.php">Ver Menú</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#services">Estatus de preparación</a>
-                <ul class="submenu">
-                    <li><a href="<?php echo $base_url; ?>/client/preparation-status/preparation-status.php">Ver estatus de preparación</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#services">Comentarios y mejoras</a>
-                <ul class="submenu">
-                    <li><a href="<?php echo $base_url; ?>/comment/create-comment/create-comment.php">Hacer comentarios y mejoras</a></li>
+                    <li><a href="<?php echo $base_url; ?>/branch/food-preparation/food-preparation.php">Ver Estatus de pedios</a></li>
                 </ul>
             </li>
             <li>

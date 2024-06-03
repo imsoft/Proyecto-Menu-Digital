@@ -21,27 +21,36 @@ session_start();
     <div class="container">
         <h2>Deja tu Comentario</h2>
         <form id="commentForm" action="createComment.php" method="POST">
-            <select id="restaurant" name="restaurant" required>
-                <option value="">-- Selecciona Restaurante --</option>
-                <!-- Las opciones del restaurante se llenarán desde la base de datos -->
-            </select>
-
-            <select id="branch" name="branch">
-                <option value="">-- Selecciona Sucursal --</option>
-                <option value="0">No aplica</option>
-                <!-- Las opciones de sucursal se llenarán dependiendo de la selección del restaurante -->
-            </select>
-
-            <select id="rating" name="rating" required>
-                <option value="">-- Califica tu experiencia --</option>
-                <option value="bueno">Bueno</option>
-                <option value="regular">Regular</option>
-                <option value="malo">Malo</option>
-            </select>
-
-            <textarea id="commentBox" name="commentBox" placeholder="Escribe tu comentario aquí..." rows="4" required></textarea>
+            <div class="form-group">
+                <label for="restaurant">Restaurante:</label>
+                <select id="restaurant" name="restaurant" required>
+                    <option value="">-- Selecciona Restaurante --</option>
+                    <!-- Las opciones del restaurante se llenarán desde la base de datos -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="branch">Sucursal:</label>
+                <select id="branch" name="branch">
+                    <option value="">-- Selecciona Sucursal --</option>
+                    <option value="0">No aplica</option>
+                    <!-- Las opciones de sucursal se llenarán dependiendo de la selección del restaurante -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="rating">Calificación:</label>
+                <select id="rating" name="rating" required>
+                    <option value="">-- Califica tu experiencia --</option>
+                    <option value="bueno">Bueno</option>
+                    <option value="regular">Regular</option>
+                    <option value="malo">Malo</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="commentBox">Comentario:</label>
+                <textarea id="commentBox" name="commentBox" placeholder="Escribe tu comentario aquí..." rows="4" required></textarea>
+            </div>
             <button type="submit">Enviar Comentario</button>
-            <button id="viewComments">Ver Comentarios</button>
+            <button id="viewComments" type="button">Ver Comentarios</button>
         </form>
     </div>
     <script src="create-comment.js"></script>

@@ -32,19 +32,21 @@ $conn->close();
     <div class="form-container">
         <h2>Seleccionar Negocio y Sucursal</h2>
         <form id="businessBranchForm" action="set-business-branch.php" method="POST">
-            <label for="business">Negocio:</label>
-            <select id="business" name="business" required>
-                <option value="">Seleccione un negocio...</option>
-                <?php foreach ($companies as $company) { ?>
-                    <option value="<?php echo $company['id']; ?>"><?php echo htmlspecialchars($company['business_name']); ?></option>
-                <?php } ?>
-            </select>
-
-            <label for="branch">Sucursal:</label>
-            <select id="branch" name="branch">
-                <option value="">Seleccione un negocio primero...</option>
-            </select>
-
+            <div class="form-group">
+                <label for="business">Negocio:</label>
+                <select id="business" name="business" required>
+                    <option value="">Seleccione un negocio...</option>
+                    <?php foreach ($companies as $company) { ?>
+                        <option value="<?php echo $company['id']; ?>"><?php echo htmlspecialchars($company['business_name']); ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="branch">Sucursal:</label>
+                <select id="branch" name="branch">
+                    <option value="">Seleccione un negocio primero...</option>
+                </select>
+            </div>
             <button type="submit">Seleccionar</button>
         </form>
     </div>

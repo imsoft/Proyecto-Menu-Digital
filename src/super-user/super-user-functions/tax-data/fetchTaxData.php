@@ -17,7 +17,7 @@ if ($result->num_rows > 0) {
         echo "<td>" . htmlspecialchars($row['address']) . "</td>";
         echo "<td>" . htmlspecialchars($row['curp']) . "</td>";
         echo "<td>" . htmlspecialchars($row['company_id']) . "</td>";
-        echo '<td><button class="edit-btn" onclick="location.href=\'../update-tax-data/update-tax-data.php?id=' . $row['id'] . '\'">Editar</button><button class="delete-btn" data-id="' . $row['id'] . '">Eliminar</button></td>';
+        echo '<td><button class="edit-btn" onclick="location.href=\'update-tax-data/update-tax-data.php?id=' . $row['id'] . '\'">Editar</button><button class="delete-btn" data-id="' . $row['id'] . '">Eliminar</button></td>';
         echo "</tr>";
     }
 } else {

@@ -15,7 +15,7 @@ if ($result->num_rows > 0) {
         echo "<td>" . htmlspecialchars($row['phone']) . "</td>";
         echo "<td>" . htmlspecialchars($row['birthdate']) . "</td>";
         echo "<td>" . htmlspecialchars($row['gender']) . "</td>";
-        echo '<td><button class="edit-btn" onclick="location.href=\'../update-client.php?id=' . $row['id'] . '\'">Editar</button><button class="delete-btn" data-id="' . $row['id'] . '">Eliminar</button></td>';
+        echo '<td><button class="edit-btn" onclick="location.href=\'update-client.php?id=' . $row['id'] . '\'">Editar</button><button class="delete-btn" data-id="' . $row['id'] . '">Eliminar</button></td>';
         echo "</tr>";
     }
 } else {

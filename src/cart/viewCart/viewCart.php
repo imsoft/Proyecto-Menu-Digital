@@ -45,27 +45,31 @@ $result = $stmt->get_result();
 $total_sum = 0; // Variable para almacenar la suma total de los productos en el carrito
 
 if ($result->num_rows > 0) {
+    echo "<div class='container'>";
     echo "<h1>Tu Carrito de Compras</h1>";
     echo "<table>";
-    echo "<tr><th>Producto</th><th>Precio</th><th>Cantidad</th><th>Total</th></tr>";
+    echo "<tr><th>Producto</th><th>Precio</th><th>Cantidad</th><th>Total</th><th></th></tr>";
     while ($row = $result->fetch_assoc()) {
         $total = $row['price'] * $row['quantity'];
         $total_sum += $total; // Sumar al total general
         echo "<tr>";
-        echo "<td><img src='" . htmlspecialchars($row['product_image']) . "' alt='" . htmlspecialchars($row['product_name']) . "' style='width:50px;'> " . htmlspecialchars($row['product_name']) . "</td>";
+        echo "<td><img src='" . htmlspecialchars($row['product_image']) . "' alt='" . htmlspecialchars($row['product_name']) . "' class='product-image'> " . htmlspecialchars($row['product_name']) . "</td>";
         echo "<td>$" . number_format($row['price'], 2) . "</td>";
         echo "<td>" . $row['quantity'] . "</td>";
         echo "<td>$" . number_format($total, 2) . "</td>";
-        echo "<td><button onclick='removeFromCart(" . $row['cart_item_id'] . ")'>Eliminar</button></td>";
+        echo "<td><button class='remove-btn' onclick='removeFromCart(" . $row['cart_item_id'] . ")'>Eliminar</button></td>";
         echo "</tr>";
     }
     echo "<tr>";
-    echo "<td colspan='3' style='text-align:right;'><strong>Total:</strong></td>";
+    echo "<td colspan='3' class='total-label'><strong>Total:</strong></td>";
     echo "<td>$" . number_format($total_sum, 2) . "</td>";
+    echo "<td></td>";
     echo "</tr>";
     echo "</table>";
+    echo "<button id='finishOrderButton' class='finish-order-btn'>Terminar Pedido</button>";
+    echo "</div>";
 } else {
-    echo "Tu carrito está vacío.";
+    echo "<div class='container'>Tu carrito está vacío.</div>";
 }
 
 $stmt->close();
@@ -86,7 +90,6 @@ $conn->close();
 
 <body>
     <?php include '../../client/client-menubar/client-menubar.php'; ?>
-    <button id='finishOrderButton'>Terminar Pedido</button>
 
     <script>
         document.getElementById('finishOrderButton').addEventListener('click', function() {

@@ -14,7 +14,7 @@ $companyId = $_SESSION['company_id'];
     <link rel="stylesheet" href="company-graph.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="company-graph.js" defer></script>
-    <link rel="shortcut icon" href="../../public/images/favicon/logo.png" />
+    <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="../company-menubar/company-menubar.css">
     <script src="../company-menubar/company-menubar.js"></script>
 </head>

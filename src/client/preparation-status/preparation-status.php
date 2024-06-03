@@ -11,7 +11,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estatus de preparación</title>
     <link rel="stylesheet" href="preparation-status.css">
-    <link rel="shortcut icon" href="../../public/images/favicon/logo.png" />
+    <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="../client-menubar/client-menubar.css">
     <script src="../client-menubar/client-menubar.js"></script>
 </head>
