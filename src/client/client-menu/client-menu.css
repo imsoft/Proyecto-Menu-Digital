@@ -16,7 +16,7 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 1200px;
-  margin: 20px auto;
+  margin: 100px auto;
 }
 
 h1 {
@@ -63,6 +63,9 @@ h1 {
   background-color: #fff;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .menu-item:hover {
@@ -71,7 +74,8 @@ h1 {
 
 .menu-item img {
   width: 100%;
-  height: auto;
+  height: 400px; /* Establece una altura fija */
+  object-fit: cover; /* Mantiene la proporción de la imagen y la recorta si es necesario */
   border-radius: 5px;
   margin-bottom: 10px;
 }
@@ -84,6 +88,11 @@ h1 {
 .menu-item p {
   margin: 0 0 10px;
   color: #666;
+}
+
+.frequent-purchase {
+  color: #e5450f;
+  font-weight: bold;
 }
 
 .add-to-cart-btn {
@@ -99,4 +108,8 @@ h1 {
 
 .add-to-cart-btn:hover {
   background-color: #cc2b00;
+}
+
+.menu-item-content {
+  flex-grow: 1;
 }

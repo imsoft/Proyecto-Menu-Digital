@@ -23,7 +23,6 @@ if (!$employeeId || !$companyId) {
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="employee-options.css">
     <link rel="stylesheet" href="../employee-menubar/employee-menubar.css">
-    <script src="../employee-menubar/employee-menubar.js"></script>
 </head>
 
 <body>
@@ -34,6 +33,7 @@ if (!$employeeId || !$companyId) {
             <button id="viewStatus">Ver Estatus</button>
         </div>
     </div>
+    <script src="../employee-menubar/employee-menubar.js"></script>
     <script src="employee-options.js"></script>
 </body>
 

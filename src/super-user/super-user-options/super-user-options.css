@@ -102,7 +102,7 @@ body {
 .full-screen-image {
   width: 100%;
   height: calc(
-    100vh - 47px
+    100vh - 0px
   ); /* Altura restante de la pantalla debajo del menú */
   display: flex;
   justify-content: center;

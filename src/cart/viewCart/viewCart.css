@@ -79,3 +79,57 @@ th {
   text-align: right;
   font-weight: bold;
 }
+
+/* Estilos para el modal */
+.modal {
+  display: none; /* Oculto por defecto */
+  position: fixed; /* Fijado en la pantalla */
+  z-index: 1000; /* Encima de otros elementos */
+  left: 0;
+  top: 0;
+  width: 100%; /* Ancho completo */
+  height: 100%; /* Altura completa */
+  overflow: auto; /* Habilita el scroll si es necesario */
+  background-color: rgb(0, 0, 0); /* Color de fondo */
+  background-color: rgba(0, 0, 0, 0.4); /* Color de fondo con opacidad */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% desde la parte superior y centrado */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Ancho del modal */
+  max-width: 600px; /* Ancho máximo del modal */
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.confirm-order-btn,
+.cancel-order-btn {
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #e5450f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.confirm-order-btn:hover,
+.cancel-order-btn:hover {
+  background-color: #cc2b00;
+}

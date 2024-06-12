@@ -1,32 +1,17 @@
 <?php
-// Obtén el protocolo (http o https)
-$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
+header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
+header("Pragma: no-cache"); // HTTP 1.0.
+header("Expires: 0"); // Proxies.
 
-// Obtén el nombre del host (dominio)
-$host = $_SERVER['HTTP_HOST'];
+session_start(); // Asegúrate de que la sesión esté iniciada
 
-// Obtén la ruta completa del script actual
-$path = $_SERVER['REQUEST_URI'];
-
-// Concatena todo para obtener la URL completa
-$currentUrl = $protocol . "://" . $host . $path;
-
-session_start();
-
-if ($currentUrl === "https://menudigital.sbs/src/company/company-ingredients/read-company-ingredients/read-company-ingredients.php") {
-    require '../../../db/connection.php';
-} else {
-    require '../../db/connection.php';
+if (!isset($_SESSION['company_id'])) {
+    // Redirigir al usuario para iniciar sesión si no hay un company_id en la sesión
+    header("Location: ../../company/company-login/company-login.html");
+    exit;
 }
 
 $companyId = $_SESSION['company_id'];
-
-$sql = "SELECT id, name, price FROM ingredients WHERE company_id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $companyId);
-$stmt->execute();
-$result = $stmt->get_result();
-
 ?>
 
 <!DOCTYPE html>
@@ -43,9 +28,9 @@ $result = $stmt->get_result();
 
 <body>
     <?php include '../../company-menubar/company-menubar.php'; ?>
-    <div class="container">
+    <div class="table-container">
         <h2>Ingredientes</h2>
-        <table>
+        <table id="ingredientsTable">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -54,24 +39,11 @@ $result = $stmt->get_result();
                 </tr>
             </thead>
             <tbody>
-                <?php while ($row = $result->fetch_assoc()) { ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($row['name']); ?></td>
-                        <td><?php echo htmlspecialchars($row['price']); ?></td>
-                        <td>
-                            <a href="../update-company-ingredients/update-company-ingredients.php?id=<?php echo $row['id']; ?>" class="button edit-btn">Editar</a>
-                            <a href="delete-company-ingredients.php?id=<?php echo $row['id']; ?>" class="button delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar este ingrediente?');">Eliminar</a>
-                        </td>
-                    </tr>
-                <?php } ?>
+                <!-- Los datos se mostrarán aquí -->
+                <?php include 'fetch-company-ingredients.php'; ?>
             </tbody>
         </table>
     </div>
 </body>
 
 </html>
-
-<?php
-$stmt->close();
-$conn->close();
-?>

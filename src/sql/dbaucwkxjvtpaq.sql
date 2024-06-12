@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 28-05-2024 a las 02:22:25
+-- Tiempo de generación: 12-06-2024 a las 00:08:25
 -- Versión del servidor: 8.0.34-26
 -- Versión de PHP: 7.4.33
 
@@ -92,16 +92,11 @@ CREATE TABLE `cart_items` (
 
 INSERT INTO `cart_items` (`id`, `cart_id`, `menu_item_id`, `quantity`, `folio`) VALUES
 (2, 1, 3, 1, 4),
-(6, 2, 9, 2, 931573),
-(7, 2, 10, 3, 726869),
-(8, 2, 15, 1, 447719),
-(9, 2, 35, 1, 367889),
-(10, 2, 36, 1, 540261),
 (11, 3, 3, 4, 464633),
 (12, 3, 9, 1, 667767),
-(14, 2, 3, 5, 408212),
 (19, 3, 46, 1, 156960),
-(20, 3, 66, 1, 422212);
+(20, 3, 66, 1, 422212),
+(22, 2, 3, 1, 177804);
 
 -- --------------------------------------------------------
 
@@ -120,17 +115,11 @@ CREATE TABLE `cart_item_ingredients` (
 --
 
 INSERT INTO `cart_item_ingredients` (`id`, `cart_item_id`, `ingredient`) VALUES
-(1, 8, 'Lechuga'),
 (2, 2, 'Papa'),
-(3, 6, 'Pan'),
-(4, 7, 'Pollo'),
-(5, 9, 'Extra Cheese'),
-(6, 9, 'Avocado'),
-(7, 10, 'Avocado'),
 (8, 11, 'Tomato'),
 (9, 12, 'Avocado'),
-(10, 14, 'Tomato'),
-(11, 19, 'Lunetas');
+(11, 19, 'Lunetas'),
+(12, 22, 'Tomato');
 
 -- --------------------------------------------------------
 
@@ -158,7 +147,7 @@ CREATE TABLE `clients` (
 INSERT INTO `clients` (`id`, `firstName`, `lastName`, `surname`, `email`, `phone`, `birthdate`, `gender`, `password`, `table_number`) VALUES
 (6, 'Brandon Uriel', 'García', 'Ramos', 'a@a.com', '3325365558', '2024-04-09', 'femenino', '$2y$10$OSPeKfCBeEDNdJ/0XBbXue/enwSjK/p6UtIIb0i.F0Wwe3aFwOyM.', 98),
 (8, 'Brandon Uriel', 'García', 'Ramos', 'b@b.com', '3325365558', '2024-04-12', 'masculino', '$2y$10$lvOVKEZhpPDkg9BhLuszEuoqj0NQgzV/.DWWNo1TeQz5tRc7rKmVq', 36),
-(9, 'cliente', 'cliente', 'cliente', 'cliente@cliente.com', '3311670593', '2024-04-11', 'femenino', '$2y$10$De7KfGq0A/hJuAqW/PTOg.FUPbEeGDJQ/sE33IuieqtpVm.2yihj.', 82),
+(9, 'cliente', 'cliente', 'cliente', 'cliente@cliente.com', '3311670593', '2024-04-11', 'femenino', '$2y$10$De7KfGq0A/hJuAqW/PTOg.FUPbEeGDJQ/sE33IuieqtpVm.2yihj.', 50),
 (10, 'vanessa ', 'flores', 'cervantes', 'vanessa@cliente.com', '3311670593', '1994-02-01', 'femenino', '$2y$10$KBwzVdu.hwEK3/Zl3XLnsOMoq3JfKrlejrMhcSGuVCmwiN79o8h6i', 88),
 (11, 'Luis', 'beltran', 'macias', 'luisbeltran@cliente.com', '3311458795', '1997-02-18', 'femenino', '$2y$10$RQeW19M/ZxcER7TtnenHHemqtzu7Bh1P7C06o7WZiFPFjkG6UKb..', 28),
 (12, 'Jose', 'Romero', 'Roman', 'Jose@cliente.com', '3311647852', '1965-12-12', 'masculino', '$2y$10$3l0HFKvj50qfUOJxlRMKp.elgwHDZnjwYpM8FzXKwxWDlnmP4TuqK', 31);
@@ -223,7 +212,6 @@ INSERT INTO `companies` (`id`, `logo_path`, `associated_name`, `business_name`, 
 (9, '../../../public/images/uploaded_images/4ad7737fc5d40dab0d983eabcb0c6c0a.jpg', 'negocio', 'negocio', 'negocio', 'negocio@negocio.com', '3311670593', 'restaurante', 0, 0, '$2y$10$LmmjkuyWr5o1mt.h7fO04OOjIp6YyPUHJbEOvnTIU3p0Nom4yTMCO', 'negocio'),
 (10, '../../../public/images/uploaded_images/707bdfe1b9098b849b17b4758ede5ad0.webp', 'vanessa flores', 'Snackes', 'Santa Maria 250', 'vanessa_flores@hotmail.com', '3311674892', 'cafe', 1, 1, '$2y$10$PgGqgYORe80AFaVAxYgdmeszATyoyrhsEs1y2fnXcg5gJZ.neBgtK', 'negocio'),
 (12, '../../../public/images/uploaded_images/e5a312fc84f4f180466b0e5e6e27c7fc.webp', 'vanessa flores', 'Snackes', 'Santa Maria 250', 'vanessa_flores1@hotmail.com', '3311674892', 'cafe', 1, 1, '$2y$10$t/umdalqzT7xYOgvEMGPE.EXw1tdPkPpZPSfMIQhiOstB6zqdnvRq', 'negocio'),
-(16, '../../../public/images/uploaded_images/90ce87091ae7b4dd1c3e111e9118c9d9.png', 'Elizabeth Juarez', 'Deli Eli', 'sta rosalia 314', 'Elizabether@jabil.com', '3311670593', 'panaderia', 0, 1, '$2y$10$D2225YRYC3g07.m3FkGF5egfmb.VatgDOnFMUlISCAqy4O0JP5tGS', 'negocio'),
 (17, '../../../public/images/uploaded_images/690c73b7d7c6b160d464f562cecc9480.jfif', 'Vanessa Flores', 'Pasteleria Vane', 'sta rosalia 314', 'vanessa@negocio.com', '3311670593', 'panaderia', 0, 1, '$2y$10$FN9Hcy1Zy78Hb1Z8Rk7MjuqK82k1gdf/deTWa4LiPJo4UKTAD2JSy', 'negocio'),
 (19, '../../../public/images/uploaded_images/c7c800384232b2135d9c52b8dd0faef5.png', 'Vanessa', 'Pastelería Sueño', 'Rio Nilo #123', 'vanessa@pasteleria.com', '3325365558', 'panaderia', 0, 0, '$2y$10$wzj.Artsxg74UmDABk9EnufKsYKcHdv.lQKQQBBwTv3fYcdXqcmAy', 'negocio'),
 (21, '../../../public/images/uploaded_images/f27a1c2241e15b5ec7fb280b536d57d1.png', 'Vanessa', 'Pasteleria OK', 'santa rosalia', 'pasteleriaok@pasteleriaok.com', '3311670594', 'panaderia', 0, 1, '$2y$10$pHrlmFuAazZ1GF0uL6yi/OtVa.heg4ulufgQNWaxyveSbE1Au4SNa', 'negocio');
@@ -285,14 +273,14 @@ INSERT INTO `ingredients` (`id`, `name`, `price`, `company_id`) VALUES
 (2, 'Doble Carne', '20.00', 9),
 (3, 'Aguacate', '10.00', 9),
 (4, 'Tomato', '5.00', 9),
-(5, 'Lechuga', '5.00', 9),
 (6, 'Huevo', '10.00', 9),
 (7, 'galleta', '5.00', 20),
 (8, 'queso crema', '10.00', 20),
 (9, 'Vainilla', '3.00', 20),
 (10, 'Chocolate Liquido', '10.00', 21),
 (11, 'Lunetas', '10.00', 21),
-(12, 'Coco rayado', '10.00', 21);
+(12, 'Coco rayado', '10.00', 21),
+(14, 'jitomate', '10.00', 9);
 
 -- --------------------------------------------------------
 
@@ -393,7 +381,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `cart_id`, `client_id`, `company_id`, `branch_id`, `state`, `created_at`) VALUES
-(2, 2, 6, 2, 5, 'entregada', '2024-05-08 02:54:41'),
+(2, 2, 6, 2, 5, 'esperando', '2024-05-08 02:54:41'),
 (3, 2, 8, 9, 3, 'entregada', '2024-05-14 04:37:28'),
 (4, 2, 9, 2, 5, 'esperando', '2024-05-14 04:42:24'),
 (5, 2, 9, 9, 8, 'entregada', '2024-05-20 19:45:44'),
@@ -403,7 +391,10 @@ INSERT INTO `orders` (`id`, `cart_id`, `client_id`, `company_id`, `branch_id`, `
 (9, 2, 9, 9, 8, 'entregada', '2024-05-23 04:15:23'),
 (10, 2, 9, 9, 8, 'entregada', '2024-05-23 04:16:27'),
 (11, 3, 10, 21, 14, 'lista', '2024-05-27 23:25:20'),
-(12, 2, 9, 9, 8, 'entregada', '2024-05-28 01:07:21');
+(12, 2, 9, 9, 8, 'entregada', '2024-05-28 01:07:21'),
+(13, 2, 9, 9, 8, 'entregada', '2024-05-28 03:11:07'),
+(14, 2, 9, 9, 8, 'entregada', '2024-06-03 17:46:07'),
+(15, 2, 9, 9, 8, 'preparando', '2024-06-08 17:50:01');
 
 -- --------------------------------------------------------
 
@@ -423,7 +414,7 @@ CREATE TABLE `superusers` (
 --
 
 INSERT INTO `superusers` (`id`, `username`, `email`, `password`) VALUES
-(1, 'superusuario', 'superusuario@superusuario.com', '$2y$10$0L91Hc9./TQXpayNmPgE3uYQkJmvqLKmmvpJMvK0n/dwCoj3FRmza'),
+(1, 'superusuario', 'superusuario@superusuario.com', '$2y$10$ngy.pxQsVYTmKfs0WhS2J.9ObdCQIt0Ce9O.YzN9l6eGBmLN31o9W'),
 (2, 'vanessaflores@superusuario.com', 'vanessaflores@superusuario.com', '$2y$10$gnZaWBjHm6nQVBlBAIiAq.FvE4.LEuoeUf4BxSl.1dyTPXSvLTKGW');
 
 -- --------------------------------------------------------
@@ -450,9 +441,7 @@ CREATE TABLE `tax_data` (
 --
 
 INSERT INTO `tax_data` (`id`, `firstName`, `lastName`, `surname`, `rfc`, `socialName`, `tradeName`, `address`, `curp`, `company_id`) VALUES
-(2, 'b', 'b', 'b', 'GARB9703155ZA', 'a', 'a', 'a', 'GARB970315HJCRMR01', NULL),
-(4, 'Vanessa Esmeralda', 'flores', 'cervantes', 'GARC840512HDF', 'Restaurante Emilio, S.A. de C.V.', 'Comida Mexicana', 'sta rosalia 314', 'GARC840512HMNLRL09', 9),
-(5, 'vanessa', 'flores', 'Cervantes', 'GARC840512HDF', 'Pasteleria Ok, S.A. de C.V.', 'Pasteleria', 'sta rosalia 314', 'FOCV940920MJCLRN34', 21);
+(6, 'vanessa', 'flores', 'Cervantes', 'GARC840512HDF', 'Restaurante Vanessa, S.A. de C.V.', 'Hamburguesas Vanessa', 'sta rosalia 314', 'FOCV940920MJCLRN09', 9);
 
 --
 -- Índices para tablas volcadas
@@ -564,7 +553,7 @@ ALTER TABLE `tax_data`
 -- AUTO_INCREMENT de la tabla `branches`
 --
 ALTER TABLE `branches`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `carts`
@@ -576,13 +565,13 @@ ALTER TABLE `carts`
 -- AUTO_INCREMENT de la tabla `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `cart_item_ingredients`
 --
 ALTER TABLE `cart_item_ingredients`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `clients`
@@ -612,7 +601,7 @@ ALTER TABLE `employees`
 -- AUTO_INCREMENT de la tabla `ingredients`
 --
 ALTER TABLE `ingredients`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `menu_items`
@@ -624,7 +613,7 @@ ALTER TABLE `menu_items`
 -- AUTO_INCREMENT de la tabla `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `superusers`
@@ -636,7 +625,7 @@ ALTER TABLE `superusers`
 -- AUTO_INCREMENT de la tabla `tax_data`
 --
 ALTER TABLE `tax_data`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas

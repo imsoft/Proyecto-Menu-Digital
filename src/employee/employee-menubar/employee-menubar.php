@@ -14,7 +14,6 @@ $currentUrl = $protocol . "://" . $host . $path;
 session_start();
 require '../../db/connection.php';
 
-
 // Asegúrate de que el ID del cliente está disponible en la sesión
 if (!isset($_SESSION['user_id'])) {
     die("ID del cliente no proporcionado.");
@@ -23,7 +22,11 @@ if (!isset($_SESSION['user_id'])) {
 $clientId = $_SESSION['user_id'];
 
 // Consulta para obtener el nombre del cliente
-$sql = "SELECT firstName FROM employees WHERE id = ?";
+$sql = "SELECT e.firstName, c.business_name, b.branch_name 
+        FROM employees e
+        LEFT JOIN companies c ON e.company_id = c.id
+        LEFT JOIN branches b ON e.branch_id = b.id
+        WHERE e.id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $clientId);
 $stmt->execute();
@@ -32,8 +35,12 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) {
     $client = $result->fetch_assoc();
     $clientName = $client['firstName'];
+    $businessName = $client['business_name'];
+    $branchName = $client['branch_name'];
 } else {
     $clientName = "Cliente no encontrado";
+    $businessName = "";
+    $branchName = "";
 }
 
 $stmt->close();
@@ -44,13 +51,13 @@ $base_url = '/src';
 ?>
 
 <nav class="navbar">
-    <a href="/src/client/client-options/client-options.php" class="logo">Menu Digital</a>
+    <a href="/src/employee/employee-options/employee-options.php" class="logo">Menu Digital</a>
     <div class="menu-container">
         <ul class="menu">
             <li>
                 <a href="#about">Estatus</a>
                 <ul class="submenu">
-                    <li><a href="<?php echo $base_url; ?>/branch/food-preparation/food-preparation.php">Ver Estatus de pedios</a></li>
+                    <li><a href="<?php echo $base_url; ?>/branch/food-preparation/food-preparation.php">Ver Estatus de pedidos</a></li>
                 </ul>
             </li>
             <li>
@@ -60,6 +67,12 @@ $base_url = '/src';
     </div>
     <div class="client-name">
         <?php echo htmlspecialchars($clientName); ?>
+        <?php if (!empty($businessName)) { ?>
+            - <?php echo htmlspecialchars($businessName); ?>
+        <?php } ?>
+        <?php if (!empty($branchName)) { ?>
+            - <?php echo htmlspecialchars($branchName); ?>
+        <?php } ?>
     </div>
     <div class="menu-toggle">
         <div></div>

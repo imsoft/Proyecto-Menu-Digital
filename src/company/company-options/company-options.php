@@ -36,7 +36,6 @@ $conn->close();
     <title>Configuración</title>
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="company-options.css">
-    <script src="../company-menubar/company-menubar.js"></script>
 </head>
 
 <body>
@@ -45,6 +44,7 @@ $conn->close();
     <div class="full-screen-image">
         <img src="../../../public/images/splash/splash.png" alt="Main Image" />
     </div>
+    <script src="../company-menubar/company-menubar.js"></script>
 </body>
 
 </html>

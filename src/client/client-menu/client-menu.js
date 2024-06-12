@@ -18,5 +18,5 @@ function filterMenu(type) {
   xhttp.send();
 }
 
-// Inicializar el menú con todos los ítems
-filterMenu(); // Sin argumentos muestra todos los ítems
+// Inicializar el menú con 'comida'
+filterMenu("comida");

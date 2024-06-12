@@ -91,24 +91,82 @@ $conn->close();
 <body>
     <?php include '../../client/client-menubar/client-menubar.php'; ?>
 
+    <!-- Modal de confirmación de pedido -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Confirmar Pedido</h2>
+            <p>Revisa los detalles de tu pedido y confirma para finalizar.</p>
+            <div id="orderDetails"></div>
+            <button id="confirmOrderButton" class="confirm-order-btn">Confirmar Pedido</button>
+            <button id="cancelOrderButton" class="cancel-order-btn">Cancelar</button>
+        </div>
+    </div>
+
     <script>
         document.getElementById('finishOrderButton').addEventListener('click', function() {
             const companyId = <?php echo $company_id; ?>;
             const branchId = <?php echo $branch_id ?? 'null'; ?>;
             const cartId = <?php echo $cart_id; ?>;
 
+            // Mostrar el modal con los detalles del pedido
+            const modal = document.getElementById('orderModal');
+            const orderDetails = document.getElementById('orderDetails');
+            modal.style.display = 'block';
+
+            // Obtener los detalles del carrito y mostrarlos en el modal
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function() {
-                if (this.responseText.trim() === 'success') {
-                    alert('Pedido realizado con éxito');
-                    window.location.href = '../../client/preparation-status/preparation-status.php'; // Redireccionar a una página de confirmación
-                } else {
-                    alert('Error al realizar el pedido: ' + this.responseText);
-                }
+                orderDetails.innerHTML = this.responseText;
             };
-            xhttp.open("POST", "../processOrder/processOrder.php");
+            xhttp.open("POST", "fetchOrderDetails.php");
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send(`cartId=${cartId}&companyId=${companyId}&branchId=${branchId}`);
+            xhttp.send(`cartId=${cartId}`);
+
+            // Confirmar el pedido
+            document.getElementById('confirmOrderButton').addEventListener('click', function() {
+                const companyId = <?php echo $company_id; ?>;
+                const branchId = <?php echo $branch_id ?? 'null'; ?>;
+                const cartId = <?php echo $cart_id; ?>;
+
+                const xhttp = new XMLHttpRequest();
+                xhttp.onload = function() {
+                    if (this.responseText.trim() === 'success') {
+                        alert('Pedido realizado con éxito');
+
+                        // Generar el ticket
+                        const ticketRequest = new XMLHttpRequest();
+                        ticketRequest.onload = function() {
+                            const ticketPath = this.responseText.trim();
+
+                            // Enviar el ticket por correo
+                            const emailRequest = new XMLHttpRequest();
+                            emailRequest.onload = function() {
+                                alert('El ticket de compra ha sido enviado a tu correo.');
+                                window.location.href = '../../client/preparation-status/preparation-status.php'; // Redireccionar a una página de confirmación
+                            };
+                            emailRequest.open("POST", "sendEmail.php");
+                            emailRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            emailRequest.send(`cartId=${cartId}`);
+                        };
+                        ticketRequest.open("POST", "generateTicket.php");
+                        ticketRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                        ticketRequest.send(`cartId=${cartId}`);
+                    } else {
+                        alert('Error al realizar el pedido: ' + this.responseText);
+                    }
+                };
+                xhttp.open("POST", "../processOrder/processOrder.php");
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send(`cartId=${cartId}&companyId=${companyId}&branchId=${branchId}`);
+            });
+
+
+
+            // Cancelar el pedido
+            document.getElementById('cancelOrderButton').addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
         });
 
         function removeFromCart(cartItemId) {
@@ -124,6 +182,14 @@ $conn->close();
             xhttp.open("POST", "../removeFromCart/removeFromCart.php");
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("cartItemId=" + cartItemId);
+        }
+
+        // Cerrar el modal cuando se hace clic fuera del contenido del modal
+        window.onclick = function(event) {
+            const modal = document.getElementById('orderModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
         }
     </script>
 </body>

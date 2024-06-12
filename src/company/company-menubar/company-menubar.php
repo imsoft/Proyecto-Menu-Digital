@@ -13,9 +13,11 @@ $currentUrl = $protocol . "://" . $host . $path;
 
 session_start();
 
-if ($currentUrl === "https://menudigital.sbs/src/company/company-comments/read-company-comments/read-company-comments.php" || 
+if (
+    $currentUrl === "https://menudigital.sbs/src/company/company-comments/read-company-comments/read-company-comments.php" ||
     $currentUrl === "https://menudigital.sbs/src/company/company-ingredients/create-company-ingredients/create-company-ingredients.php" ||
-    $currentUrl === "https://menudigital.sbs/src/company/company-ingredients/read-company-ingredients/read-company-ingredients.php") {
+    $currentUrl === "https://menudigital.sbs/src/company/company-ingredients/read-company-ingredients/read-company-ingredients.php"
+) {
     require '../../../db/connection.php';
 } else {
     require '../../db/connection.php';
@@ -50,7 +52,7 @@ $base_url = '/src';
 ?>
 
 <nav class="navbar">
-    <a href="../company-options/company-options.php" class="logo">Menu Digital</a>
+    <a href="/src/company/company-options/company-options.php" class="logo">Menu Digital</a>
     <div class="menu-container">
         <ul class="menu">
             <li>
@@ -111,4 +113,5 @@ $base_url = '/src';
         <div></div>
         <div></div>
     </div>
+    <script src="company-menubar.js"></script>
 </nav>

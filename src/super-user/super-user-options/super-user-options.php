@@ -37,7 +37,6 @@ $conn->close();
     <link rel="stylesheet" href="super-user-options.css">
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="../super-user-menubar/super-user-menubar.css">
-    <script src="../super-user-menubar/super-user-menubar.js"></script>
 </head>
 
 <body>
@@ -45,6 +44,7 @@ $conn->close();
     <div class="full-screen-image">
         <img src="../../../public/images/splash/splash.png" alt="Main Image" />
     </div>
+    <script src="../super-user-menubar/super-user-menubar.js"></script>
 </body>
 
 </html>

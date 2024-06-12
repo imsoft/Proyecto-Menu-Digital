@@ -18,7 +18,6 @@ $clientId = $_SESSION['user_id']; // Obtener el user_id de la sesión
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="client-options.css">
     <link rel="stylesheet" href="../client-menubar/client-menubar.css">
-    <script src="../client-menubar/client-menubar.js"></script>
 </head>
 
 <body>
@@ -27,6 +26,8 @@ $clientId = $_SESSION['user_id']; // Obtener el user_id de la sesión
     <div class="full-screen-image">
         <img src="../../../public/images/splash/splash.png" alt="Main Image" />
     </div>
+
+    <script src="../client-menubar/client-menubar.js"></script>
 </body>
 
 </html>

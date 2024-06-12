@@ -1,6 +1,6 @@
 .container {
     width: 50%; /* Reducir el ancho del contenedor */
-    margin: auto;
+    margin: 100px auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;

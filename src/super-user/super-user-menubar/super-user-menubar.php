@@ -24,6 +24,7 @@ if (
     require '../../../db/connection.php';
 } else if (
     $currentUrl === "https://menudigital.sbs/src/super-user/create-super-user/create-super-user.php" ||
+    $currentUrl === "https://menudigital.sbs/src/super-user/super-user-options/super-user-options.php" ||
     $currentUrl === "https://menudigital.sbs/src/super-user/read-super-user/read-super-user.php"
 
 ) {
@@ -105,6 +106,9 @@ $base_url = '/src';
                 <li><a href="/src/super-user/create-super-user/create-super-user.php">Agregar super usuario</a></li>
                 <li><a href="/src/super-user/read-super-user/read-super-user.php">Ver super usuarios</a></li>
             </ul>
+        </li>
+        <li>
+            <a href="<?php echo $base_url; ?>/logout/logout.php">Cerrar Sesión</a>
         </li>
     </ul>
     <div class="business-name">
