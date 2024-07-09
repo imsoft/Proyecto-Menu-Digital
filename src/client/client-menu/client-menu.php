@@ -25,6 +25,8 @@ session_start(); // Asegúrate de que la sesión esté iniciada
             <button onclick="filterMenu('bebida')">Bebida</button>
             <button onclick="filterMenu('extras')">Extras</button>
             <button onclick="filterMenu('postre')">Postre</button>
+            <button onclick="filterMenu('precio')">Precio</button>
+            <button onclick="filterMenu('valorado')">Más Valorado</button>
         </div>
         <div id="menuItems" class="menu-items">
             <?php include 'fetchClientMenu.php'; ?>

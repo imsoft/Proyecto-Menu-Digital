@@ -3,20 +3,24 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function addToCart(menuItemId) {
-  // Redirigir a la página de selección de ingredientes
-  window.location.href =
-    "../../cart/selectIngredients/selectIngredients.php?menuItemId=" +
-    menuItemId;
+  window.location.href = "../../cart/selectIngredients/selectIngredients.php?menuItemId=" + menuItemId;
 }
 
 function filterMenu(type) {
+  let url = "fetchClientMenu.php?type=" + type;
+
+  if (type === 'precio') {
+      url = "fetchClientMenu.php?orderBy=price";
+  } else if (type === 'valorado') {
+      url = "fetchClientMenu.php?orderBy=rating";
+  }
+
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function () {
-    document.getElementById("menuItems").innerHTML = this.responseText;
+      document.getElementById("menuItems").innerHTML = this.responseText;
   };
-  xhttp.open("GET", "fetchClientMenu.php?type=" + type);
+  xhttp.open("GET", url);
   xhttp.send();
 }
 
-// Inicializar el menú con 'comida'
 filterMenu("comida");

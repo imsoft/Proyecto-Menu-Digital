@@ -25,7 +25,7 @@ session_start();
 
     <script>
         function fetchOrderStatus() {
-            fetch('../../branch/food-preparation/getOrdetStatus.php')
+            fetch('../../branch/food-preparation/getOrderStatusForEmployee.php')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -76,6 +76,9 @@ session_start();
                                     <p><strong>Folio:</strong> ${order.folio}</p>
                                     <p><strong>Estado:</strong> ${friendly_status}</p>
                                     <div class='progress-bar'><div class='progress' style='width: ${progress}%;'><div class='progress-dot'></div></div></div>
+                                    <button onclick="viewTicket(${order.folio})">Ver Ticket</button>
+                                    <button onclick="sendTicketByEmail(${order.folio})">Enviar Ticket por Correo</button>
+                                    <button onclick="reuseOrder(${order.folio})">Reutilizar Pedido</button>
                                 </div>`;
                         });
                     } else {
@@ -83,6 +86,40 @@ session_start();
                     }
                 })
                 .catch(error => console.error('Error fetching order status:', error));
+        }
+
+        function viewTicket(folio) {
+            window.open(`viewTicket.php?folio=${folio}`, '_blank');
+        }
+
+        function sendTicketByEmail(folio) {
+            fetch(`sendTicketByEmail.php?folio=${folio}`, {
+                    method: 'POST'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Ticket enviado con éxito');
+                    } else {
+                        alert('Error al enviar el ticket');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function reuseOrder(folio) {
+            fetch(`reuseOrder.php?folio=${folio}`, {
+                    method: 'POST'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Pedido reutilizado con éxito');
+                    } else {
+                        alert('Error al reutilizar el pedido');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
         }
 
         // Fetch order status every 10 seconds

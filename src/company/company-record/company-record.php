@@ -60,10 +60,8 @@ function getColorByState($state)
         <form id="filterForm">
             <label for="startDate">Desde:</label>
             <input type="date" id="startDate" name="startDate">
-
             <label for="endDate">Hasta:</label>
             <input type="date" id="endDate" name="endDate">
-
             <label for="dish">Platillo:</label>
             <select id="dish" name="dish">
                 <option value="">-- Selecciona Platillo --</option>
@@ -71,7 +69,6 @@ function getColorByState($state)
                     <option value="<?php echo htmlspecialchars($dish); ?>"><?php echo htmlspecialchars($dish); ?></option>
                 <?php endforeach; ?>
             </select>
-
             <button type="button" onclick="filterOrders()">Filtrar</button>
         </form>
 
@@ -88,6 +85,13 @@ function getColorByState($state)
 
             <div id="statisticsResult">
                 <!-- Las estadísticas se cargarán aquí -->
+            </div>
+
+            <div id="totalSales">
+                <h2>Total de Ventas</h2>
+                <p id="totalDay">Total del Día: $0.00</p>
+                <p id="totalMonth">Total del Mes: $0.00</p>
+                <p id="totalYear">Total del Año: $0.00</p>
             </div>
         </div>
     </div>

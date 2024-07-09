@@ -63,3 +63,35 @@ h1 {
   top: 0px; /* Adjusted position for better alignment */
   right: -10px; /* Adjusted position for better alignment */
 }
+
+.orderDetails button {
+  padding: 10px;
+  background-color: #e5450f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.orderDetails button:hover {
+  background-color: #cc2b00;
+}
+
+.orderDetails button {
+  padding: 10px;
+  background-color: #e5450f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.orderDetails button:hover {
+  background-color: #cc2b00;
+}

@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Obtén el protocolo (http o https)
 $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
 
@@ -11,14 +13,11 @@ $path = $_SERVER['REQUEST_URI'];
 // Concatena todo para obtener la URL completa
 $currentUrl = $protocol . "://" . $host . $path;
 
-session_start();
-
 if ($currentUrl === "https://menudigital.sbs/src/table/table.php") {
     require '../db/connection.php';
 } else {
     require '../../db/connection.php';
 }
-
 
 // Asegúrate de que el ID del cliente está disponible en la sesión
 if (!isset($_SESSION['user_id'])) {
@@ -68,6 +67,12 @@ $base_url = '/src';
                 <a href="#services">Estatus de preparación</a>
                 <ul class="submenu">
                     <li><a href="<?php echo $base_url; ?>/client/preparation-status/preparation-status.php">Ver estatus de preparación</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#services">Ticket de compra</a>
+                <ul class="submenu">
+                    <li><a href="<?php echo $base_url; ?>/client/ticket/ticket.php">Revisar Ticket del Día</a></li>
                 </ul>
             </li>
             <li>

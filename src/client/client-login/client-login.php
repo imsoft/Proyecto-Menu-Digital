@@ -3,12 +3,17 @@ session_start();
 require '../../db/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Asegúrate de que el correo electrónico y la contraseña estén presentes
-    if (empty($_POST['email']) || empty($_POST['password'])) {
-        die('Email y contraseña son requeridos.');
+    if (empty($_POST['email']) || empty($_POST['password']) || empty($_POST['captcha'])) {
+        die('Todos los campos son requeridos.');
     }
+
     $email = $_POST['email'];
     $password = $_POST['password']; // La contraseña debe ser verificada contra un hash
+    $captcha = $_POST['captcha'];
+
+    if ($captcha != $_SESSION['captcha']) {
+        die('Captcha incorrecto.');
+    }
 
     $sql = "SELECT id, firstName, lastName, password FROM clients WHERE email = ?";
     $stmt = $conn->prepare($sql);
@@ -21,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = $stmt->get_result();
 
     if ($user = $result->fetch_assoc()) {
-        // Verificar que la contraseña hasheada coincida con la ingresada por el usuario
         if (password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_name'] = $user['firstName'];
@@ -44,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             // Redireccionar al usuario a la página donde se muestra el número de mesa
             header("Location: ../client-options/client-options.php");
-            exit; // Asegúrate de llamar a exit después de header()
+            exit;
         } else {
             echo "Credenciales inválidas.";
         }

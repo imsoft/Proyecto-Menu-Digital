@@ -89,3 +89,14 @@ h1 {
 #statisticsResult {
   margin-top: 20px;
 }
+
+#totalSales {
+  margin-top: 40px;
+  text-align: center;
+}
+
+#totalSales p {
+  font-size: 18px;
+  font-weight: bold;
+  color: #e5450f;
+}

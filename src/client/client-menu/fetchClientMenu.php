@@ -1,5 +1,5 @@
 <?php
-session_start(); // Asegura que la sesión esté iniciada
+session_start();
 require '../../db/connection.php'; // Incluye tu archivo de conexión a la base de datos
 
 if (!isset($_SESSION['company_id'])) {
@@ -11,8 +11,8 @@ $companyId = $_SESSION['company_id']; // Obtén el company_id de la sesión
 $clientId = $_SESSION['user_id']; // Obtén el user_id de la sesión
 
 $type = isset($_GET['type']) ? $_GET['type'] : '';
+$orderBy = isset($_GET['orderBy']) ? $_GET['orderBy'] : '';
 
-// Consulta para obtener las compras frecuentes
 $frequentItemsSql = "
     SELECT mi.id, mi.product_image, mi.product_name, mi.description, mi.category_name, mi.price, COUNT(oi.menu_item_id) as purchase_count
     FROM cart_items oi
@@ -38,13 +38,20 @@ while ($row = $frequentItemsResult->fetch_assoc()) {
     $frequentItems[] = $row['id'];
 }
 
-// Consulta para obtener todos los ítems del menú
 $sql = "SELECT id, product_image, product_name, description, category_name, price FROM menu_items WHERE company_id = ?";
 $params = [$companyId];
 
-if ($type) {
+if ($type && $type !== 'precio' && $type !== 'valorado') {
     $sql .= " AND category_name = ?";
     $params[] = $type;
+}
+
+if ($orderBy) {
+    if ($orderBy === 'price') {
+        $sql .= " ORDER BY price ASC";
+    } elseif ($orderBy === 'rating') {
+        $sql .= " ORDER BY rating DESC";
+    }
 }
 
 $stmt = $conn->prepare($sql);
@@ -80,3 +87,4 @@ if ($result->num_rows > 0) {
 $frequentItemsStmt->close();
 $stmt->close();
 $conn->close();
+?>

@@ -2,12 +2,19 @@
 session_start();
 require '../../db/connection.php';  // Ajusta la ruta según sea necesario.
 
-// Chequear si el formulario ha sido enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty($_POST['email']) || empty($_POST['password']) || empty($_POST['captcha'])) {
+        die('Todos los campos son requeridos.');
+    }
+
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $captcha = $_POST['captcha'];
 
-    // Preparar la consulta SQL para buscar el usuario con el correo dado
+    if ($captcha != $_SESSION['captcha']) {
+        die('Captcha incorrecto.');
+    }
+
     $sql = "SELECT id, business_name, user_type, password FROM companies WHERE email = ?";
     $stmt = $conn->prepare($sql);
 
@@ -17,14 +24,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = $stmt->get_result();
 
         if ($user = $result->fetch_assoc()) {
-            // Verificar que la contraseña hasheada coincida con la ingresada por el usuario
             if (password_verify($password, $user['password'])) {
-                // Establecer variables de sesión
                 $_SESSION['company_id'] = $user['id'];
                 $_SESSION['user_name'] = $user['business_name'];
                 $_SESSION['user_type'] = $user['user_type'];
 
-                // Redireccionar al usuario a la página de inicio de su perfil o dashboard
                 header("Location: ../company-options/company-options.php"); // Ajusta el URL según sea necesario
                 exit;
             } else {
