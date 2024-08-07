@@ -84,13 +84,15 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ver Carrito</title>
     <link rel="stylesheet" href="viewCart.css">
+    <link rel="stylesheet" href="../../arrow/arrow.css" />
     <link rel="stylesheet" href="../../client/client-menubar/client-menubar.css">
     <script src="../../client/client-menubar/client-menubar.js"></script>
 </head>
 
 <body>
     <?php include '../../client/client-menubar/client-menubar.php'; ?>
-
+    <!-- Flecha de regreso -->
+    <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
     <!-- Modal de confirmación de pedido -->
     <div id="orderModal" class="modal">
         <div class="modal-content">

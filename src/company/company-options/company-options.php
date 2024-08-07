@@ -36,14 +36,32 @@ $conn->close();
     <title>Configuración</title>
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="company-options.css">
+    <link rel="stylesheet" href="../../arrow/arrow.css" />
+    <style>
+        .required-field {
+            color: red;
+        }
+
+        .form-note {
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
 </head>
 
 <body>
     <?php include '../company-menubar/company-menubar.php'; ?>
-
+    <!-- Flecha de regreso -->
+    <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
     <div class="full-screen-image">
         <img src="../../../public/images/splash/splash.png" alt="Main Image" />
     </div>
+
+    <!-- Nota de campos obligatorios -->
+    <div class="form-note">
+        Nota: Los campos marcados con <span class="required-field">*</span> son obligatorios.
+    </div>
+
     <script src="../company-menubar/company-menubar.js"></script>
 </body>
 

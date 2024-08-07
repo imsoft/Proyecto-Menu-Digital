@@ -73,6 +73,7 @@ $conn->close();
         <form id="ingredientsForm" action="../addToCart/addToCart.php" method="POST">
             <input type="hidden" name="menuItemId" value="<?php echo htmlspecialchars($menuItemId); ?>">
             <input type="hidden" id="basePrice" value="<?php echo htmlspecialchars($menuItem['price']); ?>">
+
             <?php if (!empty($ingredients)) : ?>
                 <?php foreach ($ingredients as $ingredient) : ?>
                     <div class="ingredient">
@@ -85,6 +86,7 @@ $conn->close();
             <?php else : ?>
                 <p>No hay ingredientes disponibles.</p>
             <?php endif; ?>
+
             <p id="totalPrice">Total: $<?php echo number_format($menuItem['price'], 2); ?></p>
             <button type="submit">Añadir al Carrito</button>
         </form>

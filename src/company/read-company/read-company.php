@@ -24,12 +24,15 @@ $companyId = $_SESSION['company_id'];
     <link rel="stylesheet" href="read-company.css">
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="../company-menubar/company-menubar.css">
+    <link rel="stylesheet" href="../../arrow/arrow.css" />
     <script src="../company-menubar/company-menubar.js"></script>
 </head>
 
 <body>
     <?php include '../company-menubar/company-menubar.php'; ?>
     <div class="table-container">
+        <!-- Flecha de regreso -->
+        <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
         <h2>Datos del Negocio</h2>
         <table id="companyTable">
             <thead>

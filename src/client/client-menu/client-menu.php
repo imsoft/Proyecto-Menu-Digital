@@ -11,6 +11,7 @@ session_start(); // Asegúrate de que la sesión esté iniciada
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú</title>
     <link rel="stylesheet" href="client-menu.css">
+    <link rel="stylesheet" href="../../arrow/arrow.css" />
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="../../client/client-menubar/client-menubar.css">
     <script src="../../client/client-menubar/client-menubar.js"></script>
@@ -19,6 +20,10 @@ session_start(); // Asegúrate de que la sesión esté iniciada
 <body>
     <?php include '../../client/client-menubar/client-menubar.php'; ?>
     <div class="container">
+
+    <!-- Flecha de regreso -->
+    <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
+
         <h1>Menú del Restaurante</h1>
         <div class="menu-buttons">
             <button onclick="filterMenu('comida')">Comida</button>

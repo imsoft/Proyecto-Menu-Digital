@@ -11,6 +11,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar comentario</title>
     <link rel="stylesheet" href="create-comment.css">
+    <link rel="stylesheet" href="../../arrow/arrow.css" />
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="../../client/client-menubar/client-menubar.css">
     <script src="../../client/client-menubar/client-menubar.js"></script>
@@ -19,6 +20,8 @@ session_start();
 <body>
     <?php include '../../client/client-menubar/client-menubar.php'; ?>
     <div class="container">
+        <!-- Flecha de regreso -->
+        <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
         <h2>Deja tu Comentario</h2>
         <form id="commentForm" action="createComment.php" method="POST">
             <div class="form-group">

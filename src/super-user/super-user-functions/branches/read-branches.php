@@ -16,6 +16,7 @@ session_start(); // Asegúrate de iniciar la sesión al principio del script
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Sucursales</title>
     <link rel="stylesheet" href="read-branches.css">
+    <link rel="stylesheet" href="../../../arrow/arrow.css" />
     <link rel="shortcut icon" href="../../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="../../super-user-menubar/super-user-menubar.css">
     <script src="../../super-user-menubar/super-user-menubar.js"></script>
@@ -24,6 +25,8 @@ session_start(); // Asegúrate de iniciar la sesión al principio del script
 <body>
     <?php include '../../super-user-menubar/super-user-menubar.php'; ?>
     <div class="table-container">
+        <!-- Flecha de regreso -->
+      <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
         <h2>Datos de las Sucursales</h2>
         <table id="branchTable">
             <thead>

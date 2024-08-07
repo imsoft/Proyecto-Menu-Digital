@@ -46,6 +46,7 @@ if ($result->num_rows > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preparación de alimentos</title>
     <link rel="stylesheet" href="company-food-preparation.css">
+    <link rel="stylesheet" href="../../arrow/arrow.css" />
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="../company-menubar/company-menubar.css">
     <script src="../company-menubar/company-menubar.js"></script>
@@ -54,6 +55,8 @@ if ($result->num_rows > 0) {
 <body>
     <?php include '../company-menubar/company-menubar.php'; ?>
     <div class="container">
+        <!-- Flecha de regreso -->
+        <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
         <h1>Estado de Preparación de los Alimentos</h1>
         <div id="preparationStatus">
             <?php foreach ($orders as $branch => $statuses) { ?>

@@ -20,6 +20,7 @@ if (!$employeeId || !$companyId) {
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Preparación de alimentos</title>
     <link rel='stylesheet' href='food-preparation.css'>
+    <link rel="stylesheet" href="../../arrow/arrow.css" />
     <link rel='shortcut icon' href='../../../public/images/favicon/logo.png' />
     <link rel='stylesheet' href='../../employee/employee-menubar/employee-menubar.css'>
     <script src='../../employee/employee-menubar/employee-menubar.js'></script>
@@ -27,6 +28,8 @@ if (!$employeeId || !$companyId) {
 
 <body>
     <?php include '../../employee/employee-menubar/employee-menubar.php'; ?>
+    <!-- Flecha de regreso -->
+    <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
     <div class='container'>
         <h1>Estado de Preparación de los Alimentos</h1>
         <div id='preparationStatus'></div>

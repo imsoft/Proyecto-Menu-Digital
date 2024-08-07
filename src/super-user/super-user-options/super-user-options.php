@@ -35,12 +35,15 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configuración Superusuario</title>
     <link rel="stylesheet" href="super-user-options.css">
+    <link rel="stylesheet" href="../../arrow/arrow.css" />
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="../super-user-menubar/super-user-menubar.css">
 </head>
 
 <body>
     <?php include '../super-user-menubar/super-user-menubar.php'; ?>
+    <!-- Flecha de regreso -->
+    <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
     <div class="full-screen-image">
         <img src="../../../public/images/splash/splash.png" alt="Main Image" />
     </div>

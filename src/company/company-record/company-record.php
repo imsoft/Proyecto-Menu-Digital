@@ -49,19 +49,34 @@ function getColorByState($state)
     <link rel="stylesheet" href="company-record.css">
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="../company-menubar/company-menubar.css">
+    <link rel="stylesheet" href="../../arrow/arrow.css" />
     <script src="../company-menubar/company-menubar.js"></script>
+    <style>
+        .required-field {
+            color: red;
+        }
+
+        .form-note {
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
 </head>
 
 <body>
     <?php include '../company-menubar/company-menubar.php'; ?>
     <div class="container">
+        <!-- Flecha de regreso -->
+        <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
         <h1>Historial de Pedidos</h1>
 
-        <form id="filterForm">
-            <label for="startDate">Desde:</label>
-            <input type="date" id="startDate" name="startDate">
-            <label for="endDate">Hasta:</label>
-            <input type="date" id="endDate" name="endDate">
+        <form id="filterForm" onsubmit="return validateFilterDates()">
+            <label for="startDate">Desde:<span class="required-field">*</span></label>
+            <input type="date" id="startDate" name="startDate" placeholder="Seleccione una fecha de inicio" required>
+            
+            <label for="endDate">Hasta:<span class="required-field">*</span></label>
+            <input type="date" id="endDate" name="endDate" placeholder="Seleccione una fecha de fin" required>
+            
             <label for="dish">Platillo:</label>
             <select id="dish" name="dish">
                 <option value="">-- Selecciona Platillo --</option>
@@ -70,6 +85,10 @@ function getColorByState($state)
                 <?php endforeach; ?>
             </select>
             <button type="button" onclick="filterOrders()">Filtrar</button>
+
+            <div class="form-note">
+                Los campos marcados con <span class="required-field">*</span> son obligatorios.
+            </div>
         </form>
 
         <div id="orderHistory">
@@ -97,6 +116,34 @@ function getColorByState($state)
     </div>
 
     <script src="company-record.js"></script>
+    <script>
+        function validateFilterDates() {
+            const startDateInput = document.getElementById('startDate').value;
+            const endDateInput = document.getElementById('endDate').value;
+
+            const startDate = new Date(startDateInput);
+            const endDate = new Date(endDateInput);
+            const today = new Date();
+
+            // Restricciones de fecha
+            if (startDate > today || endDate > today) {
+                alert("Las fechas no pueden ser futuras.");
+                return false;
+            }
+
+            if (startDate.getFullYear() < 1900 || endDate.getFullYear() < 1900) {
+                alert("No se aceptan fechas de años muy lejanos en el pasado.");
+                return false;
+            }
+
+            if (endDate < startDate) {
+                alert("La fecha de fin no puede ser anterior a la fecha de inicio.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </body>
 
 </html>

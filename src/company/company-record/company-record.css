@@ -100,3 +100,9 @@ h1 {
   font-weight: bold;
   color: #e5450f;
 }
+
+.form-note {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 15px;
+}

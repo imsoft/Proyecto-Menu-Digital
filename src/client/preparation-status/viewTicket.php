@@ -36,6 +36,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../arrow/arrow.css" />
     <title>Ticket del Pedido</title>
     <style>
         body {
@@ -74,6 +75,8 @@ $conn->close();
 
 <body>
     <div class="container">
+        <!-- Flecha de regreso -->
+        <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
         <h1>Ticket del Pedido</h1>
         <p><strong>Folio:</strong> <?php echo htmlspecialchars($order['folio']); ?></p>
         <p><strong>Fecha:</strong> <?php echo htmlspecialchars($order['created_at']); ?></p>

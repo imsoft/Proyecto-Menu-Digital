@@ -71,3 +71,9 @@ button:hover {
   display: block;
   color: #333;
 }
+
+.form-note {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 15px;
+}

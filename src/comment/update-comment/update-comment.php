@@ -46,6 +46,7 @@ if ($comment['company_id']) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Comentario</title>
     <link rel="stylesheet" href="update-comment.css">
+    <link rel="stylesheet" href="../../arrow/arrow.css" />
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="../../client/client-menubar/client-menubar.css">
     <script src="../../client/client-menubar/client-menubar.js"></script>
@@ -54,6 +55,8 @@ if ($comment['company_id']) {
 <body>
     <?php include '../../client/client-menubar/client-menubar.php'; ?>
     <div class="container">
+        <!-- Flecha de regreso -->
+        <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
         <h2>Editar Comentario</h2>
         <form id="commentForm" action="updateComment.php" method="POST">
             <input type="hidden" name="id" value="<?php echo htmlspecialchars($comment['id']); ?>">
@@ -68,6 +71,7 @@ if ($comment['company_id']) {
                         </option>
                     <?php endwhile; ?>
                 </select>
+                <div class="form-note">Seleccione el negocio relacionado con el comentario.</div>
             </div>
 
             <div class="form-group">
@@ -80,6 +84,7 @@ if ($comment['company_id']) {
                         </option>
                     <?php endforeach; ?>
                 </select>
+                <div class="form-note">Seleccione la sucursal específica, si aplica.</div>
             </div>
 
             <div class="form-group">
@@ -89,11 +94,13 @@ if ($comment['company_id']) {
                     <option value="regular" <?php echo ($comment['rating'] == 'regular') ? 'selected' : ''; ?>>Regular</option>
                     <option value="malo" <?php echo ($comment['rating'] == 'malo') ? 'selected' : ''; ?>>Malo</option>
                 </select>
+                <div class="form-note">Seleccione la valoración del cliente sobre el servicio.</div>
             </div>
 
             <div class="form-group">
                 <label for="commentBox">Comentario:</label>
-                <textarea id="commentBox" name="commentBox" rows="4" required><?php echo htmlspecialchars($comment['comment']); ?></textarea>
+                <textarea id="commentBox" name="commentBox" rows="4" required placeholder="Escriba el comentario aquí"><?php echo htmlspecialchars($comment['comment']); ?></textarea>
+                <div class="form-note">Proporcione detalles adicionales sobre la experiencia del cliente.</div>
             </div>
 
             <button type="submit">Actualizar Comentario</button>

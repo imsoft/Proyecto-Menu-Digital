@@ -1,0 +1,15 @@
+.back-arrow {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+  font-size: 48px;
+  color: #e5450f; /* Color de la flecha */
+  z-index: 1000;
+  text-decoration: none;
+  transition: color 0.3s ease; /* Suaviza la transición de color */
+}
+
+.back-arrow:hover {
+  color: #cc2b00; /* Color al hacer hover */
+}

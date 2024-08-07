@@ -9,19 +9,18 @@ if (!isset($_SESSION['user_id'])) {
 
 $clientId = $_SESSION['user_id'];
 
-// Obtener la fecha actual
-$currentDate = date('Y-m-d');
-
-// Consulta para obtener los pedidos del cliente para el día actual
+// Consulta para obtener todos los pedidos del cliente
 $sql = "SELECT o.id AS folio, o.created_at, mi.product_name AS dish, mi.price, c.table_number, cl.email
         FROM orders o
         JOIN cart_items ci ON o.cart_id = ci.cart_id
         JOIN menu_items mi ON ci.menu_item_id = mi.id
         JOIN clients c ON o.client_id = c.id
         JOIN clients cl ON o.client_id = cl.id
-        WHERE o.client_id = ? AND DATE(o.created_at) = ?";
+        WHERE o.client_id = ?
+        ORDER BY o.created_at DESC"; // Ordenar por fecha de creación, más reciente primero
+
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("is", $clientId, $currentDate);
+$stmt->bind_param("i", $clientId);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -31,8 +30,7 @@ if ($result->num_rows > 0) {
         $orders[] = $row;
     }
 } else {
-    echo "No se encontraron pedidos para el día de hoy.";
-    exit;
+    $noOrdersMessage = "No se encontraron pedidos.";
 }
 
 $stmt->close();
@@ -45,7 +43,8 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ticket del Día</title>
+    <link rel="stylesheet" href="../../arrow/arrow.css" />
+    <title>Mis Tickets</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -86,22 +85,33 @@ $conn->close();
             border-radius: 5px;
             background-color: #fff;
         }
+
+        .no-orders {
+            text-align: center;
+            color: #666;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>Ticket del Día</h1>
-        <?php foreach ($orders as $order) : ?>
-            <div class="order">
-                <p><strong>Folio:</strong> <?php echo htmlspecialchars($order['folio']); ?></p>
-                <p><strong>Fecha:</strong> <?php echo htmlspecialchars($order['created_at']); ?></p>
-                <p><strong>Mesa:</strong> <?php echo htmlspecialchars($order['table_number']); ?></p>
-                <p><strong>Platillo:</strong> <?php echo htmlspecialchars($order['dish']); ?></p>
-                <p><strong>Precio:</strong> $<?php echo htmlspecialchars($order['price']); ?></p>
-                <p><strong>Correo:</strong> <?php echo htmlspecialchars($order['email']); ?></p>
-            </div>
-        <?php endforeach; ?>
+        <!-- Flecha de regreso -->
+        <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
+        <h1>Mis Tickets</h1>
+        <?php if (!empty($orders)) : ?>
+            <?php foreach ($orders as $order) : ?>
+                <div class="order">
+                    <p><strong>Folio:</strong> <?php echo htmlspecialchars($order['folio']); ?></p>
+                    <p><strong>Fecha:</strong> <?php echo htmlspecialchars($order['created_at']); ?></p>
+                    <p><strong>Mesa:</strong> <?php echo htmlspecialchars($order['table_number']); ?></p>
+                    <p><strong>Platillo:</strong> <?php echo htmlspecialchars($order['dish']); ?></p>
+                    <p><strong>Precio:</strong> $<?php echo htmlspecialchars($order['price']); ?></p>
+                    <p><strong>Correo:</strong> <?php echo htmlspecialchars($order['email']); ?></p>
+                </div>
+            <?php endforeach; ?>
+        <?php else : ?>
+            <p class="no-orders"><?php echo isset($noOrdersMessage) ? htmlspecialchars($noOrdersMessage) : ''; ?></p>
+        <?php endif; ?>
     </div>
 </body>
 

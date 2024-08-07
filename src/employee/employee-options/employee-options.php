@@ -20,6 +20,7 @@ if (!$employeeId || !$companyId) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configuración</title>
     <link rel="stylesheet" href="employee-options.css">
+    <link rel="stylesheet" href="../../arrow/arrow.css" />
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="employee-options.css">
     <link rel="stylesheet" href="../employee-menubar/employee-menubar.css">
@@ -28,6 +29,8 @@ if (!$employeeId || !$companyId) {
 <body>
     <?php include '../employee-menubar/employee-menubar.php'; ?>
     <div class="container">
+        <!-- Flecha de regreso -->
+        <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
         <h1>Estado de Preparación de los Alimentos</h1>
         <div class="buttons">
             <button id="viewStatus">Ver Estatus</button>

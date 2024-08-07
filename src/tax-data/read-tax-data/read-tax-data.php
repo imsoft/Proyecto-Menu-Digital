@@ -22,6 +22,7 @@ $companyId = $_SESSION['company_id'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Negocios</title>
     <link rel="stylesheet" href="read-tax-data.css">
+    <link rel="stylesheet" href="../../arrow/arrow.css" />
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="../../company/company-menubar/company-menubar.css">
     <script src="../../company/company-menubar/company-menubar.js"></script>
@@ -30,6 +31,8 @@ $companyId = $_SESSION['company_id'];
 <body>
     <?php include '../../company/company-menubar/company-menubar.php'; ?>
     <div class="table-container">
+        <!-- Flecha de regreso -->
+        <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
         <h2>Información del Negocio</h2>
         <table id="clientTable">
             <thead>

@@ -187,3 +187,10 @@ body {
   height: 100%;
   object-fit: cover; /* Ajusta la imagen para cubrir el contenedor */
 }
+
+.navbar .logo img {
+  height: 40px; /* Altura del logo, ajusta según sea necesario */
+  width: auto; /* Mantiene la proporción del logo */
+  margin-right: 20px; /* Espacio entre el logo y el nombre de la empresa */
+  vertical-align: middle; /* Alinea verticalmente el logo */
+}

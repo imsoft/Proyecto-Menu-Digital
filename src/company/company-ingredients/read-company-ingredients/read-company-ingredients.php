@@ -22,6 +22,7 @@ $companyId = $_SESSION['company_id'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Ingredientes</title>
     <link rel="stylesheet" href="read-company-ingredients.css">
+    <link rel="stylesheet" href="../../../arrow/arrow.css" />
     <link rel="stylesheet" href="../../company-menubar/company-menubar.css">
     <script src="../../company-menubar/company-menubar.js"></script>
 </head>
@@ -29,6 +30,8 @@ $companyId = $_SESSION['company_id'];
 <body>
     <?php include '../../company-menubar/company-menubar.php'; ?>
     <div class="table-container">
+        <!-- Flecha de regreso -->
+        <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
         <h2>Ingredientes</h2>
         <table id="ingredientsTable">
             <thead>

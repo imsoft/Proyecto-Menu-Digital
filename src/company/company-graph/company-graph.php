@@ -12,6 +12,7 @@ $companyId = $_SESSION['company_id'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Graficas</title>
     <link rel="stylesheet" href="company-graph.css">
+    <link rel="stylesheet" href="../../arrow/arrow.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="company-graph.js" defer></script>
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
@@ -22,6 +23,8 @@ $companyId = $_SESSION['company_id'];
 <body>
 <?php include '../company-menubar/company-menubar.php'; ?>
     <div class="container">
+        <!-- Flecha de regreso -->
+      <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
         <h1>Graficas de Negocio</h1>
         <div>
             <div class="canvas-container">

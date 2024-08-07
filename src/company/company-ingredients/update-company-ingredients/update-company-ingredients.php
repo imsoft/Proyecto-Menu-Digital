@@ -32,22 +32,27 @@ if (isset($_GET['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Ingrediente</title>
     <link rel="stylesheet" href="update-company-ingredients.css">
+    <link rel="stylesheet" href="../../../arrow/arrow.css" />
     <link rel="stylesheet" href="../../company-menubar/company-menubar.css">
     <script src="../../company-menubar/company-menubar.js"></script>
 </head>
 
 <body>
-<?php include '../../company-menubar/company-menubar.php'; ?>
+    <?php include '../../company-menubar/company-menubar.php'; ?>
     <div class="form-container">
+        <!-- Flecha de regreso -->
+        <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
         <h2>Editar Ingrediente</h2>
         <form action="UpdateCompanyIngredients.php" method="POST">
-            <input type="hidden" name="id" value="<?php echo $id; ?>">
+            <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>">
 
             <label for="name">Nombre del Ingrediente:</label>
-            <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($ingredient['name']); ?>" required>
+            <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($ingredient['name']); ?>" required placeholder="Ingrese el nombre del ingrediente">
+            <div class="form-note">Proporcione el nombre completo del ingrediente.</div>
 
             <label for="price">Precio:</label>
-            <input type="number" step="0.01" id="price" name="price" value="<?php echo htmlspecialchars($ingredient['price']); ?>" required>
+            <input type="number" step="0.01" id="price" name="price" value="<?php echo htmlspecialchars($ingredient['price']); ?>" required placeholder="Ingrese el precio del ingrediente">
+            <div class="form-note">Ingrese el precio del ingrediente en formato decimal.</div>
 
             <button type="submit">Actualizar</button>
         </form>

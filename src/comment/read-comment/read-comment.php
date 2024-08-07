@@ -15,6 +15,7 @@ $clientId = $_SESSION['user_id'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comentarios de Clientes</title>
     <link rel="stylesheet" href="read-comment.css">
+    <link rel="stylesheet" href="../../arrow/arrow.css" />
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="../../client/client-menubar/client-menubar.css">
     <script src="../../client/client-menubar/client-menubar.js"></script>
@@ -23,6 +24,8 @@ $clientId = $_SESSION['user_id'];
 <body>
     <?php include '../../client/client-menubar/client-menubar.php'; ?>
     <div class="container">
+        <!-- Flecha de regreso -->
+        <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
         <h2>Comentarios de Clientes</h2>
         <div class="table-container">
             <table id="clientTable">

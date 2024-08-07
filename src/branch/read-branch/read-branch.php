@@ -22,6 +22,7 @@ $companyId = $_SESSION['company_id'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Información de Sucursales</title>
     <link rel="stylesheet" href="read-branch.css">
+    <link rel="stylesheet" href="../../arrow/arrow.css" />
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="../../company/company-menubar/company-menubar.css">
     <script src="../../company/company-menubar/company-menubar.js"></script>
@@ -29,6 +30,8 @@ $companyId = $_SESSION['company_id'];
 
 <body>
     <?php include '../../company/company-menubar/company-menubar.php'; ?>
+    <!-- Flecha de regreso -->
+    <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
     <div class="table-container">
         <h2>Detalles de Sucursales</h2>
         <table id="branchTable">

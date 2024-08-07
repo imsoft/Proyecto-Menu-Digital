@@ -14,6 +14,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Superusuarios</title>
     <link rel="stylesheet" href="read-super-user.css">
+    <link rel="stylesheet" href="../../arrow/arrow.css" />
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="../super-user-menubar/super-user-menubar.css">
     <script src="../super-user-menubar/super-user-menubar.js"></script>
@@ -22,6 +23,8 @@ session_start();
 <body>
     <?php include '../super-user-menubar/super-user-menubar.php'; ?>
     <div class="table-container">
+        <!-- Flecha de regreso -->
+        <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
         <h2>Datos de los Superusuarios</h2>
         <table id="superuserTable">
             <thead>

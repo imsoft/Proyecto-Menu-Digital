@@ -17,11 +17,15 @@ $clientId = $_SESSION['user_id']; // Obtener el user_id de la sesión
     <title>Configuración</title>
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <link rel="stylesheet" href="client-options.css">
+    <link rel="stylesheet" href="../../arrow/arrow.css" />
     <link rel="stylesheet" href="../client-menubar/client-menubar.css">
 </head>
 
 <body>
     <?php include '../client-menubar/client-menubar.php'; ?>
+
+    <!-- Flecha de regreso -->
+    <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
 
     <div class="full-screen-image">
         <img src="../../../public/images/splash/splash.png" alt="Main Image" />

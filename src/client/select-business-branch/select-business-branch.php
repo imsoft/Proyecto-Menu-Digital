@@ -23,6 +23,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seleccionar Negocio y Sucursal</title>
     <link rel="stylesheet" href="select-business-branch.css">
+    <link rel="stylesheet" href="../../arrow/arrow.css" />
     <link rel="stylesheet" href="../client-menubar/client-menubar.css">
     <script src="../client-menubar/client-menubar.js"></script>
 </head>
@@ -30,6 +31,10 @@ $conn->close();
 <body>
     <?php include '../client-menubar/client-menubar.php'; ?>
     <div class="form-container">
+
+        <!-- Flecha de regreso -->
+        <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
+
         <h2>Seleccionar Negocio y Sucursal</h2>
         <form id="businessBranchForm" action="set-business-branch.php" method="POST">
             <div class="form-group">

@@ -46,6 +46,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seleccionar Ingredientes</title>
     <link rel="stylesheet" href="selectIngredients.css">
+    <link rel="stylesheet" href="../../arrow/arrow.css" />
     <link rel="shortcut icon" href="../../../public/images/favicon/logo.png" />
     <script>
         function updateTotal() {
@@ -63,6 +64,8 @@ $conn->close();
 
 <body>
     <div class="container">
+        <!-- Flecha de regreso -->
+        <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
         <h1>Seleccionar Ingredientes</h1>
         <div class="menu-item">
             <img src="<?php echo htmlspecialchars($menuItem['product_image']); ?>" alt="Imagen del Producto">

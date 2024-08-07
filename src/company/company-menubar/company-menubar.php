@@ -30,8 +30,8 @@ if (!isset($_SESSION['company_id'])) {
 
 $companyId = $_SESSION['company_id'];
 
-// Consulta para obtener el nombre del negocio
-$sql = "SELECT business_name FROM companies WHERE id = ?";
+// Consulta para obtener el nombre del negocio y el logo
+$sql = "SELECT business_name, logo_url FROM companies WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $companyId);
 $stmt->execute();
@@ -40,8 +40,10 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) {
     $company = $result->fetch_assoc();
     $businessName = $company['business_name'];
+    $logoUrl = $company['logo_url']; // Ruta al logo
 } else {
     $businessName = "Nombre no encontrado";
+    $logoUrl = "/path/to/default-logo.png"; // Ruta a un logo por defecto si no se encuentra
 }
 
 $stmt->close();
@@ -52,6 +54,10 @@ $base_url = '/src';
 ?>
 
 <nav class="navbar">
+    <!-- Logo de la empresa -->
+    <a href="/src/company/company-options/company-options.php" class="logo">
+        <img src="<?php echo htmlspecialchars($logoUrl); ?>" alt="<?php echo htmlspecialchars($businessName); ?>" class="company-logo">
+    </a>
     <a href="/src/company/company-options/company-options.php" class="logo">Menu Digital</a>
     <div class="menu-container">
         <ul class="menu">
@@ -113,5 +119,11 @@ $base_url = '/src';
         <div></div>
         <div></div>
     </div>
+
+    <!-- Nota de campos obligatorios -->
+    <div class="form-note">
+        Nota: Los campos marcados con <span class="required-field">*</span> son obligatorios en formularios.
+    </div>
+
     <script src="company-menubar.js"></script>
 </nav>
