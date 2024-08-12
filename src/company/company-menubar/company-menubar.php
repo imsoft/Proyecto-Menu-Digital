@@ -30,9 +30,14 @@ if (!isset($_SESSION['company_id'])) {
 
 $companyId = $_SESSION['company_id'];
 
-// Consulta para obtener el nombre del negocio y el logo
-$sql = "SELECT business_name, logo_url FROM companies WHERE id = ?";
+$sql = "SELECT business_name, logo_path FROM companies WHERE id = ?";
 $stmt = $conn->prepare($sql);
+
+if ($stmt === false) {
+    // Si la preparación falló, muestra el error y detén la ejecución
+    die("Error al preparar la consulta: " . $conn->error);
+}
+
 $stmt->bind_param("i", $companyId);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -40,14 +45,15 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) {
     $company = $result->fetch_assoc();
     $businessName = $company['business_name'];
-    $logoUrl = $company['logo_url']; // Ruta al logo
+    $logoUrl = $company['logo_path']; // Ruta al logo
 } else {
     $businessName = "Nombre no encontrado";
-    $logoUrl = "/path/to/default-logo.png"; // Ruta a un logo por defecto si no se encuentra
+    $logoUrl = "/public/images/favicon/logo.png"; // Ruta a un logo por defecto si no se encuentra
 }
 
 $stmt->close();
 $conn->close();
+
 
 // Define la variable base
 $base_url = '/src';

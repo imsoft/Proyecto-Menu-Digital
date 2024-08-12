@@ -189,8 +189,13 @@ body {
 }
 
 .navbar .logo img {
-  height: 40px; /* Altura del logo, ajusta según sea necesario */
+  height: 10px; /* Ajusta esta altura según el tamaño que desees */
   width: auto; /* Mantiene la proporción del logo */
-  margin-right: 20px; /* Espacio entre el logo y el nombre de la empresa */
+  margin-right: 10px; /* Espacio entre el logo y el nombre de la empresa */
   vertical-align: middle; /* Alinea verticalmente el logo */
+}
+
+.company-logo {
+  height: 10px; /* Altura del logo, ajusta según sea necesario */
+  width: auto; /* Mantiene la proporción del logo */
 }
